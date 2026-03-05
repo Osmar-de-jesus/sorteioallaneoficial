@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allane Gonzaga Fotografia</title>
+
+  <meta name="description" content="Allane Gonzaga Fotografia — Transformando momentos em memórias eternas. Agende seu ensaio pelo WhatsApp." />
+
+  <style>
+    :root{
+      --bg:#fafafa;
+      --text:#222;
+      --muted:rgba(0,0,0,.65);
+      --card:#fff;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --radius:14px;
+      --btn:#000;
+      --wa:#25D366;
+      --ig:#E1306C;
+
+      /* Páscoa (leve e profissional) */
+      --e1:#f8f1ff;
+      --e2:#fff5e6;
+      --e3:#ecfff1;
+      --sale:#d81b60;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+
+    /* HERO */
+    header{
+      min-height: 80vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:90px 20px;
+
+      background-image:
+        linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+        url("assets/allane.png");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      color:#fff;
+    }
+
+    header h1{ margin:0; font-size:44px; letter-spacing:.2px; }
+    header p{ margin:10px 0 0 0; font-size:18px; opacity:.92; }
+
+    @media (max-width: 720px){
+      header{
+        min-height: 64vh;
+        padding: 70px 16px;
+        background-position: center top;
+      }
+      header h1{ font-size:32px; }
+      header p{ font-size:16px; }
+    }
+
+    .cta{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    button{
+      background:var(--btn);
+      color:#fff;
+      border:none;
+      padding:12px 20px;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:16px;
+      transition: transform .12s ease, opacity .2s ease, box-shadow .2s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,.20);
+    }
+    button:hover{ opacity:.9; transform: translateY(-1px); }
+    button:active{ transform: translateY(0); }
+
+    .container{
+      max-width:1150px;
+      margin:auto;
+      padding:60px 20px;
+    }
+
+    h2{ margin:0 0 12px 0; }
+    .muted{ color: var(--muted); margin:0 0 18px 0; }
+
+    /* GRID geral */
+    .works-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    /* CARD */
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:var(--shadow);
+      border: 1px solid rgba(0,0,0,.04);
+    }
+
+    /* ====== LEQUE ====== */
+    .fan-card{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,.04);
+      padding: 16px;
+      overflow: hidden;
+    }
+    .fan-title{
+      margin: 0 0 8px 0;
+      font-weight: 800;
+      text-align:center;
+    }
+    .fan-sub{
+      margin: 0 0 14px 0;
+      color: var(--muted);
+      font-size: 14px;
+      text-align:center;
+    }
+
+    .fan{
+      width: 100%;
+      aspect-ratio: 4/3;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      position: relative;
+      border-radius: 16px;
+      overflow: visible;
+      display: block;
+      margin-top: 6px;
+    }
+
+    .fan img{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+      transform-origin: 12% 88%;
+      transition: transform .28s ease, filter .28s ease;
+      will-change: transform;
+      background: #eee;
+    }
+
+    /* leque fechado */
+    .fan img:nth-child(1){ transform: rotate(-10deg) translateX(-10px) translateY(4px); }
+    .fan img:nth-child(2){ transform: rotate(-6deg)  translateX(-6px)  translateY(2px); }
+    .fan img:nth-child(3){ transform: rotate(-2deg)  translateX(-2px)  translateY(1px); }
+    .fan img:nth-child(4){ transform: rotate( 2deg)  translateX( 2px)  translateY(1px); }
+    .fan img:nth-child(5){ transform: rotate( 6deg)  translateX( 6px)  translateY(2px); }
+    .fan img:nth-child(6){ transform: rotate(10deg)  translateX(10px)  translateY(4px); }
+
+    /* leque aberto */
+    .fan:hover img,
+    .fan.open img{
+      filter: saturate(1.05) contrast(1.03);
+    }
+    .fan:hover img:nth-child(1),
+    .fan.open  img:nth-child(1){ transform: rotate(-18deg) translateX(-60px) translateY(10px); }
+    .fan:hover img:nth-child(2),
+    .fan.open  img:nth-child(2){ transform: rotate(-10deg) translateX(-36px) translateY(6px); }
+    .fan:hover img:nth-child(3),
+    .fan.open  img:nth-child(3){ transform: rotate(-3deg)  translateX(-12px) translateY(2px); }
+    .fan:hover img:nth-child(4),
+    .fan.open  img:nth-child(4){ transform: rotate( 3deg)  translateX( 12px) translateY(2px); }
+    .fan:hover img:nth-child(5),
+    .fan.open  img:nth-child(5){ transform: rotate(10deg)  translateX( 36px) translateY(6px); }
+    .fan:hover img:nth-child(6),
+    .fan.open  img:nth-child(6){ transform: rotate(18deg)  translateX( 60px) translateY(10px); }
+
+    .fan-hint{
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      text-align:center;
+    }
+
+    /* GRID de fotos */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:15px;
+      margin-top: 18px;
+    }
+    .gallery a{
+      display:block;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,.10);
+      border:1px solid rgba(0,0,0,.04);
+      background:#fff;
+    }
+    .gallery img{
+      width:100%;
+      height:230px;
+      object-fit:cover;
+      border-radius:14px;
+      transition: transform .25s ease;
+      display:block;
+    }
+    .gallery a:hover img{ transform: scale(1.04); }
+
+    /* vídeos */
+    .video-card h3{ margin:0 0 8px 0; }
+    .video-card p{ margin:0 0 12px 0; color:var(--muted); font-size:14px; }
+    video{
+      width:100%;
+      border-radius:14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.12);
+      background:#000;
+    }
+
+    /* ====== PACOTES PÁSCOA ====== */
+    .promo-wrap{
+      margin-top:60px;
+      border-radius: 18px;
+      padding: 18px;
+      background:
+        radial-gradient(1200px 250px at 10% 0%, rgba(248,241,255,.9), transparent 60%),
+        radial-gradient(1200px 250px at 90% 0%, rgba(255,245,230,.9), transparent 60%),
+        linear-gradient(180deg, rgba(236,255,241,.55), transparent 65%);
+      border: 1px solid rgba(0,0,0,.05);
+    }
+
+    .promo-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background: var(--sale);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:999px;
+      font-weight:800;
+      box-shadow: 0 10px 25px rgba(216,27,96,.25);
+      white-space:nowrap;
+    }
+
+    .badge small{
+      font-weight:700;
+      opacity:.95;
+    }
+
+    .promo-sub{
+      margin: 6px 0 0 0;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .promo-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .promo-card{
+      background: var(--card);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(0,0,0,.04);
+      position: relative;
+      overflow:hidden;
+    }
+
+    .promo-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(260px 120px at 15% 0%, rgba(248,241,255,.65), transparent 60%),
+        radial-gradient(260px 120px at 85% 0%, rgba(255,245,230,.65), transparent 60%);
+      pointer-events:none;
+    }
+
+    .promo-card > *{ position:relative; }
+
+    .promo-title{
+      margin: 0 0 6px 0;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .promo-desc{
+      margin: 0 0 12px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .price-row{
+      display:flex;
+      align-items:baseline;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+
+    .old-price{
+      color: rgba(0,0,0,.55);
+      font-weight: 800;
+      text-decoration: line-through;
+      text-decoration-thickness: 2px;
+      text-decoration-color: #d40000;
+    }
+
+    .new-price{
+      font-size: 22px;
+      font-weight: 1000;
+    }
+
+    .save-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(216,27,96,.08);
+      color: #b01245;
+      font-weight: 900;
+      font-size: 13px;
+      width: fit-content;
+    }
+
+    .promo-btn{
+      margin-top: 14px;
+      width: 100%;
+      box-shadow:none;
+    }
+
+    /* AGENDA */
+    .agenda{
+      margin-top:10px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap:12px;
+    }
+    .slot{
+      background:var(--card);
+      border-radius:14px;
+      padding:14px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.06);
+      border: 1px solid rgba(0,0,0,.04);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      cursor: pointer;
+    }
+    .slot b{ font-size:15px; }
+    .slot small{ color:var(--muted); }
+
+    .slot button{
+      box-shadow:none;
+      padding:10px 14px;
+      border-radius:12px;
+      font-size:14px;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+
+    .selected{
+      outline: 2px solid rgba(0,0,0,.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,.10);
+    }
+
+    /* HORÁRIOS */
+    .times{
+      margin-top:14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .time-btn{
+      box-shadow:none;
+      background:#111;
+      padding:10px 14px;
+      font-size:14px;
+      border-radius:12px;
+    }
+
+    /* FORM */
+    .booking{
+      background:var(--card);
+      padding:28px;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      margin-top:40px;
+      border: 1px solid rgba(0,0,0,.04);
+    }
+    label{ font-weight:700; font-size:13px; }
+    input, select{
+      width:100%;
+      padding:12px;
+      margin-top:8px;
+      margin-bottom:16px;
+      border-radius:12px;
+      border:1px solid #ddd;
+      outline:none;
+      background:#fff;
+    }
+    input:focus, select:focus{ border-color:#bbb; }
+
+    .whatsapp{
+      background:var(--wa);
+      width:100%;
+      box-shadow: 0 10px 25px rgba(37,211,102,.25);
+    }
+
+    /* FLOATS */
+    .float-area{
+      position:fixed;
+      bottom:18px;
+      right:18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      z-index:999;
+    }
+    .fab{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color:#fff;
+      padding:12px 14px;
+      border-radius:999px;
+      font-size:14px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.20);
+      transition: transform .12s ease, opacity .2s ease;
+      backdrop-filter: blur(6px);
+    }
+    .fab:hover{ transform: translateY(-2px); opacity:.95; }
+    .fab .icon{ display:inline-flex; }
+    .fab-wa{ background: var(--wa); }
+    .fab-ig{ background: var(--ig); }
+
+    footer{
+      text-align:center;
+      padding:40px 14px;
+      font-size:14px;
+      opacity:.65;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div>
+    <h1>Allane Gonzaga Fotografia</h1>
+    <p>Transformando momentos em memórias eternas</p>
+    <div class="cta">
+      <button onclick="document.getElementById('agendamento').scrollIntoView({behavior:'smooth'})">
+        Agendar Ensaio
+      </button>
+      <button onclick="document.getElementById('ultimos-ensaios').scrollIntoView({behavior:'smooth'})">
+        Ver Últimos Ensaios
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ÚLTIMOS ENSAIOS -->
+  <div id="ultimos-ensaios">
+    <h2>Últimos Ensaios</h2>
+    <p class="muted">Alguns trabalhos recentes. Clique no leque para abrir (no celular: toque).</p>
+
+    <div class="works-grid">
+
+      <!-- LEQUE -->
+      <div class="fan-card">
+        <h3 class="fan-title">Ensaio Infantil</h3>
+        <p class="fan-sub">Visual dinâmico em leque para ver várias fotos do mesmo ensaio.</p>
+
+        <button class="fan js-fan" type="button" aria-label="Abrir leque de fotos do ensaio infantil">
+          <img src="assets/ensaios/crianca/crianca-01.jpeg" alt="Ensaio infantil - foto 1">
+          <img src="assets/ensaios/crianca/crianca-02.jpeg" alt="Ensaio infantil - foto 2">
+          <img src="assets/ensaios/crianca/crianca-03.jpeg" alt="Ensaio infantil - foto 3">
+          <img src="assets/ensaios/crianca/crianca-04.jpeg" alt="Ensaio infantil - foto 4">
+          <img src="assets/ensaios/crianca/crianca-05.jpeg" alt="Ensaio infantil - foto 5">
+          <img src="assets/ensaios/crianca/crianca-06.jpeg" alt="Ensaio infantil - foto 6">
+        </button>
+
+        <div class="fan-hint">Dica: toque/clique para abrir e tocar novamente para fechar.</div>
+
+        <!-- Grid com todas as fotos -->
+        <div class="gallery">
+          <a href="assets/ensaios/crianca/crianca-01.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/ensaios/crianca/crianca-01.jpeg" alt="Ensaio infantil 01"></a>
+          <a href="assets/ensaios/crianca/crianca-02.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/ensaios/crianca/crianca-02.jpeg" alt="Ensaio infantil 02"></a>
+          <a href="assets/ensaios/crianca/crianca-03.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/ensaios/crianca/crianca-03.jpeg" alt="Ensaio infantil 03"></a>
+          <a href="assets/ensaios/crianca/crianca-04.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/ensaios/crianca/crianca-04.jpeg" alt="Ensaio infantil 04"></a>
+          <a href="assets/ensaios/crianca/crianca-05.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/ensaios/crianca/crianca-05.jpeg" alt="Ensaio infantil 05"></a>
+          <a href="assets/ensaios/crianca/crianca-06.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/ensaios/crianca/crianca-06.jpeg" alt="Ensaio infantil 06"></a>
+          <a href="assets/ensaios/crianca/crianca-07.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/ensaios/crianca/crianca-07.jpeg" alt="Ensaio infantil 07"></a>
+          <a href="assets/ensaios/crianca/crianca-08.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/ensaios/crianca/crianca-08.jpeg" alt="Ensaio infantil 08"></a>
+          <a href="assets/ensaios/crianca/crianca-09.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/ensaios/crianca/crianca-09.jpeg" alt="Ensaio infantil 09"></a>
+          <a href="assets/ensaios/crianca/crianca-10.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/ensaios/crianca/crianca-10.jpeg" alt="Ensaio infantil 10"></a>
+          <a href="assets/ensaios/crianca/crianca-11.jpeg" target="_blank" rel="noopener noreferrer"><img src="assets/ensaios/crianca/crianca-11.jpeg" alt="Ensaio infantil 11"></a>
+        </div>
+      </div>
+
+      <!-- VÍDEOS -->
+      <div class="card video-card">
+        <h3>Vídeos do Ensaio</h3>
+        <p>Reprodução direto no site.</p>
+
+        <video controls playsinline preload="metadata">
+          <source src="assets/ensaios/crianca/video-crianca-1.mp4" type="video/mp4">
+          Seu navegador não suporta vídeo.
+        </video>
+
+        <div style="height:14px;"></div>
+
+        <video controls playsinline preload="metadata">
+          <source src="assets/ensaios/crianca/video-crianca-2.mp4" type="video/mp4">
+          Seu navegador não suporta vídeo.
+        </video>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PACOTES ESPECIAIS (PÁSCOA) -->
+  <div class="promo-wrap" id="pacotes">
+    <div class="promo-head">
+      <div>
+        <h2 style="margin:0;">Pacotes Especiais de Páscoa</h2>
+        <p class="promo-sub">Promoção por tempo limitado com <b>40% de desconto</b>. Valores antigos riscados e novo preço em destaque.</p>
+      </div>
+
+      <div class="badge">
+        🐰 <span>40% OFF</span> <small>Promoção</small>
+      </div>
+    </div>
+
+    <div class="promo-grid">
+
+      <div class="promo-card">
+        <div class="promo-title">Pacote Chocolate</div>
+        <div class="promo-desc">10 fotos digitais • Ensaio temático de Páscoa</div>
+
+        <div class="price-row">
+          <span class="old-price">R$140</span>
+          <span class="new-price">R$84</span>
+        </div>
+
+        <div class="save-pill">Você economiza 40%</div>
+        <button class="promo-btn" onclick="selectPackage('Pacote Chocolate (Páscoa) - 10 fotos digitais | de R$140 por R$84')">Selecionar</button>
+      </div>
+
+      <div class="promo-card">
+        <div class="promo-title">Pacote Coelhinho</div>
+        <div class="promo-desc">15 fotos digitais • Ensaio temático de Páscoa</div>
+
+        <div class="price-row">
+          <span class="old-price">R$210</span>
+          <span class="new-price">R$126</span>
+        </div>
+
+        <div class="save-pill">Você economiza 40%</div>
+        <button class="promo-btn" onclick="selectPackage('Pacote Coelhinho (Páscoa) - 15 fotos digitais | de R$210 por R$126')">Selecionar</button>
+      </div>
+
+      <div class="promo-card">
+        <div class="promo-title">Páscoa Encantada</div>
+        <div class="promo-desc">20 fotos digitais • Ensaio temático de Páscoa</div>
+
+        <div class="price-row">
+          <span class="old-price">R$280</span>
+          <span class="new-price">R$168</span>
+        </div>
+
+        <div class="save-pill">Você economiza 40%</div>
+        <button class="promo-btn" onclick="selectPackage('Páscoa Encantada - 20 fotos digitais | de R$280 por R$168')">Selecionar</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AGENDA -->
+  <h2 style="margin-top:60px">Agenda (datas disponíveis)</h2>
+  <p class="muted">Selecione uma data disponível e, em seguida, escolha um horário.</p>
+
+  <div class="agenda" id="agenda"></div>
+
+  <div id="timesArea" style="margin-top:18px; display:none;">
+    <h3 style="margin:0 0 10px 0;">Horários disponíveis</h3>
+    <div class="times" id="times"></div>
+    <p class="muted" style="margin-top:10px;">Ao selecionar o horário, ele será preenchido automaticamente no formulário.</p>
+  </div>
+
+  <!-- FORM -->
+  <div id="agendamento" class="booking">
+    <h2>Agendar Ensaio</h2>
+
+    <label for="package">Pacote escolhido</label>
+    <input id="package" readonly placeholder="Selecione um pacote acima">
+
+    <label for="name">Seu nome</label>
+    <input id="name" placeholder="Digite seu nome" autocomplete="name">
+
+    <label for="phone">WhatsApp</label>
+    <input id="phone" placeholder="(DDD) número" inputmode="tel" autocomplete="tel">
+
+    <label for="type">Tipo de ensaio</label>
+    <select id="type">
+      <option>Páscoa</option>
+      <option>Casal</option>
+      <option>Gestante</option>
+      <option>Família</option>
+      <option>Feminino</option>
+      <option>Infantil</option>
+    </select>
+
+    <label for="date">Data desejada</label>
+    <input type="date" id="date">
+
+    <label for="time">Horário</label>
+    <select id="time">
+      <option value="">Selecione um horário</option>
+      <option>09:00</option>
+      <option>11:00</option>
+      <option>14:00</option>
+      <option>16:00</option>
+      <option>18:00</option>
+    </select>
+
+    <button class="whatsapp" onclick="sendWhatsApp()">Enviar agendamento pelo WhatsApp</button>
+    <p class="muted" style="margin-top:12px;font-size:13px">
+      Ao enviar, você será redirecionado para o WhatsApp com a mensagem pronta.
+    </p>
+  </div>
+
+</div>
+
+<!-- FLOATS -->
+<div class="float-area">
+  <a class="fab fab-wa" href="https://wa.me/5566999138775" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <span class="icon" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="18" height="18" fill="currentColor">
+        <path d="M19.11 17.44c-.28-.14-1.64-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.21-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.12-.12.28-.32.41-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.5-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.46h-.52c-.18 0-.46.07-.7.35-.25.28-.95.93-.95 2.28s.98 2.65 1.12 2.83c.14.18 1.93 2.95 4.68 4.13.65.28 1.15.45 1.54.58.65.21 1.24.18 1.71.11.52-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/>
+        <path d="M26.67 5.33A13.27 13.27 0 0 0 16 0C7.18 0 0 7.18 0 16c0 2.82.74 5.58 2.15 8.01L0 32l8.2-2.12A15.9 15.9 0 0 0 16 32c8.82 0 16-7.18 16-16 0-4.27-1.66-8.29-5.33-10.67zM16 29.33c-2.39 0-4.73-.64-6.77-1.85l-.49-.29-4.86 1.26 1.3-4.73-.32-.49A13.2 13.2 0 0 1 2.67 16C2.67 8.65 8.65 2.67 16 2.67S29.33 8.65 29.33 16 23.35 29.33 16 29.33z"/>
+      </svg>
+    </span>
+    <span>WhatsApp</span>
+  </a>
+
+  <a class="fab fab-ig" href="https://www.instagram.com/allanegonzagafotografia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+    <span class="icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4a6 6 0 1 1 0 12a6 6 0 0 1 0-12zm0 2a4 4 0 1 0 0 8a4 4 0 0 0 0-8zm6.2-2.8a1 1 0 1 1 0 2a1 1 0 0 1 0-2z"/>
+      </svg>
+    </span>
+    <span>Instagram</span>
+  </a>
+</div>
+
+<footer>
+  © Allane Gonzaga Fotografia
+</footer>
+
+<script>
+  const WHATSAPP_NUMBER = '5566999138775';
+
+  // ✅ DATAS DISPONÍVEIS (06/03 e depois +6 dias)
+  const availableDates = [
+    "2026-03-06",
+    "2026-03-12",
+    "2026-03-18",
+    "2026-03-24",
+    "2026-03-30",
+    "2026-04-05"
+  ];
+
+  const timeSlots = ["09:00","11:00","14:00","16:00","18:00"];
+
+  function formatBR(yyyy_mm_dd){
+    const [y,m,d] = yyyy_mm_dd.split("-");
+    return `${d}/${m}/${y}`;
+  }
+
+  function renderAgenda(){
+    const agenda = document.getElementById("agenda");
+    agenda.innerHTML = "";
+
+    availableDates.forEach(dateStr => {
+      const item = document.createElement("div");
+      item.className = "slot";
+      item.setAttribute("data-date", dateStr);
+
+      item.innerHTML = `
+        <div>
+          <b>${formatBR(dateStr)}</b><br>
+          <small>Disponível</small>
+        </div>
+        <button type="button">Escolher</button>
+      `;
+
+      item.querySelector("button").addEventListener("click", (e) => {
+        e.stopPropagation();
+        chooseDate(dateStr);
+      });
+
+      item.addEventListener("click", () => chooseDate(dateStr));
+      agenda.appendChild(item);
+    });
+  }
+
+  function chooseDate(dateStr){
+    document.querySelectorAll(".slot").forEach(el => {
+      el.classList.toggle("selected", el.getAttribute("data-date") === dateStr);
+    });
+
+    document.getElementById("date").value = dateStr;
+    document.getElementById("time").value = "";
+
+    renderTimes();
+    document.getElementById("timesArea").style.display = "block";
+    document.getElementById("timesArea").scrollIntoView({behavior:"smooth"});
+  }
+
+  function renderTimes(){
+    const times = document.getElementById("times");
+    times.innerHTML = "";
+
+    timeSlots.forEach(t => {
+      const btn = document.createElement("button");
+      btn.className = "time-btn";
+      btn.type = "button";
+      btn.textContent = t;
+
+      btn.addEventListener("click", () => chooseTime(t));
+      times.appendChild(btn);
+    });
+  }
+
+  function chooseTime(t){
+    document.querySelectorAll(".time-btn").forEach(b => {
+      b.classList.toggle("selected", b.textContent === t);
+    });
+
+    document.getElementById("time").value = t;
+    document.getElementById("agendamento").scrollIntoView({behavior:"smooth"});
+  }
+
+  function selectPackage(pkg){
+    document.getElementById('package').value = pkg;
+    document.getElementById('agendamento').scrollIntoView({behavior:'smooth'});
+  }
+
+  function sendWhatsApp(){
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const pkg = document.getElementById('package').value.trim();
+    const type = document.getElementById('type').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+
+    if(!pkg){ alert('Selecione um pacote antes de enviar.'); return; }
+    if(!name || !phone){ alert('Preencha seu nome e WhatsApp.'); return; }
+    if(!date){ alert('Selecione uma data disponível.'); return; }
+    if(!time){ alert('Selecione um horário.'); return; }
+
+    const message =
+`Olá! Quero agendar um ensaio.
+
+Nome: ${name}
+WhatsApp: ${phone}
+Pacote: ${pkg}
+Tipo de ensaio: ${type}
+Data: ${date}
+Horário: ${time}`;
+
+    const encoded = encodeURIComponent(message);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`,'_blank');
+  }
+
+  // Leque (mobile): clique abre/fecha
+  document.querySelectorAll('.js-fan').forEach(btn => {
+    btn.addEventListener('click', () => btn.classList.toggle('open'));
+  });
+
+  renderAgenda();
+</script>
+
+</body>
+</html>
