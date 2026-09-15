@@ -722,6 +722,43 @@ function exportarCompradores(){
   a.click();
 
   URL.revokeObjectURL(url);
+}function desativarModoAdmin(){
+
+  modoAdmin = false;
+
+  document.getElementById("modoAdminAviso").style.display = "none";
+
+  Array.from(grid.children).forEach((botao, index) => {
+
+    const numero = index + 1;
+
+    botao.classList.remove("admin");
+
+    if(vendidos.includes(numero)){
+      botao.style.pointerEvents = "none";
+      botao.onclick = null;
+    } else {
+      botao.style.pointerEvents = "auto";
+      botao.onclick = () => {
+
+        botao.classList.toggle("selecionado");
+
+        const pos = selecionados.indexOf(numero);
+
+        if(pos > -1){
+          selecionados.splice(pos,1);
+        }else{
+          selecionados.push(numero);
+        }
+
+        atualizarTotal();
+      };
+    }
+
+  });
+
+  alert("Modo administrador encerrado.");
+
 }
 </script>
 
