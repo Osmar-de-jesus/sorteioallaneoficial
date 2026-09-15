@@ -250,7 +250,10 @@ Escolher meu número
 <button class="whatsapp" onclick="gerarPix()">
 💳 Gerar Pix e Reservar
 </button>
-
+<div id="timerBox" style="display:none;margin-top:20px;background:#fff7ed;padding:18px;border-radius:16px;text-align:center;">
+  <div style="color:#ea580c;font-weight:700;">⏳ Tempo para concluir o Pix</div>
+  <div id="timer" style="font-size:34px;font-weight:800;color:#ea580c;">10:00</div>
+</div>
 <div id="pixArea" style="display:none;margin-top:20px;text-align:center;">
     <h3>Escaneie o QR Code</h3>
 
@@ -317,6 +320,9 @@ const TOTAL = 100;
 const selecionados = [];
 const vendidos = JSON.parse(localStorage.getItem("rifaVendidos")) || [];
 const compradores = JSON.parse(localStorage.getItem("compradoresNatal")) || [];
+let tempoRestante = 600;
+let cronometro = null;
+let reservaTemporaria = [];
 
 const grid = document.getElementById("gridNumeros");
 
@@ -377,7 +383,56 @@ function buscarNumero(){
   });
 
 }
+function iniciarTimer(){
 
+  clearInterval(cronometro);
+
+  tempoRestante = 600;
+
+  document.getElementById("timerBox").style.display = "block";
+
+  document.getElementById("timer").textContent = "10:00";
+
+  cronometro = setInterval(()=>{
+
+    tempoRestante--;
+
+    const m = Math.floor(tempoRestante/60);
+    const s = tempoRestante%60;
+
+    document.getElementById("timer").textContent =
+      String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+
+    if(tempoRestante<=0){
+
+      clearInterval(cronometro);
+
+      document.getElementById("timer").textContent = "00:00";
+
+      // libera os números caso expire
+      reservaTemporaria.forEach(n=>{
+        const botao = grid.children[n-1];
+        botao.classList.remove("vendido");
+        botao.onclick = ()=>{
+          botao.classList.toggle("selecionado");
+          const pos=selecionados.indexOf(n);
+          if(pos>=0) selecionados.splice(pos,1);
+          else selecionados.push(n);
+          atualizarTotal();
+        };
+      });
+
+      vendidos.splice(0,vendidos.length,...vendidos.filter(n=>!reservaTemporaria.includes(n)));
+      localStorage.setItem("rifaVendidos",JSON.stringify(vendidos));
+
+      reservaTemporaria=[];
+
+      alert("O tempo expirou. Os números voltaram a ficar disponíveis.");
+    }
+
+  },1000);
+
+}
 // Gerar PIX e reservar
 function gerarPix(){
 
@@ -407,6 +462,8 @@ Chave: +556699138775`;
 document.getElementById("qrCode").src =
 "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
 encodeURIComponent(textoPix);
+ 
+iniciarTimer();
 
   compradores.push({
     nome,
@@ -416,7 +473,7 @@ encodeURIComponent(textoPix);
   });
 
   localStorage.setItem("compradoresNatal",JSON.stringify(compradores));
-
+  reservaTemporaria = [...selecionados];
   selecionados.forEach(n=>{
 
     if(!vendidos.includes(n)){
