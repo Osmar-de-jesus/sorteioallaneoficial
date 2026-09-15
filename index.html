@@ -246,31 +246,53 @@ Escolher meu número
 <input id="nome" placeholder="Nome completo">
 <input id="telefone" placeholder="WhatsApp">
 
-<button class="whatsapp" onclick="reservarNumeros()">
-📲 Reservar pelo WhatsApp
+<button class="whatsapp" onclick="gerarPix()">
+💳 Gerar Pix e Reservar
 </button>
 
+<div id="pixArea" style="display:none;margin-top:20px;text-align:center;">
+    <h3>Escaneie o QR Code</h3>
+
+    <img id="qrCode" width="220" height="220">
+
+    <p style="margin-top:15px;">
+        Chave Pix:
+        <strong>+55 66 9913-8775</strong>
+    </p>
+
+  <button onclick="copiarPix()">Copiar Chave Pix</button>
+
 </div>
+
+</div> <!-- fecha .booking -->
 
 <div class="winner">
 
-<h2>Sorteio</h2>
+<h2>🔒 Área da Organizadora</h2>
 
-<p><strong>Data:</strong> 31 de outubro de 2026</p>
+<p><strong>Data do sorteio:</strong> 31 de outubro de 2026</p>
 
-<p><strong>1º prêmio</strong><br>
-Ensaio de Natal em um dos cenários disponíveis + 15 fotos digitais.</p>
+<div style="margin:25px 0;padding:20px;background:#f8fafc;border-radius:18px;line-height:1.8">
 
-<br>
+<h3>🥇 Primeiro Prêmio</h3>
+<p>Ensaio de Natal em um dos cenários disponíveis + 15 fotos digitais.</p>
 
-<p><strong>2º prêmio</strong><br>
-Ensaio de Natal no outro cenário + 15 fotos digitais.</p>
+<hr style="margin:20px 0;border:none;border-top:1px solid #ddd;">
 
-<div id="resultadoSorteio">
-🔒 Aguardando sorteio
+<h3>🥈 Segundo Prêmio</h3>
+<p>Ensaio de Natal no outro cenário disponível + 15 fotos digitais.</p>
+
 </div>
 
-<button onclick="pedirSenha()">Realizar Sorteio</button>
+<div id="resultadoSorteio">🔒 Aguardando sorteio</div>
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px;">
+
+<button onclick="pedirSenha()">🎲 Realizar Sorteio</button>
+
+<button onclick="exportarCompradores()">📊 Exportar Compradores</button>
+
+</div>
 
 </div>
 
@@ -287,147 +309,204 @@ Ensaio de Natal no outro cenário + 15 fotos digitais.</p>
 
 <script>
 
-const SENHA_ADMIN="8294";
-const PRECO=8;
-const TOTAL=100;
+const SENHA_ADMIN = "8294";
+const PRECO = 8;
+const TOTAL = 100;
 
-const selecionados=[];
-const vendidos=JSON.parse(localStorage.getItem("rifaVendidos"))||[];
+const selecionados = [];
+const vendidos = JSON.parse(localStorage.getItem("rifaVendidos")) || [];
+const compradores = JSON.parse(localStorage.getItem("compradoresNatal")) || [];
 
-const grid=document.getElementById("gridNumeros");
+const grid = document.getElementById("gridNumeros");
 
+// Criar números
 for(let i=1;i<=TOTAL;i++){
 
-const b=document.createElement("div");
-b.className="numero";
-b.textContent=String(i).padStart(3,"0");
+  const b=document.createElement("div");
 
-if(vendidos.includes(i)){
-b.classList.add("vendido");
-}else{
+  b.className="numero";
+  b.textContent=String(i).padStart(3,"0");
 
-b.onclick=()=>{
+  if(vendidos.includes(i)){
+    b.classList.add("vendido");
+  }else{
 
-b.classList.toggle("selecionado");
+    b.onclick=()=>{
 
-if(selecionados.includes(i))
-selecionados.splice(selecionados.indexOf(i),1);
-else
-selecionados.push(i);
+      b.classList.toggle("selecionado");
 
-atualizarTotal();
+      const pos=selecionados.indexOf(i);
 
-};
+      if(pos>=0){
+        selecionados.splice(pos,1);
+      }else{
+        selecionados.push(i);
+      }
+
+      atualizarTotal();
+
+    };
+
+  }
+
+  grid.appendChild(b);
 
 }
 
-grid.appendChild(b);
-
-}
-
+// Atualizar total
 function atualizarTotal(){
 
-document.getElementById("qtdSelecionados").textContent=selecionados.length;
+  document.getElementById("qtdSelecionados").textContent=selecionados.length;
 
-document.getElementById("valorTotal").textContent=
-"R$ "+(selecionados.length*PRECO).toFixed(2).replace(".",",");
+  document.getElementById("valorTotal").textContent=
+    "R$ "+(selecionados.length*PRECO).toFixed(2).replace(".",",");
 
 }
 
+// Buscar número
 function buscarNumero(){
 
-const v=parseInt(document.getElementById("buscarNumero").value);
+  const v=parseInt(document.getElementById("buscarNumero").value);
 
-if(isNaN(v)||v<1||v>100)return;
+  if(isNaN(v)||v<1||v>100)return;
 
-grid.children[v-1].scrollIntoView({behavior:"smooth",block:"center"});
-
-}
-
-function reservarNumeros(){
-
-const nome=document.getElementById("nome").value.trim();
-const telefone=document.getElementById("telefone").value.trim();
-
-if(!nome||!telefone){
-alert("Preencha nome e WhatsApp.");
-return;
-}
-
-if(selecionados.length===0){
-alert("Escolha pelo menos um número.");
-return;
-}
-
-const numeros=selecionados.map(n=>String(n).padStart(3,"0")).join(", ");
-
-const total=(selecionados.length*PRECO).toFixed(2).replace(".",",");
-
-const msg=encodeURIComponent(
-`Olá!
-
-Quero reservar meus números da Rifa Especial de Natal.
-
-Nome: ${nome}
-WhatsApp: ${telefone}
-Números: ${numeros}
-Valor: R$ ${total}`
-);
-
-selecionados.forEach(n=>{
-
-if(!vendidos.includes(n))
-vendidos.push(n);
-
-const botao=grid.children[n-1];
-botao.classList.remove("selecionado");
-botao.classList.add("vendido");
-botao.onclick=null;
-
-});
-
-localStorage.setItem("rifaVendidos",JSON.stringify(vendidos));
-
-selecionados.length=0;
-atualizarTotal();
-
-window.open(`https://wa.me/5566999138775?text=${msg}`,"_blank");
+  grid.children[v-1].scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
 
 }
 
+// Gerar PIX e reservar
+function gerarPix(){
+
+  const nome=document.getElementById("nome").value.trim();
+  const telefone=document.getElementById("telefone").value.trim();
+
+  if(!nome||!telefone){
+    alert("Preencha nome e WhatsApp.");
+    return;
+  }
+
+  if(selecionados.length===0){
+    alert("Escolha pelo menos um número.");
+    return;
+  }
+
+  const valor=(selecionados.length*PRECO).toFixed(2).replace(".",",");
+
+  const textoPix=`Pix para Allane Gonzaga Fotografia
+
+Valor: R$ ${valor}
+
+Chave: +556699138775`;
+
+  document.getElementById("pixArea").style.display="block";
+
+  document.getElementById("qrCode").src=
+    "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+encodeURIComponent(textoPix);
+
+  compradores.push({
+    nome,
+    telefone,
+    numeros:[...selecionados],
+    valor
+  });
+
+  localStorage.setItem("compradoresNatal",JSON.stringify(compradores));
+
+  selecionados.forEach(n=>{
+
+    if(!vendidos.includes(n)){
+      vendidos.push(n);
+    }
+
+    const botao=grid.children[n-1];
+
+    botao.classList.remove("selecionado");
+    botao.classList.add("vendido");
+    botao.onclick=null;
+
+  });
+
+  localStorage.setItem("rifaVendidos",JSON.stringify(vendidos));
+
+  selecionados.length=0;
+
+  atualizarTotal();
+
+}
+
+// Copiar chave
+function copiarPix(){
+
+  navigator.clipboard.writeText("+556699138775");
+
+  alert("Chave Pix copiada!");
+
+}
+
+// Pedir senha
 function pedirSenha(){
 
-const senha=prompt("Digite a senha:");
+  const senha=prompt("Digite a senha da organizadora:");
 
-if(senha!==SENHA_ADMIN){
-alert("Senha incorreta.");
-return;
+  if(senha!==SENHA_ADMIN){
+    alert("Senha incorreta.");
+    return;
+  }
+
+  realizarSorteio();
+
 }
 
-realizarSorteio();
-
-}
-
+// Sorteio
 function realizarSorteio(){
 
-if(vendidos.length<2){
-alert("É preciso ter pelo menos 2 números vendidos.");
-return;
+  if(vendidos.length<2){
+    alert("É preciso ter pelo menos 2 números vendidos.");
+    return;
+  }
+
+  const disponiveis=[...vendidos];
+
+  const g1=disponiveis.splice(Math.floor(Math.random()*disponiveis.length),1)[0];
+  const g2=disponiveis.splice(Math.floor(Math.random()*disponiveis.length),1)[0];
+
+  document.getElementById("resultadoSorteio").innerHTML=`
+    🥇 1º Ganhador: <strong>${String(g1).padStart(3,"0")}</strong><br><br>
+    🥈 2º Ganhador: <strong>${String(g2).padStart(3,"0")}</strong>
+  `;
+
 }
 
-const disponiveis=[...vendidos];
+// Exportar compradores
+function exportarCompradores(){
 
-const g1=disponiveis.splice(Math.floor(Math.random()*disponiveis.length),1)[0];
-const g2=disponiveis.splice(Math.floor(Math.random()*disponiveis.length),1)[0];
+  const senha=prompt("Digite a senha da organizadora:");
 
-document.getElementById("resultadoSorteio").innerHTML=`
-🥇 1º Ganhador: <strong>${String(g1).padStart(3,"0")}</strong><br><br>
-🥈 2º Ganhador: <strong>${String(g2).padStart(3,"0")}</strong>
-`;
+  if(senha!==SENHA_ADMIN){
+    alert("Senha incorreta.");
+    return;
+  }
+
+  const lista=JSON.parse(localStorage.getItem("compradoresNatal"))||[];
+
+  let csv="Nome,WhatsApp,Números,Valor\n";
+
+  lista.forEach(c=>{
+    csv+=`${c.nome},${c.telefone},"${c.numeros.join(" ")}",${c.valor}\n`;
+  });
+
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+
+  const url=URL.createObjectURL(blob);
+
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="compradores_rifa_natal.csv";
+  a.click();
+
+  URL.revokeObjectURL(url);
 
 }
-
-</script>
-
-</body>
-</html>
