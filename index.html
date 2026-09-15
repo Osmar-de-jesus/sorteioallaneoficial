@@ -20,6 +20,16 @@
  --radius:22px;
 }
 
+.numero.admin{
+  border:2px solid #ef4444;
+  animation:pulse .9s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+  100%{transform:scale(1);}
+}
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
@@ -295,7 +305,36 @@ Escolher meu número
 <button onclick="pedirSenha()">🎲 Realizar Sorteio</button>
 
 <button onclick="exportarCompradores()">📊 Exportar Compradores</button>
+<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px;">
 
+  <button onclick="pedirSenha()">
+    🎲 Realizar Sorteio
+  </button>
+
+  <button onclick="exportarCompradores()">
+    📊 Exportar Compradores
+  </button>
+
+  <button onclick="ativarModoAdmin()">
+    🔓 Liberar Números
+  </button>
+
+  <button onclick="desativarModoAdmin()">
+    🔒 Sair do Modo Admin
+  </button>
+
+</div>
+
+<div id="modoAdminAviso"
+style="display:none;margin-top:15px;padding:12px;background:#fef2f2;color:#b91c1c;border-radius:12px;">
+  Modo administrador ativo. Clique em um número reservado para liberá-lo.
+</div>
+</button>
+
+<div id="modoAdminAviso"
+style="display:none;margin-top:15px;padding:12px;background:#fef2f2;color:#b91c1c;border-radius:12px;">
+  Modo administrador ativo. Clique em um número reservado para liberá-lo.
+</div>
 </div>
 
 </div>
@@ -323,6 +362,7 @@ const compradores = JSON.parse(localStorage.getItem("compradoresNatal")) || [];
 let tempoRestante = 600;
 let cronometro = null;
 let reservaTemporaria = [];
+let modoAdmin = false;
 
 const grid = document.getElementById("gridNumeros");
 
@@ -408,6 +448,8 @@ function iniciarTimer(){
       clearInterval(cronometro);
 
       document.getElementById("timer").textContent = "00:00";
+     document.getElementById("pixArea").style.display="none";
+document.getElementById("timerBox").style.display="none";
 
       // libera os números caso expire
       reservaTemporaria.forEach(n=>{
@@ -504,12 +546,10 @@ const payloadPix = gerarPayloadPix(valorPix);
 document.getElementById("pixArea").style.display = "block";
 
 document.getElementById("qrCode").src =
-"https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
-encodeURIComponent(payloadPix);
+  "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
+  encodeURIComponent(payloadPix);
 
-iniciarTimer();
-
-reservaTemporaria = [...selecionados]; 
+reservaTemporaria = [...selecionados];
 iniciarTimer();
 
   compradores.push({
@@ -552,7 +592,80 @@ function copiarPix(){
 
   alert("Código Pix Copia e Cola copiado!");
 }
+function ativarModoAdmin(){
 
+  const senha = prompt("Digite a senha da organizadora:");
+
+  if(senha !== SENHA_ADMIN){
+    alert("Senha incorreta.");
+    return;
+  }
+
+  modoAdmin = true;
+
+  document.getElementById("modoAdminAviso").style.display="block";
+
+  Array.from(grid.children).forEach((botao,index)=>{
+
+    const numero=index+1;
+
+    if(vendidos.includes(numero)){
+
+      botao.classList.add("admin");
+      botao.style.pointerEvents="auto";
+
+      botao.onclick=()=>liberarNumero(numero);
+
+    }
+
+  });
+
+}
+ function liberarNumero(numero){
+
+  if(!confirm(`Liberar o número ${String(numero).padStart(3,"0")}?`))
+    return;
+
+  const pos = vendidos.indexOf(numero);
+
+  if(pos>-1) vendidos.splice(pos,1);
+
+  localStorage.setItem("rifaVendidos",JSON.stringify(vendidos));
+
+  let lista = JSON.parse(localStorage.getItem("compradoresNatal")) || [];
+
+  lista = lista
+    .map(c=>({
+      ...c,
+   numeros: c.numeros.filter(n => n !== numero)
+    }))
+    .filter(c=>c.numeros.length>0);
+
+  localStorage.setItem("compradoresNatal",JSON.stringify(lista));
+
+  const botao = grid.children[numero-1];
+
+  botao.classList.remove("vendido","admin");
+  botao.style.pointerEvents="auto";
+
+  botao.onclick=()=>{
+
+    botao.classList.toggle("selecionado");
+
+    const p=selecionados.indexOf(numero);
+
+    if(p>-1){
+      selecionados.splice(p,1);
+    }else{
+      selecionados.push(numero);
+    }
+
+    atualizarTotal();
+
+  };
+
+  alert(`Número ${String(numero).padStart(3,"0")} liberado.`);
+}
 // Pedir senha
 function pedirSenha(){
 
