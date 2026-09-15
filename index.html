@@ -405,8 +405,8 @@ Chave: +556699138775`;
   document.getElementById("pixArea").style.display="block";
 
 document.getElementById("qrCode").src =
-  "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
-  encodeURIComponent(textoPix);
+"https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
+encodeURIComponent(textoPix);
 
   compradores.push({
     nome,
@@ -482,9 +482,6 @@ function realizarSorteio(){
 
 }
 
-// Exportar compradores
-function exportarCompradores(){
-
  // Exportar compradores
 function exportarCompradores(){
 
@@ -512,7 +509,7 @@ function exportarCompradores(){
   a.click();
 
   URL.revokeObjectURL(url);
-} // <-- ESTA CHAVE ESTAVA FALTANDO
+}
 </script>
 
 </body>
