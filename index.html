@@ -155,7 +155,13 @@ button:hover{
   background:var(--primary);
   color:#fff;
 }
-
+.numero.vendido{
+  background:#cbd5e1;
+  color:#64748b;
+  cursor:not-allowed;
+  pointer-events:none;
+  opacity:.9;
+}
 .checkout{
   position:sticky;
   bottom:0;
@@ -398,37 +404,44 @@ const SENHA_ADMIN="8294";
 const PRECO=2;
 const TOTAL_NUMEROS=5000;
 const selecionados=[];
+const vendidos = JSON.parse(localStorage.getItem("rifaVendidos")) || [];
 
 const grid=document.getElementById("gridNumeros");
 
 for(let i=1;i<=TOTAL_NUMEROS;i++){
 
-const botao=document.createElement("div");
+  const botao=document.createElement("div");
 
-botao.className="numero";
-botao.textContent=String(i).padStart(4,"0");
+  botao.className="numero";
+  botao.textContent=String(i).padStart(4,"0");
 
-botao.onclick=()=>{
+  botao.onclick=()=>{
 
-botao.classList.toggle("selecionado");
+    botao.classList.toggle("selecionado");
 
-if(selecionados.includes(i)){
-selecionados.splice(selecionados.indexOf(i),1);
-}else{
-selecionados.push(i);
+    if(selecionados.includes(i)){
+      selecionados.splice(selecionados.indexOf(i),1);
+    }else{
+      selecionados.push(i);
+    }
+
+    document.getElementById("qtdSelecionados").textContent=selecionados.length;
+    document.getElementById("valorTotal").textContent=
+      "R$ "+(selecionados.length*PRECO).toFixed(2).replace(".",",");
+
+  };
+
+  grid.appendChild(botao);
 }
-
-document.getElementById("qtdSelecionados").textContent=selecionados.length;
-
-document.getElementById("valorTotal").textContent=
-"R$ "+(selecionados.length*PRECO).toFixed(2).replace(".",",");
-
-};
-
-grid.appendChild(botao);
-
-}
-
+// Marca os números já vendidos
+vendidos.forEach(n=>{
+  const botao = grid.children[n-1];
+  if(botao){
+    botao.classList.add("vendido");
+    botao.onclick = null;
+  }
+});
+  
 function buscarNumero(){
 
 const valor=parseInt(document.getElementById("buscarNumero").value);
@@ -472,12 +485,17 @@ alert("Chave Pix copiada!");
 
 function enviarComprovante(){
 
-const nome=document.getElementById("nome").value;
-const telefone=document.getElementById("telefone").value;
+const nome=document.getElementById("nome").value.trim();
+const telefone=document.getElementById("telefone").value.trim();
 
-if(!nome||!telefone){
-alert("Preencha nome e WhatsApp.");
-return;
+if(!nome || !telefone){
+  alert("Preencha nome e WhatsApp.");
+  return;
+}
+
+if(selecionados.length===0){
+  alert("Escolha pelo menos um número.");
+  return;
 }
 
 const numeros=selecionados.map(n=>String(n).padStart(4,"0")).join(", ");
@@ -485,6 +503,42 @@ const numeros=selecionados.map(n=>String(n).padStart(4,"0")).join(", ");
 const total=(selecionados.length*PRECO).toFixed(2).replace(".",",");
 
 const msg=encodeURIComponent(
+`Olá! Fiz o Pix da Rifa Premiada de R$ 5.000.
+
+Nome: ${nome}
+WhatsApp: ${telefone}
+Números: ${numeros}
+Valor: R$ ${total}
+
+Estou enviando o comprovante agora.`
+);
+
+// Marca como vendidos
+selecionados.forEach(n=>{
+  if(!vendidos.includes(n)){
+    vendidos.push(n);
+  }
+
+  const botao = grid.children[n-1];
+  if(botao){
+    botao.classList.remove("selecionado");
+    botao.classList.add("vendido");
+    botao.onclick = null;
+  }
+});
+
+// Salva no navegador
+localStorage.setItem("rifaVendidos", JSON.stringify(vendidos));
+
+// Limpa seleção
+selecionados.length = 0;
+document.getElementById("qtdSelecionados").textContent = "0";
+document.getElementById("valorTotal").textContent = "R$ 0,00";
+
+window.open(`https://wa.me/5566999138775?text=${msg}`,"_blank");
+}
+
+
 `Olá! Fiz o Pix da Rifa Premiada de R$ 5.000.
 
 Nome: ${nome}
@@ -538,4 +592,3 @@ document.getElementById("resultadoSorteio").innerHTML=
 
 </body>
 </html>
-
