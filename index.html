@@ -3,290 +3,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rifa Premiada • R$ 5.000</title>
+<title>Rifa de Natal • Dois Ganhadores</title>
 
-<style>
-:root{
-  --bg:#f4f8ff;
-  --primary:#2563eb;
-  --primary-dark:#1d4ed8;
-  --dark:#0f172a;
-  --card:rgba(255,255,255,.96);
-  --shadow:0 20px 45px rgba(15,23,42,.15);
-  --radius:22px;
-  --wa:#25D366;
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-
-body{
-  font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
-  background:var(--bg);
-  color:#111827;
-}
-
-header{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:30px;
-  background:
-    linear-gradient(rgba(15,23,42,.65),rgba(15,23,42,.78)),
-    url("assets/allane.png");
-  background-size:cover;
-  background-position:center;
-}
-
-.hero{max-width:700px}
-
-.badge{
-  display:inline-block;
-  background:#dc2626;
-  color:#fff;
-  padding:8px 18px;
-  border-radius:999px;
-  font-weight:700;
-  margin-bottom:18px;
-}
-
-.hero h1{
-  font-size:58px;
-  color:#fff;
-}
-
-.hero p{
-  color:#dbeafe;
-  font-size:20px;
-  margin:18px 0 28px;
-}
-
-.cta{
-  display:flex;
-  gap:15px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
-button{
-  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-  color:#fff;
-  border:none;
-  border-radius:16px;
-  padding:15px 24px;
-  cursor:pointer;
-  font-weight:700;
-  transition:.25s;
-  box-shadow:0 12px 30px rgba(37,99,235,.35);
-}
-
-button:hover{
-  transform:translateY(-3px);
-}
-
-.container{
-  max-width:1250px;
-  margin:auto;
-  padding:40px 20px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
-  margin-top:-70px;
-}
-
-.card{
-  background:var(--card);
-  backdrop-filter:blur(10px);
-  border-radius:var(--radius);
-  padding:24px;
-  text-align:center;
-  box-shadow:var(--shadow);
-}
-
-.card h3{
-  color:#64748b;
-  margin-bottom:8px;
-}
-
-.card b{
-  font-size:28px;
-}
-
-.search{
-  margin:35px 0;
-}
-
-.search input{
-  width:100%;
-  padding:18px;
-  border-radius:18px;
-  border:1px solid #dbeafe;
-  font-size:16px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(62px,1fr));
-  gap:10px;
-}
-
-.numero{
-  height:58px;
-  border-radius:14px;
-  background:#fff;
-  border:1px solid #dbeafe;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.numero:hover{
-  transform:scale(1.08);
-}
-
-.numero.selecionado{
-  background:var(--primary);
-  color:#fff;
-}
-.numero.vendido{
-  background:#cbd5e1;
-  color:#64748b;
-  cursor:not-allowed;
-  pointer-events:none;
-  opacity:.9;
-}
-.checkout{
-  position:sticky;
-  bottom:0;
-  background:#fff;
-  padding:16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-top:1px solid #ddd;
-  box-shadow:0 -10px 30px rgba(0,0,0,.08);
-}
-
-.booking{
-  background:#fff;
-  border-radius:26px;
-  padding:30px;
-  box-shadow:var(--shadow);
-  margin-top:45px;
-}
-
-.booking input{
-  width:100%;
-  padding:15px;
-  border-radius:14px;
-  border:1px solid #dbeafe;
-  margin-bottom:14px;
-}
-
-.timer{
-  background:#fff7ed;
-  color:#ea580c;
-  border-radius:14px;
-  padding:16px;
-  text-align:center;
-  font-weight:700;
-  margin:18px 0;
-}
-
-#timer{
-  font-size:30px;
-}
-
-.pix-box{
-  background:#eef4ff;
-  border-radius:18px;
-  padding:18px;
-  text-align:center;
-}
-
-.copy{
-  width:100%;
-  background:#111;
-  margin-top:14px;
-}
-
-.whatsapp{
-  width:100%;
-  background:var(--wa);
-  margin-top:14px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-}
-
-.winner{
-  background:#fff;
-  border-radius:26px;
-  padding:28px;
-  text-align:center;
-  box-shadow:var(--shadow);
-  margin-top:45px;
-}
-
-#resultadoSorteio{
-  font-size:34px;
-  font-weight:800;
-  margin:20px 0;
-}
-
-.fab{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  background:var(--wa);
-  color:#fff;
-  text-decoration:none;
-  padding:15px 18px;
-  border-radius:999px;
-  font-weight:700;
-  box-shadow:0 15px 35px rgba(37,211,102,.35);
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-footer{
-  text-align:center;
-  padding:40px;
-  color:#64748b;
-}
-
-@media(max-width:700px){
-.hero h1{font-size:40px}
-.stats{margin-top:-35px}
-}
-</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#f4f8ff;
+ --primary:#2563eb;
+ --primary2:#1d4ed8;
+ --wa:#25D366;
+ --shadow:0 18px 40px rgba(0,0,0,.12);
+ --radius:22px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+font-family:Inter,sans-serif;
+background:var(--bg);
+color:#111827;
+}
+
+header{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:30px;
+background:
+linear-gradient(rgba(15,23,42,.65),rgba(15,23,42,.78)),
+url("assets/allane.png") center/cover;
+}
+
+.hero{max-width:700px;color:white;}
+
+.badge{
+display:inline-block;
+background:#dc2626;
+padding:8px 18px;
+border-radius:999px;
+font-weight:700;
+margin-bottom:18px;
+}
+
+.hero h1{font-size:52px;}
+.hero p{margin:18px 0;font-size:20px;color:#dbeafe;}
+
+button{
+border:none;
+cursor:pointer;
+border-radius:16px;
+padding:14px 24px;
+font-weight:700;
+color:white;
+background:linear-gradient(135deg,var(--primary),var(--primary2));
+box-shadow:var(--shadow);
+transition:.2s;
+}
+button:hover{transform:translateY(-3px);}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:40px 20px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+margin-top:-60px;
+}
+
+.card{
+background:white;
+padding:24px;
+border-radius:var(--radius);
+box-shadow:var(--shadow);
+text-align:center;
+}
+
+.card h3{color:#64748b;margin-bottom:8px;}
+.card b{font-size:26px;}
+
+.search{margin:35px 0;}
+
+.search input{
+width:100%;
+padding:18px;
+border-radius:18px;
+border:1px solid #dbeafe;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(65px,1fr));
+gap:10px;
+margin-top:25px;
+}
+
+.numero{
+height:60px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:white;
+border-radius:14px;
+cursor:pointer;
+font-weight:700;
+border:1px solid #dbeafe;
+transition:.2s;
+}
+
+.numero:hover{transform:scale(1.05);}
+
+.numero.selecionado{
+background:var(--primary);
+color:white;
+}
+
+.numero.vendido{
+background:#cbd5e1;
+color:#64748b;
+cursor:not-allowed;
+pointer-events:none;
+}
+
+.checkout{
+position:sticky;
+bottom:0;
+background:white;
+display:flex;
+justify-content:space-between;
+padding:18px;
+margin-top:30px;
+box-shadow:0 -8px 25px rgba(0,0,0,.1);
+border-radius:18px 18px 0 0;
+}
+
+.booking,.winner{
+margin-top:40px;
+background:white;
+padding:30px;
+border-radius:26px;
+box-shadow:var(--shadow);
+}
+
+.booking input{
+width:100%;
+padding:15px;
+border-radius:14px;
+border:1px solid #dbeafe;
+margin-bottom:14px;
+}
+
+.whatsapp{
+width:100%;
+background:var(--wa);
+margin-top:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+}
+
+#resultadoSorteio{
+font-size:26px;
+font-weight:800;
+margin:20px 0;
+}
+
+footer{
+text-align:center;
+padding:35px;
+color:#64748b;
+}
+</style>
 </head>
+
 <body>
+
 <header>
 <div class="hero">
-
 <div class="badge">Rifa Oficial</div>
 
-<h1>🎉 Rifa Premiada de R$ 5.000</h1>
+<h1>🎄 Rifa Especial de Natal</h1>
 
-<p>Escolha seus números e concorra ao prêmio.</p>
+<p>
+Dois cenários especiais para registrar momentos inesquecíveis.
+Escolha seu número e participe!
+</p>
 
-<div class="cta">
-<button onclick="document.getElementById('numeros').scrollIntoView({behavior:'smooth'})">Escolher números</button>
-<button onclick="document.getElementById('sorteio').scrollIntoView({behavior:'smooth'})">Ver Sorteio</button>
-</div>
+<button onclick="document.getElementById('numeros').scrollIntoView({behavior:'smooth'})">
+Escolher meu número
+</button>
 
 </div>
 </header>
@@ -296,258 +210,198 @@ footer{
 <div class="stats">
 
 <div class="card">
-<h3>Prêmio</h3>
-<b>R$ 5.000</b>
-</div>
-
-<div class="card">
 <h3>Valor</h3>
-<b>R$ 2,00</b>
+<b>R$ 8,00</b>
 </div>
 
 <div class="card">
 <h3>Números</h3>
-<b>0001 a 5000</b>
+<b>001 a 100</b>
 </div>
 
 <div class="card">
-<h3>WhatsApp</h3>
-<b>66 9913-8775</b>
+<h3>Sorteio</h3>
+<b>31/10/2026</b>
+</div>
+
+<div class="card">
+<h3>Ganhadores</h3>
+<b>2 Famílias</b>
 </div>
 
 </div>
 
 <div class="search">
-<input id="buscarNumero"
-placeholder="Digite um número (2587)"
-oninput="buscarNumero()">
+<input id="buscarNumero" placeholder="Digite um número (001 a 100)" oninput="buscarNumero()">
 </div>
 
-<h2 id="numeros">Escolha seus números</h2>
+<h2 id="numeros">Escolha seu número</h2>
 
 <div class="grid" id="gridNumeros"></div>
 
 <div class="booking">
 
-<h2>Finalizar Compra</h2>
+<h2>Reservar números</h2>
 
 <input id="nome" placeholder="Nome completo">
 <input id="telefone" placeholder="WhatsApp">
-<input id="cpf" placeholder="CPF (opcional)">
 
-<div class="timer">
-⏳ Tempo restante
-<div id="timer">10:00</div>
-</div>
-
-<div class="pix-box">
-
-<h3>Chave Pix</h3>
-
-<p><b>+55 66 9913-8775</b></p>
-
-<button class="copy" onclick="copiarPix()">Copiar Chave Pix</button>
-
-</div>
-
-<button class="whatsapp" onclick="enviarComprovante()">
-<svg width="22" height="22" viewBox="0 0 32 32" fill="currentColor">
-<path d="M19.11 17.44c-.28-.14-1.64-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.21-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.12-.12.28-.32.41-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.5-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.46h-.52c-.18 0-.46.07-.7.35-.25.28-.95.93-.95 2.28s.98 2.65 1.12 2.83c.14.18 1.93 2.95 4.68 4.13.65.28 1.15.45 1.54.58.65.21 1.24.18 1.71.11.52-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/>
-</svg>
-Enviar comprovante pelo WhatsApp
+<button class="whatsapp" onclick="reservarNumeros()">
+📲 Reservar pelo WhatsApp
 </button>
 
 </div>
 
-<div id="sorteio" class="winner">
+<div class="winner">
 
-<h2>Área do Sorteio</h2>
+<h2>Sorteio</h2>
 
-<p>Somente a organizadora pode realizar o sorteio.</p>
+<p><strong>Data:</strong> 31 de outubro de 2026</p>
+
+<p><strong>1º prêmio</strong><br>
+Ensaio de Natal em um dos cenários disponíveis + 15 fotos digitais.</p>
+
+<br>
+
+<p><strong>2º prêmio</strong><br>
+Ensaio de Natal no outro cenário + 15 fotos digitais.</p>
 
 <div id="resultadoSorteio">
 🔒 Aguardando sorteio
 </div>
 
-<button onclick="pedirSenha()">
-Realizar Sorteio
-</button>
-
-</div>
+<button onclick="pedirSenha()">Realizar Sorteio</button>
 
 </div>
 
 <div class="checkout">
-<div>
-<b id="qtdSelecionados">0</b> número(s) selecionado(s)
+<div><b id="qtdSelecionados">0</b> número(s)</div>
+<div>Total: <b id="valorTotal">R$ 0,00</b></div>
 </div>
 
-<div>
-Total: <b id="valorTotal">R$ 0,00</b>
 </div>
-</div>
-
-<a class="fab" href="https://wa.me/5566999138775" target="_blank">
-<svg width="22" height="22" viewBox="0 0 32 32" fill="currentColor">
-<path d="M19.11 17.44c-.28-.14-1.64-.81-1.9-.9-.25-.09-.43-.14-.61.14-.18.28-.7.9-.86 1.08-.16.18-.32.21-.6.07-.28-.14-1.17-.43-2.23-1.38-.82-.73-1.38-1.64-1.54-1.92-.16-.28-.02-.43.12-.57.12-.12.28-.32.41-.48.14-.16.18-.28.28-.46.09-.18.05-.35-.02-.5-.07-.14-.61-1.48-.84-2.03-.22-.53-.45-.46-.61-.46h-.52c-.18 0-.46.07-.7.35-.25.28-.95.93-.95 2.28s.98 2.65 1.12 2.83c.14.18 1.93 2.95 4.68 4.13.65.28 1.15.45 1.54.58.65.21 1.24.18 1.71.11.52-.08 1.64-.67 1.87-1.32.23-.65.23-1.2.16-1.32-.07-.12-.25-.19-.53-.33z"/>
-</svg>
-WhatsApp
-</a>
 
 <footer>
-© Rifa Premiada
+© Rifa Especial de Natal
 </footer>
 
 <script>
 
 const SENHA_ADMIN="8294";
-const PRECO=2;
-const TOTAL_NUMEROS=5000;
+const PRECO=8;
+const TOTAL=100;
+
 const selecionados=[];
-const vendidos = JSON.parse(localStorage.getItem("rifaVendidos")) || [];
+const vendidos=JSON.parse(localStorage.getItem("rifaVendidos"))||[];
 
 const grid=document.getElementById("gridNumeros");
 
-for(let i=1;i<=TOTAL_NUMEROS;i++){
+for(let i=1;i<=TOTAL;i++){
 
-  const botao=document.createElement("div");
+const b=document.createElement("div");
+b.className="numero";
+b.textContent=String(i).padStart(3,"0");
 
-  botao.className="numero";
-  botao.textContent=String(i).padStart(4,"0");
+if(vendidos.includes(i)){
+b.classList.add("vendido");
+}else{
 
-  botao.onclick=()=>{
+b.onclick=()=>{
 
-    botao.classList.toggle("selecionado");
+b.classList.toggle("selecionado");
 
-    if(selecionados.includes(i)){
-      selecionados.splice(selecionados.indexOf(i),1);
-    }else{
-      selecionados.push(i);
-    }
+if(selecionados.includes(i))
+selecionados.splice(selecionados.indexOf(i),1);
+else
+selecionados.push(i);
 
-    document.getElementById("qtdSelecionados").textContent=selecionados.length;
-    document.getElementById("valorTotal").textContent=
-      "R$ "+(selecionados.length*PRECO).toFixed(2).replace(".",",");
+atualizarTotal();
 
-  };
+};
 
-  grid.appendChild(botao);
 }
-// Marca os números já vendidos
-vendidos.forEach(n=>{
-  const botao = grid.children[n-1];
-  if(botao){
-    botao.classList.add("vendido");
-    botao.onclick = null;
-  }
-});
-  
+
+grid.appendChild(b);
+
+}
+
+function atualizarTotal(){
+
+document.getElementById("qtdSelecionados").textContent=selecionados.length;
+
+document.getElementById("valorTotal").textContent=
+"R$ "+(selecionados.length*PRECO).toFixed(2).replace(".",",");
+
+}
+
 function buscarNumero(){
 
-const valor=parseInt(document.getElementById("buscarNumero").value);
+const v=parseInt(document.getElementById("buscarNumero").value);
 
-if(isNaN(valor)||valor<1||valor>5000)return;
+if(isNaN(v)||v<1||v>100)return;
 
-grid.children[valor-1].scrollIntoView({
-behavior:"smooth",
-block:"center"
-});
+grid.children[v-1].scrollIntoView({behavior:"smooth",block:"center"});
 
 }
 
-
-let segundos=600;
-
-const timer=setInterval(()=>{
-
-if(segundos<=0){
-clearInterval(timer);
-return;
-}
-
-segundos--;
-
-const m=Math.floor(segundos/60);
-const s=segundos%60;
-
-document.getElementById("timer").textContent=
-String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
-
-},1000);
-
-function copiarPix(){
-
-navigator.clipboard.writeText("+5566999138775");
-
-alert("Chave Pix copiada!");
-
-}
-
-function enviarComprovante(){
+function reservarNumeros(){
 
 const nome=document.getElementById("nome").value.trim();
 const telefone=document.getElementById("telefone").value.trim();
 
-if(!nome || !telefone){
-  alert("Preencha nome e WhatsApp.");
-  return;
+if(!nome||!telefone){
+alert("Preencha nome e WhatsApp.");
+return;
 }
 
 if(selecionados.length===0){
-  alert("Escolha pelo menos um número.");
-  return;
+alert("Escolha pelo menos um número.");
+return;
 }
 
-const numeros=selecionados.map(n=>String(n).padStart(4,"0")).join(", ");
+const numeros=selecionados.map(n=>String(n).padStart(3,"0")).join(", ");
 
 const total=(selecionados.length*PRECO).toFixed(2).replace(".",",");
 
 const msg=encodeURIComponent(
-`Olá! Fiz o Pix da Rifa Premiada de R$ 5.000.
+`Olá!
+
+Quero reservar meus números da Rifa Especial de Natal.
 
 Nome: ${nome}
 WhatsApp: ${telefone}
 Números: ${numeros}
-Valor: R$ ${total}
-
-Estou enviando o comprovante agora.`
+Valor: R$ ${total}`
 );
 
-// Marca como vendidos
 selecionados.forEach(n=>{
-  if(!vendidos.includes(n)){
-    vendidos.push(n);
-  }
 
-  const botao = grid.children[n-1];
-  if(botao){
-    botao.classList.remove("selecionado");
-    botao.classList.add("vendido");
-    botao.onclick = null;
-  }
+if(!vendidos.includes(n))
+vendidos.push(n);
+
+const botao=grid.children[n-1];
+botao.classList.remove("selecionado");
+botao.classList.add("vendido");
+botao.onclick=null;
+
 });
 
-// Salva no navegador
-localStorage.setItem("rifaVendidos", JSON.stringify(vendidos));
+localStorage.setItem("rifaVendidos",JSON.stringify(vendidos));
 
-// Limpa seleção
-selecionados.length = 0;
-document.getElementById("qtdSelecionados").textContent = "0";
-document.getElementById("valorTotal").textContent = "R$ 0,00";
+selecionados.length=0;
+atualizarTotal();
 
 window.open(`https://wa.me/5566999138775?text=${msg}`,"_blank");
+
 }
 
 function pedirSenha(){
 
-const senha=prompt("Digite a senha do sorteio:");
+const senha=prompt("Digite a senha:");
 
 if(senha!==SENHA_ADMIN){
-
 alert("Senha incorreta.");
-
 return;
-
 }
 
 realizarSorteio();
@@ -556,20 +410,20 @@ realizarSorteio();
 
 function realizarSorteio(){
 
-if(selecionados.length===0){
-
-alert("Nenhum número selecionado.");
-
+if(vendidos.length<2){
+alert("É preciso ter pelo menos 2 números vendidos.");
 return;
-
 }
 
-const vencedor=selecionados[
-Math.floor(Math.random()*selecionados.length)
-];
+const disponiveis=[...vendidos];
 
-document.getElementById("resultadoSorteio").innerHTML=
-`🏆 Número ${String(vencedor).padStart(4,"0")} sorteado!`;
+const g1=disponiveis.splice(Math.floor(Math.random()*disponiveis.length),1)[0];
+const g2=disponiveis.splice(Math.floor(Math.random()*disponiveis.length),1)[0];
+
+document.getElementById("resultadoSorteio").innerHTML=`
+🥇 1º Ganhador: <strong>${String(g1).padStart(3,"0")}</strong><br><br>
+🥈 2º Ganhador: <strong>${String(g2).padStart(3,"0")}</strong>
+`;
 
 }
 
