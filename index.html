@@ -432,6 +432,52 @@ function iniciarTimer(){
 
   },1000);
 
+}function campo(id, valor){
+  return id + String(valor.length).padStart(2,"0") + valor;
+}
+
+function crc16(payload){
+  let polinomio = 0x1021;
+  let resultado = 0xFFFF;
+
+  for(let i=0;i<payload.length;i++){
+    resultado ^= payload.charCodeAt(i) << 8;
+    for(let j=0;j<8;j++){
+      if(resultado & 0x8000){
+        resultado = (resultado << 1) ^ polinomio;
+      }else{
+        resultado <<= 1;
+      }
+      resultado &= 0xFFFF;
+    }
+  }
+
+  return resultado.toString(16).toUpperCase().padStart(4,"0");
+}
+
+function gerarPayloadPix(valor){
+
+  const chave = "556699138775"; // telefone sem +
+
+  let payload = "";
+
+  payload += campo("00","01");
+  payload += campo("26",
+      campo("00","BR.GOV.BCB.PIX") +
+      campo("01",chave)
+  );
+  payload += campo("52","0000");
+  payload += campo("53","986");
+  payload += campo("54",valor);
+  payload += campo("58","BR");
+  payload += campo("59","ALLANE GONZAGA");
+  payload += campo("60","ALTO GARCAS");
+  payload += campo("62",campo("05","NATAL2026"));
+
+  payload += "6304";
+  payload += crc16(payload);
+
+  return payload;
 }
 // Gerar PIX e reservar
 function gerarPix(){
@@ -451,18 +497,19 @@ function gerarPix(){
 
   const valor=(selecionados.length*PRECO).toFixed(2).replace(".",",");
 
-  const textoPix=`Pix para Allane Gonzaga Fotografia
+const valorPix = (selecionados.length * PRECO).toFixed(2);
 
-Valor: R$ ${valor}
+const payloadPix = gerarPayloadPix(valorPix);
 
-Chave: +556699138775`;
-
-  document.getElementById("pixArea").style.display="block";
+document.getElementById("pixArea").style.display = "block";
 
 document.getElementById("qrCode").src =
 "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
-encodeURIComponent(textoPix);
- 
+encodeURIComponent(payloadPix);
+
+iniciarTimer();
+
+reservaTemporaria = [...selecionados]; 
 iniciarTimer();
 
   compradores.push({
@@ -499,10 +546,11 @@ iniciarTimer();
 // Copiar chave
 function copiarPix(){
 
-  navigator.clipboard.writeText("+556699138775");
+  const valorPix = (reservaTemporaria.length * PRECO).toFixed(2);
 
-  alert("Chave Pix copiada!");
+  navigator.clipboard.writeText(gerarPayloadPix(valorPix));
 
+  alert("Código Pix Copia e Cola copiado!");
 }
 
 // Pedir senha
