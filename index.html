@@ -225,6 +225,15 @@ button:disabled{
   display:block;
 }
 
+.adminHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
 .adminTop{
   display:flex;
   gap:10px;
@@ -234,6 +243,30 @@ button:disabled{
 
 .adminTop button{
   background:#111827;
+}
+
+.btn-green{
+  background:#16a34a !important;
+}
+
+.btn-red{
+  background:#dc2626 !important;
+}
+
+.btn-orange{
+  background:#ea580c !important;
+}
+
+.btn-dark{
+  background:#111827 !important;
+}
+
+.btn-gray{
+  background:#64748b !important;
+}
+
+.btn-exit{
+  background:#475569 !important;
 }
 
 .tableWrap{
@@ -335,33 +368,26 @@ th{
   margin:0;
 }
 
-.btn-green{
-  background:#16a34a;
-}
-
-.btn-red{
-  background:#dc2626;
-}
-
-.btn-orange{
-  background:#ea580c;
-}
-
-.btn-dark{
-  background:#111827;
-}
-
-.btn-gray{
-  background:#64748b;
-}
-
 .actionBtn{
   padding:7px 9px;
   margin:2px;
   font-size:12px;
 }
 
+.empty{
+  text-align:center;
+  padding:30px;
+  color:#64748b;
+}
+
+footer{
+  text-align:center;
+  padding:35px 20px;
+  color:#64748b;
+}
+
 @media(max-width:650px){
+
   .hero h1{
     font-size:38px;
   }
@@ -369,6 +395,15 @@ th{
   .checkout{
     font-size:14px;
   }
+
+  .adminHeader{
+    align-items:stretch;
+  }
+
+  .adminHeader button{
+    width:100%;
+  }
+
 }
 </style>
 </head>
@@ -376,23 +411,32 @@ th{
 <body>
 
 <header>
+
   <div class="hero">
 
-    <div class="badge">Rifa Oficial</div>
+    <div class="badge">
+      Rifa Oficial
+    </div>
 
-    <h1>🎄 Rifa Especial de Natal</h1>
+    <h1>
+      🎄 Rifa Especial de Natal
+    </h1>
 
     <p>
-      Dois cenários especiais para registrar momentos inesquecíveis.
+      Dois cenários especiais para registrar
+      momentos inesquecíveis.
       <br>
       Escolha seu número e participe!
     </p>
 
-    <button onclick="document.getElementById('numeros').scrollIntoView({behavior:'smooth'})">
+    <button
+      onclick="document.getElementById('numeros').scrollIntoView({behavior:'smooth'})"
+    >
       Escolher meu número
     </button>
 
   </div>
+
 </header>
 
 
@@ -424,22 +468,36 @@ th{
 
 
   <div class="search">
+
     <input
       id="buscarNumero"
       placeholder="Digite um número (001 a 100)"
       oninput="buscarNumero()"
     >
+
   </div>
 
 
-  <h2 id="numeros">Escolha seu número</h2>
+  <h2 id="numeros">
+    Escolha seu número
+  </h2>
 
-  <div class="grid" id="gridNumeros"></div>
 
+  <div
+    class="grid"
+    id="gridNumeros"
+  ></div>
+
+
+  <!-- =========================
+       RESERVA DO CLIENTE
+       ========================= -->
 
   <div class="booking">
 
-    <h2>Reservar números</h2>
+    <h2>
+      Reservar números
+    </h2>
 
     <br>
 
@@ -474,13 +532,22 @@ th{
       "
     >
 
-      <div style="color:#ea580c;font-weight:700">
+      <div
+        style="
+          color:#ea580c;
+          font-weight:700;
+        "
+      >
         ⏳ Tempo informado para realizar o Pix
       </div>
 
       <div
         id="timer"
-        style="font-size:34px;font-weight:800;color:#ea580c"
+        style="
+          font-size:34px;
+          font-weight:800;
+          color:#ea580c;
+        "
       >
         10:00
       </div>
@@ -490,7 +557,8 @@ th{
         class="small"
         style="margin-top:8px"
       >
-        A reserva continuará bloqueada mesmo após o contador chegar a zero.
+        A reserva continuará bloqueada mesmo após
+        o contador chegar a zero.
       </div>
 
     </div>
@@ -505,17 +573,22 @@ th{
       "
     >
 
-      <h3>Escaneie o QR Code</h3>
+      <h3>
+        Escaneie o QR Code
+      </h3>
 
       <img
         id="qrCode"
         width="220"
         height="220"
+        alt="QR Code Pix"
       >
 
       <p style="margin-top:15px">
         Chave Pix:
-        <strong>+55 66 99913-8775</strong>
+        <strong>
+          +55 66 99913-8775
+        </strong>
       </p>
 
       <button onclick="copiarPix()">
@@ -527,12 +600,20 @@ th{
   </div>
 
 
+  <!-- =========================
+       ÁREA DO SORTEIO
+       ========================= -->
+
   <div class="winner">
 
-    <h2>🔒 Área da Organizadora</h2>
+    <h2>
+      🔒 Área da Organizadora
+    </h2>
 
     <p>
-      <strong>Data do sorteio:</strong>
+      <strong>
+        Data do sorteio:
+      </strong>
       31 de outubro de 2026
     </p>
 
@@ -547,11 +628,13 @@ th{
       "
     >
 
-      <h3>🥇 Primeiro Prêmio</h3>
+      <h3>
+        🥇 Primeiro Prêmio
+      </h3>
 
       <p>
-        Ensaio de Natal em um dos cenários disponíveis
-        + 15 fotos digitais.
+        Ensaio de Natal em um dos cenários
+        disponíveis + 15 fotos digitais.
       </p>
 
       <hr
@@ -562,11 +645,13 @@ th{
         "
       >
 
-      <h3>🥈 Segundo Prêmio</h3>
+      <h3>
+        🥈 Segundo Prêmio
+      </h3>
 
       <p>
-        Ensaio de Natal no outro cenário disponível
-        + 15 fotos digitais.
+        Ensaio de Natal no outro cenário
+        disponível + 15 fotos digitais.
       </p>
 
     </div>
@@ -600,34 +685,77 @@ th{
   </div>
 
 
-  <!-- ==============================
-       PAINEL DA ALLANE
-       ============================== -->
+  <!-- =========================
+       PAINEL ADMINISTRATIVO
+       ========================= -->
 
   <div
     class="adminPanel"
     id="adminPanel"
   >
 
-    <h2>📊 Painel da Allane</h2>
+    <div class="adminHeader">
 
-    <p class="small">
-      Aqui a Allane consegue controlar os compradores,
-      confirmar pagamentos, liberar números, trocar números
-      e fazer o cadastro manual de compras.
-    </p>
+      <div>
+
+        <h2>
+          📊 Painel da Allane
+        </h2>
+
+        <p class="small">
+          Área administrativa da organizadora.
+        </p>
+
+      </div>
 
 
-    <!-- CADASTRO MANUAL -->
+      <!-- BOTÃO SAIR -->
+
+      <button
+        class="btn-exit"
+        onclick="sairAdmin()"
+      >
+        🚪 Sair do modo administrador
+      </button>
+
+    </div>
+
+
+    <div class="alert ok">
+
+      🔐
+      <strong>
+        Modo administrador ativo.
+      </strong>
+
+      <br>
+
+      Aqui você pode cadastrar compradores,
+      confirmar pagamentos, trocar números,
+      liberar números e exportar a lista.
+
+    </div>
+
+
+    <!-- =========================
+         CADASTRO MANUAL
+         ========================= -->
 
     <div class="manualBox">
 
-      <h3>➕ Cadastrar comprador</h3>
+      <h3>
+        ➕ Cadastrar comprador
+      </h3>
 
       <p class="small">
-        Use quando alguém comprar diretamente com a Allane,
-        pelo WhatsApp, pessoalmente ou por outro meio.
-        Os números informados ficarão bloqueados como pagos.
+
+        Use quando alguém comprar diretamente
+        com a Allane pelo WhatsApp, pessoalmente
+        ou por outro meio.
+
+        Os números informados ficarão
+        bloqueados como pagos.
+
       </p>
 
 
@@ -674,36 +802,52 @@ th{
       <div
         id="manualResultado"
         class="small"
-        style="margin-top:12px;"
+        style="margin-top:12px"
       ></div>
 
     </div>
 
 
-    <!-- BOTÕES -->
+    <!-- =========================
+         BOTÕES ADMINISTRATIVOS
+         ========================= -->
 
     <div class="adminTop">
 
-      <button onclick="carregarAdmin()">
+      <button
+        onclick="carregarAdmin()"
+      >
         🔄 Atualizar Compradores
       </button>
 
-      <button onclick="mostrarDisponiveis()">
+
+      <button
+        onclick="mostrarDisponiveis()"
+      >
         🔢 Números Disponíveis
       </button>
 
-      <button onclick="exportarCSV()">
+
+      <button
+        onclick="exportarCSV()"
+      >
         📥 Exportar Compradores
       </button>
 
-      <button onclick="fecharAdmin()">
-        ✖ Fechar
+
+      <button
+        class="btn-exit"
+        onclick="sairAdmin()"
+      >
+        🚪 Sair
       </button>
 
     </div>
 
 
-    <!-- NÚMEROS DISPONÍVEIS -->
+    <!-- =========================
+         NÚMEROS DISPONÍVEIS
+         ========================= -->
 
     <div
       id="disponiveisArea"
@@ -712,11 +856,17 @@ th{
 
       <div class="alert ok">
 
-        <strong>Números disponíveis:</strong>
+        <strong>
+          Números disponíveis:
+        </strong>
 
-        Estes são os números que ainda podem ser vendidos.
+        <br>
+
+        Estes são os números que ainda podem
+        ser vendidos.
 
       </div>
+
 
       <div
         id="listaDisponiveis"
@@ -730,7 +880,9 @@ th{
     <div id="adminResumo"></div>
 
 
-    <!-- TABELA -->
+    <!-- =========================
+         TABELA
+         ========================= -->
 
     <div class="tableWrap">
 
@@ -762,7 +914,10 @@ th{
 
         </thead>
 
-        <tbody id="adminTabela"></tbody>
+
+        <tbody
+          id="adminTabela"
+        ></tbody>
 
       </table>
 
@@ -771,16 +926,31 @@ th{
   </div>
 
 
+  <!-- =========================
+       TOTAL
+       ========================= -->
+
   <div class="checkout">
 
     <div>
-      <b id="qtdSelecionados">0</b>
+
+      <b id="qtdSelecionados">
+        0
+      </b>
+
       número(s)
+
     </div>
 
+
     <div>
+
       Total:
-      <b id="valorTotal">R$ 0,00</b>
+
+      <b id="valorTotal">
+        R$ 0,00
+      </b>
+
     </div>
 
   </div>
@@ -789,7 +959,9 @@ th{
 
 
 <footer>
+
   © Rifa Especial de Natal • Allane Gonzaga
+
 </footer>
 
 
@@ -805,15 +977,20 @@ const SUPABASE_URL =
 const SUPABASE_ANON_KEY =
   "sb_publishable_368aF2vyzalAvt88hXRBvw_L89cfyWr";
 
-const SENHA_ADMIN = "8294";
+const SENHA_ADMIN =
+  "8294";
 
-const PRECO = 8;
+const PRECO =
+  8;
 
-const TOTAL = 100;
+const TOTAL =
+  100;
 
-const TEMPO_RESERVA_MINUTOS = 10;
+const TEMPO_RESERVA_MINUTOS =
+  10;
 
-const CHAVE_PIX = "+5566999138775";
+const CHAVE_PIX =
+  "+5566999138775";
 
 
 let db = null;
@@ -822,10 +999,13 @@ if(
   !SUPABASE_URL.includes("COLOQUE_AQUI") &&
   !SUPABASE_ANON_KEY.includes("COLOQUE_AQUI")
 ){
-  db = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-  );
+
+  db =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
 }
 
 
@@ -843,22 +1023,32 @@ let tempoRestante =
    PIX
    ========================================================= */
 
-function campo(id, valor){
+function campo(
+  id,
+  valor
+){
 
   return (
     id +
-    String(valor.length).padStart(2,"0") +
+    String(
+      valor.length
+    ).padStart(2,"0") +
     valor
   );
 
 }
 
 
-function crc16(payload){
+function crc16(
+  payload
+){
 
-  let polinomio = 0x1021;
+  let polinomio =
+    0x1021;
 
-  let resultado = 0xFFFF;
+  let resultado =
+    0xFFFF;
+
 
   for(
     let i=0;
@@ -869,6 +1059,7 @@ function crc16(payload){
     resultado ^=
       payload.charCodeAt(i) << 8;
 
+
     for(
       let j=0;
       j<8;
@@ -876,17 +1067,27 @@ function crc16(payload){
     ){
 
       resultado =
-        (resultado & 0x8000)
+        (
+          resultado &
+          0x8000
+        )
         ?
-        ((resultado<<1)^polinomio)
+        (
+          (resultado << 1) ^
+          polinomio
+        )
         :
-        (resultado<<1);
+        (
+          resultado << 1
+        );
 
-      resultado &= 0xFFFF;
+      resultado &=
+        0xFFFF;
 
     }
 
   }
+
 
   return resultado
     .toString(16)
@@ -896,67 +1097,113 @@ function crc16(payload){
 }
 
 
-function gerarPayloadPix(valor){
+function gerarPayloadPix(
+  valor
+){
 
   let payload = "";
 
-  payload += campo("00","01");
+  payload +=
+    campo("00","01");
 
-  payload += campo(
-    "26",
-    campo("00","BR.GOV.BCB.PIX") +
-    campo("01",CHAVE_PIX)
+
+  payload +=
+    campo(
+      "26",
+      campo(
+        "00",
+        "BR.GOV.BCB.PIX"
+      ) +
+      campo(
+        "01",
+        CHAVE_PIX
+      )
+    );
+
+
+  payload +=
+    campo("52","0000");
+
+
+  payload +=
+    campo("53","986");
+
+
+  payload +=
+    campo("54",valor);
+
+
+  payload +=
+    campo("58","BR");
+
+
+  payload +=
+    campo(
+      "59",
+      "ALLANE GONZAGA"
+    );
+
+
+  payload +=
+    campo(
+      "60",
+      "ALTO GARCAS"
+    );
+
+
+  payload +=
+    campo(
+      "62",
+      campo(
+        "05",
+        "NATAL2026"
+      )
+    );
+
+
+  payload +=
+    "6304";
+
+
+  return (
+    payload +
+    crc16(payload)
   );
-
-  payload += campo("52","0000");
-
-  payload += campo("53","986");
-
-  payload += campo("54",valor);
-
-  payload += campo("58","BR");
-
-  payload += campo(
-    "59",
-    "ALLANE GONZAGA"
-  );
-
-  payload += campo(
-    "60",
-    "ALTO GARCAS"
-  );
-
-  payload += campo(
-    "62",
-    campo("05","NATAL2026")
-  );
-
-  payload += "6304";
-
-  return payload + crc16(payload);
 
 }
 
 
 async function copiarPix(){
 
-  if(!reservaAtual.length){
+  if(
+    !reservaAtual.length
+  ){
+
     return;
+
   }
+
 
   const pix =
     gerarPayloadPix(
-      (reservaAtual.length * PRECO)
-      .toFixed(2)
+      (
+        reservaAtual.length *
+        PRECO
+      ).toFixed(2)
     );
+
 
   try{
 
-    await navigator.clipboard.writeText(pix);
+    await navigator
+      .clipboard
+      .writeText(pix);
+
 
     alert(
       "Código Pix Copia e Cola copiado!"
     );
+
 
   }catch(e){
 
@@ -981,7 +1228,9 @@ function criarGrid(){
       "gridNumeros"
     );
 
+
   grid.innerHTML = "";
+
 
   for(
     let i=1;
@@ -990,21 +1239,35 @@ function criarGrid(){
   ){
 
     const b =
-      document.createElement("div");
+      document.createElement(
+        "div"
+      );
 
-    b.className = "numero";
 
-    b.id = "numero-" + i;
+    b.className =
+      "numero";
+
+
+    b.id =
+      "numero-" + i;
+
 
     b.textContent =
-      String(i).padStart(3,"0");
+      String(i).padStart(
+        3,
+        "0"
+      );
+
 
     b.onclick =
-      () => selecionarNumero(i);
+      () =>
+        selecionarNumero(i);
+
 
     grid.appendChild(b);
 
   }
+
 
   atualizarNumerosOnline();
 
@@ -1017,6 +1280,7 @@ async function atualizarNumerosOnline(){
     return;
   }
 
+
   const {
     data,
     error
@@ -1027,6 +1291,7 @@ async function atualizarNumerosOnline(){
         "numero,status,reserva_expira_em"
       );
 
+
   if(error){
 
     console.error(
@@ -1035,6 +1300,7 @@ async function atualizarNumerosOnline(){
     );
 
     return;
+
   }
 
 
@@ -1049,14 +1315,19 @@ async function atualizarNumerosOnline(){
         "numero-" + i
       );
 
-    if(!botao) continue;
+
+    if(!botao){
+      continue;
+    }
 
 
     botao.className =
       "numero";
 
+
     botao.onclick =
-      () => selecionarNumero(i);
+      () =>
+        selecionarNumero(i);
 
 
     const item =
@@ -1077,35 +1348,36 @@ async function atualizarNumerosOnline(){
 
       reservado = bloqueado.
 
-      Não verificamos mais
-      reserva_expira_em.
+      NÃO existe mais liberação
+      automática pelo horário.
 
-      Portanto, mesmo que o
-      contador do comprador
-      chegue a zero, o número
-      continua bloqueado.
+      O contador é apenas informativo.
     */
 
     if(
-      item.status === "pago"
+      item.status ===
+      "pago"
     ){
 
       botao.classList.add(
         "vendido"
       );
 
-      botao.onclick = null;
+      botao.onclick =
+        null;
 
     }
     else if(
-      item.status === "reservado"
+      item.status ===
+      "reservado"
     ){
 
       botao.classList.add(
         "reservado"
       );
 
-      botao.onclick = null;
+      botao.onclick =
+        null;
 
     }
 
@@ -1114,12 +1386,15 @@ async function atualizarNumerosOnline(){
 }
 
 
-function selecionarNumero(numero){
+function selecionarNumero(
+  numero
+){
 
   const botao =
     document.getElementById(
       "numero-" + numero
     );
+
 
   if(
     botao.classList.contains(
@@ -1129,7 +1404,9 @@ function selecionarNumero(numero){
       "reservado"
     )
   ){
+
     return;
+
   }
 
 
@@ -1146,15 +1423,18 @@ function selecionarNumero(numero){
       1
     );
 
+
     botao.classList.remove(
       "selecionado"
     );
 
-  }else{
+  }
+  else{
 
     selecionados.push(
       numero
     );
+
 
     botao.classList.add(
       "selecionado"
@@ -1184,8 +1464,11 @@ function atualizarTotal(){
       selecionados.length *
       PRECO
     )
-    .toFixed(2)
-    .replace(".",",");
+      .toFixed(2)
+      .replace(
+        ".",
+        ","
+      );
 
 }
 
@@ -1202,10 +1485,12 @@ function buscarNumero(){
 
   if(
     isNaN(v) ||
-    v<1 ||
-    v>TOTAL
+    v < 1 ||
+    v > TOTAL
   ){
+
     return;
+
   }
 
 
@@ -1240,6 +1525,7 @@ async function gerarPix(){
     );
 
     return;
+
   }
 
 
@@ -1264,6 +1550,7 @@ async function gerarPix(){
     );
 
     return;
+
   }
 
 
@@ -1274,6 +1561,7 @@ async function gerarPix(){
     );
 
     return;
+
   }
 
 
@@ -1286,6 +1574,7 @@ async function gerarPix(){
     );
 
     return;
+
   }
 
 
@@ -1295,7 +1584,9 @@ async function gerarPix(){
     );
 
 
-  btn.disabled = true;
+  btn.disabled =
+    true;
+
 
   btn.textContent =
     "⏳ Verificando disponibilidade...";
@@ -1310,9 +1601,12 @@ async function gerarPix(){
       await db.rpc(
         "reservar_numeros",
         {
-          p_nome: nome,
 
-          p_telefone: telefone,
+          p_nome:
+            nome,
+
+          p_telefone:
+            telefone,
 
           p_numeros:
             selecionados.map(
@@ -1326,22 +1620,17 @@ async function gerarPix(){
                 PRECO
               ).toFixed(2)
             )
+
         }
       );
 
 
     if(error){
+
       throw error;
+
     }
 
-
-    /*
-      Aceita a resposta atual
-      do banco com reserva_id.
-
-      Também aceita uma resposta
-      antiga com ok=true.
-    */
 
     if(
       !data ||
@@ -1361,9 +1650,13 @@ async function gerarPix(){
 
 
     reservaAtual =
-      Array.isArray(data?.numeros)
+      Array.isArray(
+        data?.numeros
+      )
       ?
-      data.numeros.map(Number)
+      data.numeros.map(
+        Number
+      )
       :
       [...selecionados];
 
@@ -1383,14 +1676,17 @@ async function gerarPix(){
 
     document.getElementById(
       "pixArea"
-    ).style.display = "block";
+    ).style.display =
+      "block";
 
 
     document.getElementById(
       "qrCode"
     ).src =
       "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
-      encodeURIComponent(payload);
+      encodeURIComponent(
+        payload
+      );
 
 
     reservaAtual.forEach(
@@ -1398,26 +1694,36 @@ async function gerarPix(){
 
         const b =
           document.getElementById(
-            "numero-" + numero
+            "numero-" +
+            numero
           );
 
-        if(!b) return;
+
+        if(!b){
+          return;
+        }
+
 
         b.classList.remove(
           "selecionado"
         );
 
+
         b.classList.add(
           "reservado"
         );
 
-        b.onclick = null;
+
+        b.onclick =
+          null;
 
       }
     );
 
 
-    selecionados.length = 0;
+    selecionados.length =
+      0;
+
 
     atualizarTotal();
 
@@ -1441,28 +1747,36 @@ async function gerarPix(){
     const detalhe = [
 
       error?.message
-        ? "Mensagem: " +
-          error.message
-        : "",
+        ?
+        "Mensagem: " +
+        error.message
+        :
+        "",
 
       error?.code
-        ? "Código: " +
-          error.code
-        : "",
+        ?
+        "Código: " +
+        error.code
+        :
+        "",
 
       error?.details
-        ? "Detalhes: " +
-          error.details
-        : "",
+        ?
+        "Detalhes: " +
+        error.details
+        :
+        "",
 
       error?.hint
-        ? "Dica: " +
-          error.hint
-        : ""
+        ?
+        "Dica: " +
+        error.hint
+        :
+        ""
 
     ]
-    .filter(Boolean)
-    .join("\n");
+      .filter(Boolean)
+      .join("\n");
 
 
     alert(
@@ -1476,9 +1790,12 @@ async function gerarPix(){
 
     await atualizarNumerosOnline();
 
-  }finally{
+  }
+  finally{
 
-    btn.disabled = false;
+    btn.disabled =
+      false;
+
 
     btn.textContent =
       "💳 Gerar Pix e Reservar";
@@ -1531,20 +1848,28 @@ function iniciarTimer(){
 
         const m =
           Math.floor(
-            tempoRestante / 60
+            tempoRestante /
+            60
           );
 
 
         const s =
-          tempoRestante % 60;
+          tempoRestante %
+          60;
 
 
         document.getElementById(
           "timer"
         ).textContent =
-          String(m).padStart(2,"0") +
+          String(m).padStart(
+            2,
+            "0"
+          ) +
           ":" +
-          String(s).padStart(2,"0");
+          String(s).padStart(
+            2,
+            "0"
+          );
 
 
         if(
@@ -1567,14 +1892,6 @@ function iniciarTimer(){
           ).innerHTML =
             "🔒 <strong>PRAZO ENCERRADO.</strong><br>" +
             "A reserva continua bloqueada até a Allane confirmar ou liberar o número.";
-
-
-          /*
-            NÃO existe mais
-            cancelar_reserva aqui.
-
-            O número continua bloqueado.
-          */
 
         }
 
@@ -1606,6 +1923,7 @@ function pedirSenha(){
     );
 
     return;
+
   }
 
 
@@ -1623,6 +1941,7 @@ async function realizarSorteio(){
     );
 
     return;
+
   }
 
 
@@ -1646,6 +1965,7 @@ async function realizarSorteio(){
     );
 
     return;
+
   }
 
 
@@ -1659,12 +1979,14 @@ async function realizarSorteio(){
     );
 
     return;
+
   }
 
 
   const lista =
     data.map(
-      x => x.numero
+      x =>
+        x.numero
     );
 
 
@@ -1693,16 +2015,22 @@ async function realizarSorteio(){
   ).innerHTML =
 
     `🥇 1º Ganhador:
-    <strong>${String(g1).padStart(3,"0")}</strong>
+    <strong>
+      ${String(g1).padStart(3,"0")}
+    </strong>
+
     <br><br>
+
     🥈 2º Ganhador:
-    <strong>${String(g2).padStart(3,"0")}</strong>`;
+    <strong>
+      ${String(g2).padStart(3,"0")}
+    </strong>`;
 
 }
 
 
 /* =========================================================
-   PAINEL ADMINISTRATIVO
+   ABRIR ADMIN
    ========================================================= */
 
 function abrirAdmin(){
@@ -1722,6 +2050,7 @@ function abrirAdmin(){
     );
 
     return;
+
   }
 
 
@@ -1748,7 +2077,20 @@ function abrirAdmin(){
 }
 
 
-function fecharAdmin(){
+/* =========================================================
+   SAIR DO ADMIN
+   ========================================================= */
+
+function sairAdmin(){
+
+  /*
+    Fecha completamente o painel
+    administrativo.
+
+    Não altera nenhum comprador.
+    Não libera nenhum número.
+    Apenas sai da área administrativa.
+  */
 
   document
     .getElementById(
@@ -1757,6 +2099,21 @@ function fecharAdmin(){
     .classList.remove(
       "active"
     );
+
+
+  document
+    .getElementById(
+      "disponiveisArea"
+    )
+    .classList.add(
+      "hidden"
+    );
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
@@ -1774,6 +2131,7 @@ async function carregarAdmin(){
     );
 
     return;
+
   }
 
 
@@ -1784,7 +2142,8 @@ async function carregarAdmin(){
     await db.rpc(
       "admin_listar_compras",
       {
-        p_senha:SENHA_ADMIN
+        p_senha:
+          SENHA_ADMIN
       }
     );
 
@@ -1803,13 +2162,16 @@ async function carregarAdmin(){
     );
 
     return;
+
   }
 
 
   const registros =
     Array.isArray(data)
-      ? data
-      : [];
+      ?
+      data
+      :
+      [];
 
 
   const contagem = {};
@@ -1821,7 +2183,11 @@ async function carregarAdmin(){
       const numero =
         String(
           r.numero
-        ).padStart(3,"0");
+        ).padStart(
+          3,
+          "0"
+        );
+
 
       contagem[numero] =
         (
@@ -1850,7 +2216,26 @@ async function carregarAdmin(){
     );
 
 
-  tbody.innerHTML = "";
+  tbody.innerHTML =
+    "";
+
+
+  if(
+    registros.length === 0
+  ){
+
+    tbody.innerHTML = `
+      <tr>
+        <td
+          colspan="9"
+          class="empty"
+        >
+          Nenhum comprador cadastrado.
+        </td>
+      </tr>
+    `;
+
+  }
 
 
   registros.forEach(
@@ -1859,7 +2244,10 @@ async function carregarAdmin(){
       const numero =
         String(
           r.numero
-        ).padStart(3,"0");
+        ).padStart(
+          3,
+          "0"
+        );
 
 
       const tr =
@@ -1893,105 +2281,142 @@ async function carregarAdmin(){
         "";
 
 
-      let statusClass = "s";
+      let statusClass =
+        "s";
 
 
       if(
-        r.status === "pago"
+        r.status ===
+        "pago"
       ){
 
-        statusClass = "p";
+        statusClass =
+          "p";
 
       }
       else if(
-        r.status === "cancelado"
+        r.status ===
+        "cancelado"
       ){
 
-        statusClass = "c";
+        statusClass =
+          "c";
 
       }
 
 
-      let acoes = "";
+      let acoes =
+        "";
 
+
+      /*
+        CONFIRMAR PAGAMENTO
+      */
 
       if(
-        r.status !== "pago" &&
-        r.status !== "cancelado"
+        r.status !==
+        "pago" &&
+        r.status !==
+        "cancelado"
       ){
 
-        acoes +=
-          `
+        acoes += `
+
           <button
             class="actionBtn btn-green"
             onclick="confirmarPagamento(${r.id})"
           >
             ✅ PAGO
           </button>
-          `;
+
+        `;
 
       }
 
 
+      /*
+        TROCAR NÚMERO
+      */
+
       if(
-        r.status !== "cancelado"
+        r.status !==
+        "cancelado"
       ){
 
-        acoes +=
-          `
+        acoes += `
+
           <button
             class="actionBtn btn-orange"
             onclick="trocarNumero(${r.id}, '${numero}')"
           >
             🔁 TROCAR
           </button>
-          `;
+
+        `;
 
       }
 
 
+      /*
+        LIBERAR NÚMERO
+      */
+
       if(
-        r.status !== "cancelado"
+        r.status !==
+        "cancelado"
       ){
 
-        acoes +=
-          `
+        acoes += `
+
           <button
             class="actionBtn btn-red"
-            onclick="cancelarCompra(${r.id})"
+            onclick="liberarNumero(${r.id}, '${numero}')"
           >
             🔓 LIBERAR
           </button>
-          `;
+
+        `;
 
       }
 
 
       tr.innerHTML = `
 
-        <td>${escapeHtml(r.id)}</td>
-
-        <td>${escapeHtml(dataFormatada)}</td>
-
-        <td>${escapeHtml(r.nome || "")}</td>
-
-        <td>${escapeHtml(r.telefone || "")}</td>
-
         <td>
-          <strong>${escapeHtml(numero)}</strong>
+          ${escapeHtml(r.id)}
         </td>
 
         <td>
-          R$ ${
+          ${escapeHtml(dataFormatada)}
+        </td>
+
+        <td>
+          ${escapeHtml(r.nome || "")}
+        </td>
+
+        <td>
+          ${escapeHtml(r.telefone || "")}
+        </td>
+
+        <td>
+          <strong>
+            ${escapeHtml(numero)}
+          </strong>
+        </td>
+
+        <td>
+          R$
+          ${
             Number(
               r.valor || 0
             )
-            .toFixed(2)
-            .replace(".",",")
+              .toFixed(2)
+              .replace(".",",")
           }
         </td>
 
         <td>
+
           <span
             class="badgeStatus ${statusClass}"
           >
@@ -1999,17 +2424,26 @@ async function carregarAdmin(){
               r.status || ""
             )}
           </span>
+
         </td>
 
         <td>
+
           ${
-            duplicados.has(numero)
-              ? "⚠️ SIM"
-              : "Não"
+            duplicados.has(
+              numero
+            )
+            ?
+            "⚠️ SIM"
+            :
+            "Não"
           }
+
         </td>
 
-        <td style="white-space:nowrap">
+        <td
+          style="white-space:nowrap"
+        >
           ${acoes}
         </td>
 
@@ -2031,8 +2465,10 @@ async function carregarAdmin(){
     <div
       class="alert ${
         duplicados.size
-          ? "warn"
-          : "ok"
+          ?
+          "warn"
+          :
+          "ok"
       }"
     >
 
@@ -2044,9 +2480,7 @@ async function carregarAdmin(){
       <br>
 
       <strong>
-        ${
-          duplicados.size
-        }
+        ${duplicados.size}
       </strong>
       número(s) aparecem mais de uma vez.
 
@@ -2078,6 +2512,7 @@ async function mostrarDisponiveis(){
     );
 
     return;
+
   }
 
 
@@ -2099,6 +2534,7 @@ async function mostrarDisponiveis(){
   ){
 
     return;
+
   }
 
 
@@ -2127,6 +2563,7 @@ async function mostrarDisponiveis(){
     );
 
     return;
+
   }
 
 
@@ -2139,19 +2576,40 @@ async function mostrarDisponiveis(){
   lista.innerHTML =
     (data || [])
       .map(
-        r =>
-          `
+        r => `
+
           <div
             class="numero"
             style="cursor:default"
           >
             ${String(
               r.numero
-            ).padStart(3,"0")}
+            ).padStart(
+              3,
+              "0"
+            )}
           </div>
-          `
+
+        `
       )
       .join("");
+
+
+  if(
+    !data ||
+    data.length === 0
+  ){
+
+    lista.innerHTML = `
+      <div
+        class="empty"
+        style="grid-column:1/-1"
+      >
+        Nenhum número disponível.
+      </div>
+    `;
+
+  }
 
 }
 
@@ -2160,7 +2618,9 @@ async function mostrarDisponiveis(){
    CONFIRMAR PAGAMENTO
    ========================================================= */
 
-async function confirmarPagamento(id){
+async function confirmarPagamento(
+  id
+){
 
   if(
     !confirm(
@@ -2169,6 +2629,7 @@ async function confirmarPagamento(id){
   ){
 
     return;
+
   }
 
 
@@ -2179,9 +2640,13 @@ async function confirmarPagamento(id){
     await db.rpc(
       "admin_confirmar_pagamento",
       {
-        p_senha:SENHA_ADMIN,
 
-        p_compra_id:id
+        p_senha:
+          SENHA_ADMIN,
+
+        p_compra_id:
+          id
+
       }
     );
 
@@ -2194,6 +2659,7 @@ async function confirmarPagamento(id){
     );
 
     return;
+
   }
 
 
@@ -2207,6 +2673,7 @@ async function confirmarPagamento(id){
     );
 
     return;
+
   }
 
 
@@ -2255,6 +2722,7 @@ async function trocarNumero(
     );
 
     return;
+
   }
 
 
@@ -2280,6 +2748,7 @@ async function trocarNumero(
     );
 
     return;
+
   }
 
 
@@ -2298,6 +2767,7 @@ async function trocarNumero(
   ){
 
     return;
+
   }
 
 
@@ -2324,6 +2794,7 @@ async function trocarNumero(
     );
 
     return;
+
   }
 
 
@@ -2334,6 +2805,7 @@ async function trocarNumero(
   ){
 
     return;
+
   }
 
 
@@ -2344,11 +2816,16 @@ async function trocarNumero(
     await db.rpc(
       "admin_remanejar_compra",
       {
-        p_senha:SENHA_ADMIN,
 
-        p_compra_id:id,
+        p_senha:
+          SENHA_ADMIN,
 
-        p_novo_numero:novo
+        p_compra_id:
+          id,
+
+        p_novo_numero:
+          novo
+
       }
     );
 
@@ -2361,6 +2838,7 @@ async function trocarNumero(
     );
 
     return;
+
   }
 
 
@@ -2374,6 +2852,7 @@ async function trocarNumero(
     );
 
     return;
+
   }
 
 
@@ -2393,16 +2872,30 @@ async function trocarNumero(
    LIBERAR NÚMERO
    ========================================================= */
 
-async function cancelarCompra(id){
+async function liberarNumero(
+  id,
+  numero
+){
 
-  if(
-    !confirm(
-      "Liberar este número?\n\n" +
-      "Ele voltará a ficar disponível para outra pessoa."
-    )
-  ){
+  const confirmar =
+    confirm(
+      "🔓 LIBERAR NÚMERO\n\n" +
+
+      "Número: " +
+      numero +
+      "\n\n" +
+
+      "Ao confirmar, este número será liberado " +
+      "e poderá ser comprado novamente por outra pessoa.\n\n" +
+
+      "Deseja realmente liberar?"
+    );
+
+
+  if(!confirmar){
 
     return;
+
   }
 
 
@@ -2413,39 +2906,56 @@ async function cancelarCompra(id){
     await db.rpc(
       "admin_cancelar_compra",
       {
-        p_senha:SENHA_ADMIN,
 
-        p_compra_id:id
+        p_senha:
+          SENHA_ADMIN,
+
+        p_compra_id:
+          id
+
       }
     );
 
 
   if(error){
 
+    console.error(
+      "Erro ao liberar:",
+      error
+    );
+
+
     alert(
-      "Erro: " +
+      "Não foi possível liberar o número.\n\n" +
       error.message
     );
 
     return;
+
   }
 
 
   if(
-    !data?.ok
+    !data ||
+    data.ok !== true
   ){
 
     alert(
       data?.erro ||
-      "Não foi possível liberar."
+      data?.mensagem ||
+      "O banco não confirmou a liberação."
     );
 
     return;
+
   }
 
 
   alert(
-    "Número liberado com sucesso!"
+    "✅ Número " +
+    numero +
+    " liberado com sucesso!\n\n" +
+    "Ele já pode ser vendido novamente."
   );
 
 
@@ -2457,7 +2967,7 @@ async function cancelarCompra(id){
 
 
 /* =========================================================
-   CADASTRAR COMPRADOR MANUAL
+   CADASTRAR COMPRA MANUAL
    ========================================================= */
 
 async function cadastrarCompraManual(){
@@ -2469,6 +2979,7 @@ async function cadastrarCompraManual(){
     );
 
     return;
+
   }
 
 
@@ -2510,6 +3021,7 @@ async function cadastrarCompraManual(){
       "⚠️ Informe o nome.";
 
     return;
+
   }
 
 
@@ -2519,6 +3031,7 @@ async function cadastrarCompraManual(){
       "⚠️ Informe o WhatsApp.";
 
     return;
+
   }
 
 
@@ -2528,17 +3041,9 @@ async function cadastrarCompraManual(){
       "⚠️ Informe os números.";
 
     return;
+
   }
 
-
-  /*
-    Aceita:
-
-    001,002,003
-    001 002 003
-    001;002;003
-    001 / 002 / 003
-  */
 
   const numeros =
     numerosTexto
@@ -2561,7 +3066,9 @@ async function cadastrarCompraManual(){
 
 
   const unicos =
-    [...new Set(numeros)];
+    [...new Set(
+      numeros
+    )];
 
 
   if(
@@ -2572,6 +3079,7 @@ async function cadastrarCompraManual(){
       "⚠️ Nenhum número válido encontrado.";
 
     return;
+
   }
 
 
@@ -2583,6 +3091,7 @@ async function cadastrarCompraManual(){
       "⚠️ Informe o valor total.";
 
     return;
+
   }
 
 
@@ -2595,11 +3104,6 @@ async function cadastrarCompraManual(){
   let erros = [];
 
 
-  /*
-    O valor é dividido pelos
-    números cadastrados.
-  */
-
   const valorPorNumero =
     valorTotal /
     unicos.length;
@@ -2611,11 +3115,14 @@ async function cadastrarCompraManual(){
 
     try{
 
-      /*
-        Antes de cadastrar,
-        verifica se o número
-        ainda está disponível.
-      */
+      const numeroFormatado =
+        String(
+          numero
+        ).padStart(
+          3,
+          "0"
+        );
+
 
       const {
         data:estado,
@@ -2628,12 +3135,7 @@ async function cadastrarCompraManual(){
           )
           .eq(
             "numero",
-            String(
-              numero
-            ).padStart(
-              3,
-              "0"
-            )
+            numeroFormatado
           )
           .maybeSingle();
 
@@ -2654,16 +3156,12 @@ async function cadastrarCompraManual(){
       ){
 
         erros.push(
-          String(
-            numero
-          ).padStart(
-            3,
-            "0"
-          ) +
+          numeroFormatado +
           " já está ocupado."
         );
 
         continue;
+
       }
 
 
@@ -2685,17 +3183,12 @@ async function cadastrarCompraManual(){
               telefone,
 
             p_numero:
-              String(
-                numero
-              ).padStart(
-                3,
-                "0"
-              ),
+              numeroFormatado,
 
             p_valor:
               Number(
                 valorPorNumero
-                .toFixed(2)
+                  .toFixed(2)
               )
 
           }
@@ -2723,12 +3216,7 @@ async function cadastrarCompraManual(){
 
 
       sucesso.push(
-        String(
-          numero
-        ).padStart(
-          3,
-          "0"
-        )
+        numeroFormatado
       );
 
 
@@ -2781,30 +3269,29 @@ async function cadastrarCompraManual(){
     "Nenhum número foi cadastrado.";
 
 
-  /*
-    Só limpa os campos
-    se pelo menos um foi salvo.
-  */
-
   if(
     sucesso.length
   ){
 
     document.getElementById(
       "manualNome"
-    ).value = "";
+    ).value =
+      "";
 
     document.getElementById(
       "manualTelefone"
-    ).value = "";
+    ).value =
+      "";
 
     document.getElementById(
       "manualNumeros"
-    ).value = "";
+    ).value =
+      "";
 
     document.getElementById(
       "manualValor"
-    ).value = "8";
+    ).value =
+      "8";
 
   }
 
@@ -2829,6 +3316,7 @@ async function exportarCSV(){
     );
 
     return;
+
   }
 
 
@@ -2839,7 +3327,8 @@ async function exportarCSV(){
     await db.rpc(
       "admin_listar_compras",
       {
-        p_senha:SENHA_ADMIN
+        p_senha:
+          SENHA_ADMIN
       }
     );
 
@@ -2852,6 +3341,7 @@ async function exportarCSV(){
     );
 
     return;
+
   }
 
 
@@ -2884,16 +3374,16 @@ async function exportarCSV(){
         r.status
 
       ]
-      .map(
-        v =>
-          `"${String(
-            v ?? ""
-          ).replaceAll(
-            '"',
-            '""'
-          )}"`
-      )
-      .join(",");
+        .map(
+          v =>
+            `"${String(
+              v ?? ""
+            ).replaceAll(
+              '"',
+              '""'
+            )}"`
+        )
+        .join(",");
 
 
       csv +=
@@ -2929,15 +3419,21 @@ async function exportarCSV(){
     );
 
 
-  a.href = url;
+  a.href =
+    url;
+
 
   a.download =
     "compradores_rifa_allane.csv";
 
 
-  document.body.appendChild(a);
+  document.body.appendChild(
+    a
+  );
+
 
   a.click();
+
 
   a.remove();
 
@@ -2955,7 +3451,7 @@ async function exportarCSV(){
 
 
 /* =========================================================
-   SEGURANÇA DE TEXTO
+   ESCAPAR HTML
    ========================================================= */
 
 function escapeHtml(v){
@@ -2984,7 +3480,7 @@ criarGrid();
 
 
 /*
-  Atualização automática
+  Atualização automática dos números
   a cada 5 segundos.
 */
 
