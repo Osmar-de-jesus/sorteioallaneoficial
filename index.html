@@ -9,156 +9,331 @@
 
 <style>
 :root{
- --bg:#f4f8ff;--primary:#2563eb;--primary2:#1d4ed8;
- --wa:#25D366;--danger:#dc2626;--warning:#f59e0b;
- --shadow:0 18px 40px rgba(0,0,0,.12);--radius:22px;
+ --bg:#f4f8ff;
+ --primary:#2563eb;
+ --primary2:#1d4ed8;
+ --wa:#25D366;
+ --danger:#dc2626;
+ --warning:#f59e0b;
+ --shadow:0 18px 40px rgba(0,0,0,.12);
+ --radius:22px;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:#111827}
+
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box
+}
+
+body{
+ font-family:Inter,Arial,sans-serif;
+ background:var(--bg);
+ color:#111827
+}
+
 header{
- min-height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
  padding:30px;
- background:linear-gradient(rgba(15,23,42,.65),rgba(15,23,42,.78)),
+ background:
+ linear-gradient(rgba(15,23,42,.65),rgba(15,23,42,.78)),
  url("assets/allane.PNG") center/cover
 }
-.hero{max-width:700px;color:white}
-.badge{
- display:inline-block;background:#dc2626;padding:8px 18px;
- border-radius:999px;font-weight:700;margin-bottom:18px
+
+.hero{
+ max-width:700px;
+ color:white
 }
-.hero h1{font-size:52px}
-.hero p{margin:18px 0;font-size:20px;color:#dbeafe}
+
+.badge{
+ display:inline-block;
+ background:#dc2626;
+ padding:8px 18px;
+ border-radius:999px;
+ font-weight:700;
+ margin-bottom:18px
+}
+
+.hero h1{
+ font-size:52px
+}
+
+.hero p{
+ margin:18px 0;
+ font-size:20px;
+ color:#dbeafe
+}
 
 button{
- border:none;cursor:pointer;border-radius:16px;padding:14px 24px;
- font-weight:700;color:white;
+ border:none;
+ cursor:pointer;
+ border-radius:16px;
+ padding:14px 24px;
+ font-weight:700;
+ color:white;
  background:linear-gradient(135deg,var(--primary),var(--primary2));
- box-shadow:var(--shadow);transition:.2s
+ box-shadow:var(--shadow);
+ transition:.2s
 }
-button:hover{transform:translateY(-2px)}
-button:disabled{opacity:.55;cursor:not-allowed;transform:none}
 
-.container{max-width:1200px;margin:auto;padding:40px 20px}
+button:hover{
+ transform:translateY(-2px)
+}
+
+button:disabled{
+ opacity:.55;
+ cursor:not-allowed;
+ transform:none
+}
+
+.container{
+ max-width:1200px;
+ margin:auto;
+ padding:40px 20px
+}
 
 .stats{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
- gap:18px;margin-top:-60px
+ gap:18px;
+ margin-top:-60px
 }
 
-.card,.booking,.winner,.adminPanel{
- background:white;padding:24px;border-radius:var(--radius);
+.card,
+.booking,
+.winner,
+.adminPanel{
+ background:white;
+ padding:24px;
+ border-radius:var(--radius);
  box-shadow:var(--shadow)
 }
 
-.card{text-align:center}
-.card h3{color:#64748b;margin-bottom:8px}
-.card b{font-size:26px}
+.card{
+ text-align:center
+}
 
-.search{margin:35px 0}
+.card h3{
+ color:#64748b;
+ margin-bottom:8px
+}
+
+.card b{
+ font-size:26px
+}
+
+.search{
+ margin:35px 0
+}
 
 .search input,
 .booking input,
 .adminPanel input,
 .adminPanel select{
- width:100%;padding:15px;border-radius:14px;
- border:1px solid #dbeafe;margin-bottom:12px
+ width:100%;
+ padding:15px;
+ border-radius:14px;
+ border:1px solid #dbeafe;
+ margin-bottom:12px
 }
 
 .grid{
  display:grid;
  grid-template-columns:repeat(auto-fill,minmax(65px,1fr));
- gap:10px;margin-top:25px
+ gap:10px;
+ margin-top:25px
 }
 
 .numero{
- height:60px;display:flex;justify-content:center;align-items:center;
- background:white;border-radius:14px;cursor:pointer;font-weight:700;
- border:1px solid #dbeafe;transition:.2s;position:relative
+ height:60px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ background:white;
+ border-radius:14px;
+ cursor:pointer;
+ font-weight:700;
+ border:1px solid #dbeafe;
+ transition:.2s;
+ position:relative
 }
 
-.numero:hover{transform:scale(1.05)}
-.numero.selecionado{background:var(--primary);color:white}
-.numero.reservado{
- background:#fde68a;color:#92400e;
- cursor:not-allowed;pointer-events:none
+.numero:hover{
+ transform:scale(1.05)
 }
+
+.numero.selecionado{
+ background:var(--primary);
+ color:white
+}
+
+.numero.reservado{
+ background:#fde68a;
+ color:#92400e;
+ cursor:not-allowed;
+ pointer-events:none
+}
+
 .numero.vendido{
- background:#cbd5e1;color:#64748b;
- cursor:not-allowed;pointer-events:none
+ background:#cbd5e1;
+ color:#64748b;
+ cursor:not-allowed;
+ pointer-events:none
+}
+
+.numero.admin{
+ border:2px solid #ef4444;
+ cursor:pointer!important;
+ pointer-events:auto!important
 }
 
 .checkout{
- position:sticky;bottom:0;background:white;
- display:flex;justify-content:space-between;padding:18px;
+ position:sticky;
+ bottom:0;
+ background:white;
+ display:flex;
+ justify-content:space-between;
+ padding:18px;
  margin-top:30px;
  box-shadow:0 -8px 25px rgba(0,0,0,.1);
- border-radius:18px 18px 0 0;z-index:10
+ border-radius:18px 18px 0 0;
+ z-index:10
 }
 
-.booking,.winner,.adminPanel{margin-top:40px}
-.whatsapp{width:100%;background:var(--wa);margin-top:10px}
+.booking,
+.winner,
+.adminPanel{
+ margin-top:40px
+}
+
+.whatsapp{
+ width:100%;
+ background:var(--wa);
+ margin-top:10px
+}
 
 #resultadoSorteio{
- font-size:26px;font-weight:800;margin:20px 0
+ font-size:26px;
+ font-weight:800;
+ margin:20px 0
 }
 
-.adminPanel{display:none}
-.adminPanel.active{display:block}
+.adminPanel{
+ display:none
+}
+
+.adminPanel.active{
+ display:block
+}
 
 .adminTop{
- display:flex;gap:10px;flex-wrap:wrap;margin:18px 0
+ display:flex;
+ gap:10px;
+ flex-wrap:wrap;
+ margin:18px 0
 }
 
-.adminTop button{background:#111827}
+.adminTop button{
+ background:#111827
+}
 
 .tableWrap{
- overflow:auto;margin-top:20px;
- border-radius:14px;border:1px solid #e5e7eb
+ overflow:auto;
+ margin-top:20px;
+ border-radius:14px;
+ border:1px solid #e5e7eb
 }
 
 table{
- width:100%;border-collapse:collapse;
- min-width:850px;background:white
+ width:100%;
+ border-collapse:collapse;
+ min-width:850px;
+ background:white
 }
 
-th,td{
- padding:12px;text-align:left;
- border-bottom:1px solid #e5e7eb;font-size:14px
+th,
+td{
+ padding:12px;
+ text-align:left;
+ border-bottom:1px solid #e5e7eb;
+ font-size:14px
 }
 
 th{
  background:#f8fafc;
- position:sticky;top:0
+ position:sticky;
+ top:0
 }
 
-.dup{background:#fff1f2}
+.dup{
+ background:#fff1f2
+}
 
 .badgeStatus{
- padding:5px 9px;border-radius:999px;
- font-weight:700;font-size:12px
+ padding:5px 9px;
+ border-radius:999px;
+ font-weight:700;
+ font-size:12px
 }
 
-.s{background:#fef3c7;color:#92400e}
-.p{background:#dcfce7;color:#166534}
-.l{background:#fee2e2;color:#991b1b}
+.s{
+ background:#fef3c7;
+ color:#92400e
+}
+
+.p{
+ background:#dcfce7;
+ color:#166534
+}
+
+.l{
+ background:#fee2e2;
+ color:#991b1b
+}
 
 .alert{
- padding:14px;border-radius:14px;
- margin:15px 0;line-height:1.5
+ padding:14px;
+ border-radius:14px;
+ margin:15px 0;
+ line-height:1.5
 }
 
-.alert.warn{background:#fff7ed;color:#9a3412}
-.alert.ok{background:#ecfdf5;color:#166534}
+.alert.warn{
+ background:#fff7ed;
+ color:#9a3412
+}
 
-.small{font-size:13px;color:#64748b}
-.hidden{display:none}
+.alert.ok{
+ background:#ecfdf5;
+ color:#166534
+}
 
-footer{text-align:center;padding:35px;color:#64748b}
+.small{
+ font-size:13px;
+ color:#64748b
+}
+
+.hidden{
+ display:none
+}
+
+footer{
+ text-align:center;
+ padding:35px;
+ color:#64748b
+}
 
 @media(max-width:650px){
- .hero h1{font-size:38px}
- .checkout{font-size:14px}
+ .hero h1{
+  font-size:38px
+ }
+
+ .checkout{
+  font-size:14px
+ }
 }
 </style>
 </head>
@@ -167,9 +342,14 @@ footer{text-align:center;padding:35px;color:#64748b}
 
 <header>
  <div class="hero">
-  <div class="badge">Rifa Oficial</div>
 
-  <h1>🎄 Rifa Especial de Natal</h1>
+  <div class="badge">
+   Rifa Oficial
+  </div>
+
+  <h1>
+   🎄 Rifa Especial de Natal
+  </h1>
 
   <p>
    Dois cenários especiais para registrar momentos inesquecíveis.<br>
@@ -179,6 +359,7 @@ footer{text-align:center;padding:35px;color:#64748b}
   <button onclick="document.getElementById('numeros').scrollIntoView({behavior:'smooth'})">
    Escolher meu número
   </button>
+
  </div>
 </header>
 
@@ -216,17 +397,27 @@ footer{text-align:center;padding:35px;color:#64748b}
   >
  </div>
 
- <h2 id="numeros">Escolha seu número</h2>
+ <h2 id="numeros">
+  Escolha seu número
+ </h2>
 
  <div class="grid" id="gridNumeros"></div>
 
  <div class="booking">
 
-  <h2>Reservar números</h2>
+  <h2>
+   Reservar números
+  </h2>
 
-  <input id="nome" placeholder="Nome completo">
+  <input
+   id="nome"
+   placeholder="Nome completo"
+  >
 
-  <input id="telefone" placeholder="WhatsApp">
+  <input
+   id="telefone"
+   placeholder="WhatsApp"
+  >
 
   <button
    class="whatsapp"
@@ -238,14 +429,7 @@ footer{text-align:center;padding:35px;color:#64748b}
 
   <div
    id="timerBox"
-   style="
-    display:none;
-    margin-top:20px;
-    background:#fff7ed;
-    padding:18px;
-    border-radius:16px;
-    text-align:center
-   "
+   style="display:none;margin-top:20px;background:#fff7ed;padding:18px;border-radius:16px;text-align:center"
   >
 
    <div style="color:#ea580c;font-weight:700">
@@ -266,9 +450,15 @@ footer{text-align:center;padding:35px;color:#64748b}
    style="display:none;margin-top:20px;text-align:center"
   >
 
-   <h3>Escaneie o QR Code</h3>
+   <h3>
+    Escaneie o QR Code
+   </h3>
 
-   <img id="qrCode" width="220" height="220">
+   <img
+    id="qrCode"
+    width="220"
+    height="220"
+   >
 
    <p style="margin-top:15px">
     Chave Pix:
@@ -285,7 +475,9 @@ footer{text-align:center;padding:35px;color:#64748b}
 
  <div class="winner">
 
-  <h2>🔒 Área da Organizadora</h2>
+  <h2>
+   🔒 Área da Organizadora
+  </h2>
 
   <p>
    <strong>Data do sorteio:</strong>
@@ -293,29 +485,27 @@ footer{text-align:center;padding:35px;color:#64748b}
   </p>
 
   <div
-   style="
-    margin:25px 0;
-    padding:20px;
-    background:#f8fafc;
-    border-radius:18px;
-    line-height:1.8
-   "
+   style="margin:25px 0;padding:20px;background:#f8fafc;border-radius:18px;line-height:1.8"
   >
 
-   <h3>🥇 Primeiro Prêmio</h3>
+   <h3>
+    🥇 Primeiro Prêmio
+   </h3>
 
    <p>
-    Ensaio de Natal em um dos cenários disponíveis
-    + 15 fotos digitais.
+    Ensaio de Natal em um dos cenários disponíveis + 15 fotos digitais.
    </p>
 
-   <hr style="margin:20px 0;border:none;border-top:1px solid #ddd">
+   <hr
+    style="margin:20px 0;border:none;border-top:1px solid #ddd"
+   >
 
-   <h3>🥈 Segundo Prêmio</h3>
+   <h3>
+    🥈 Segundo Prêmio
+   </h3>
 
    <p>
-    Ensaio de Natal no outro cenário disponível
-    + 15 fotos digitais.
+    Ensaio de Natal no outro cenário disponível + 15 fotos digitais.
    </p>
 
   </div>
@@ -325,13 +515,7 @@ footer{text-align:center;padding:35px;color:#64748b}
   </div>
 
   <div
-   style="
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    justify-content:center;
-    margin-top:20px
-   "
+   style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px"
   >
 
    <button onclick="pedirSenha()">
@@ -346,26 +530,17 @@ footer{text-align:center;padding:35px;color:#64748b}
 
  </div>
 
- <!-- ==============================
-      PAINEL DA ALLANE
-      ============================== -->
-
  <div class="adminPanel" id="adminPanel">
 
-  <h2>📊 Painel da Allane</h2>
+  <h2>
+   📊 Painel da Allane
+  </h2>
 
   <p class="small">
-   Área administrativa da organizadora.
-   Aqui aparecem todos os registros, inclusive históricos.
-   A Allane pode cadastrar compradores, confirmar pagamentos,
-   trocar números, desbloquear números e exportar a planilha.
+   Aqui aparecem todos os registros, inclusive registros antigos e números que foram liberados. A Allane pode confirmar pagamentos, trocar números, desbloquear números e exportar a planilha.
   </p>
 
   <div class="adminTop">
-
-   <button onclick="cadastrarComprador()">
-    ➕ Cadastrar comprador
-   </button>
 
    <button onclick="carregarAdmin()">
     🔄 Atualizar compradores
@@ -379,26 +554,28 @@ footer{text-align:center;padding:35px;color:#64748b}
     📥 Exportar compradores
    </button>
 
+   <button onclick="mostrarImportacao()">
+    📤 Importar histórico antigo
+   </button>
+
    <button onclick="fecharAdmin()">
     🚪 Sair do modo administrador
    </button>
 
   </div>
 
-  <!-- ==============================
+  <!-- ==========================
        DESBLOQUEAR NÚMERO
-       ============================== -->
+       ========================== -->
 
   <div
    class="card"
-   style="
-    text-align:left;
-    margin-top:20px;
-    border:2px solid #fee2e2
-   "
+   style="text-align:left;margin-top:20px;border:2px solid #fee2e2"
   >
 
-   <h3 style="color:#991b1b;margin-bottom:8px">
+   <h3
+    style="color:#991b1b;margin-bottom:8px"
+   >
     🔓 Desbloquear número
    </h3>
 
@@ -407,8 +584,7 @@ footer{text-align:center;padding:35px;color:#64748b}
     style="margin-bottom:14px"
    >
     Digite o número que precisa ser liberado.
-    O registro da reserva não será apagado:
-    ele continuará no histórico com o status
+    A reserva não será apagada: ela continuará no histórico com o status
     <strong>🔓 LIBERADO</strong>.
    </p>
 
@@ -435,56 +611,23 @@ footer{text-align:center;padding:35px;color:#64748b}
 
   </div>
 
-  <!-- ==============================
-       CADASTRAR COMPRADOR
-       ============================== -->
+  <!-- ==========================
+       NÚMEROS DISPONÍVEIS
+       ========================== -->
 
   <div
-   id="cadastroCompradorArea"
-   class="card"
-   style="text-align:left;margin-top:20px;display:none"
+   id="disponiveisArea"
+   class="hidden"
   >
 
-   <h3 style="margin-bottom:15px">
-    ➕ Cadastrar comprador
-   </h3>
-
-   <input
-    id="cadastroNome"
-    placeholder="Nome completo"
-   >
-
-   <input
-    id="cadastroTelefone"
-    placeholder="WhatsApp"
-   >
-
-   <input
-    id="cadastroNumeros"
-    placeholder="Número(s), exemplo: 025 ou 025,026,027"
-   >
-
-   <button onclick="salvarCadastroComprador()">
-    💾 Cadastrar comprador
-   </button>
-
-   <div
-    id="cadastroResultado"
-    class="small"
-    style="margin-top:12px"
-   ></div>
-
-  </div>
-
-  <!-- ==============================
-       NÚMEROS DISPONÍVEIS
-       ============================== -->
-
-  <div id="disponiveisArea" class="hidden">
-
    <div class="alert ok">
-    <strong>Números disponíveis:</strong>
+
+    <strong>
+     Números disponíveis:
+    </strong>
+
     a Allane pode mandar esta lista para quem precisar escolher outro número.
+
    </div>
 
    <div
@@ -495,15 +638,40 @@ footer{text-align:center;padding:35px;color:#64748b}
 
   </div>
 
-  <!-- ==============================
-       RESUMO
-       ============================== -->
+  <!-- ==========================
+       IMPORTAÇÃO
+       ========================== -->
+
+  <div
+   id="importArea"
+   class="hidden"
+  >
+
+   <div class="alert warn">
+
+    <strong>Importante:</strong>
+
+    os compradores que ficaram salvos nos navegadores antigos não podem ser buscados automaticamente por este site.
+
+    Exporte os dados antigos e importe o CSV aqui.
+
+    Os registros serão adicionados ao histórico sem apagar os existentes.
+
+   </div>
+
+   <input
+    type="file"
+    id="csvFile"
+    accept=".csv"
+   >
+
+   <button onclick="importarCSV()">
+    Importar CSV
+   </button>
+
+  </div>
 
   <div id="adminResumo"></div>
-
-  <!-- ==============================
-       TABELA
-       ============================== -->
 
   <div class="tableWrap">
 
@@ -542,7 +710,9 @@ footer{text-align:center;padding:35px;color:#64748b}
 
   <div>
    Total:
-   <b id="valorTotal">R$ 0,00</b>
+   <b id="valorTotal">
+    R$ 0,00
+   </b>
   </div>
 
  </div>
@@ -553,12 +723,11 @@ footer{text-align:center;padding:35px;color:#64748b}
  © Rifa Especial de Natal
 </footer>
 
-
 <script>
 
-/* =========================================================
+/* =====================================================
    CONFIGURAÇÃO
-   ========================================================= */
+   ===================================================== */
 
 const SUPABASE_URL =
  "https://sucfxibqessrjifphluk.supabase.co";
@@ -566,16 +735,20 @@ const SUPABASE_URL =
 const SUPABASE_ANON_KEY =
  "sb_publishable_368aF2vyzalAvt88hXRBvw_L89cfyWr";
 
-const SENHA_ADMIN = "8294";
+const SENHA_ADMIN =
+ "8294";
 
-const PRECO = 8;
+const PRECO =
+ 8;
 
-const TOTAL = 100;
+const TOTAL =
+ 100;
 
-const TEMPO_RESERVA_MINUTOS = 10;
+const TEMPO_RESERVA_MINUTOS =
+ 10;
 
-const CHAVE_PIX = "+5566999138775";
-
+const CHAVE_PIX =
+ "+5566999138775";
 
 let db = null;
 
@@ -583,14 +756,11 @@ if(
  !SUPABASE_URL.includes("COLOQUE_AQUI") &&
  !SUPABASE_ANON_KEY.includes("COLOQUE_AQUI")
 ){
-
  db = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
  );
-
 }
-
 
 const selecionados = [];
 
@@ -601,12 +771,14 @@ let cronometro = null;
 let tempoRestante =
  TEMPO_RESERVA_MINUTOS * 60;
 
+let adminAberto = false;
 
-/* =========================================================
+
+/* =====================================================
    PIX
-   ========================================================= */
+   ===================================================== */
 
-function campo(id, valor){
+function campo(id,valor){
 
  return id +
  String(valor.length).padStart(2,"0") +
@@ -614,25 +786,36 @@ function campo(id, valor){
 
 }
 
-
 function crc16(payload){
 
  let polinomio = 0x1021;
 
  let resultado = 0xFFFF;
 
- for(let i=0;i<payload.length;i++){
+ for(
+  let i=0;
+  i<payload.length;
+  i++
+ ){
 
-  resultado ^= payload.charCodeAt(i)<<8;
+  resultado ^=
+   payload.charCodeAt(i)<<8;
 
-  for(let j=0;j<8;j++){
+  for(
+   let j=0;
+   j<8;
+   j++
+  ){
 
    resultado =
     (resultado & 0x8000)
-    ? ((resultado<<1)^polinomio)
-    : (resultado<<1);
+     ?
+    ((resultado<<1)^polinomio)
+     :
+    (resultado<<1);
 
-   resultado &= 0xFFFF;
+   resultado &=
+    0xFFFF;
 
   }
 
@@ -645,83 +828,129 @@ function crc16(payload){
 
 }
 
-
 function gerarPayloadPix(valor){
 
  let payload = "";
 
- payload += campo("00","01");
+ payload += campo(
+  "00",
+  "01"
+ );
 
  payload += campo(
   "26",
-  campo("00","BR.GOV.BCB.PIX") +
-  campo("01",CHAVE_PIX)
+  campo(
+   "00",
+   "BR.GOV.BCB.PIX"
+  ) +
+  campo(
+   "01",
+   CHAVE_PIX
+  )
  );
 
- payload += campo("52","0000");
+ payload += campo(
+  "52",
+  "0000"
+ );
 
- payload += campo("53","986");
+ payload += campo(
+  "53",
+  "986"
+ );
 
- payload += campo("54",valor);
+ payload += campo(
+  "54",
+  valor
+ );
 
- payload += campo("58","BR");
+ payload += campo(
+  "58",
+  "BR"
+ );
 
- payload += campo("59","ALLANE GONZAGA");
+ payload += campo(
+  "59",
+  "ALLANE GONZAGA"
+ );
 
- payload += campo("60","ALTO GARCAS");
+ payload += campo(
+  "60",
+  "ALTO GARCAS"
+ );
 
  payload += campo(
   "62",
-  campo("05","NATAL2026")
+  campo(
+   "05",
+   "NATAL2026"
+  )
  );
 
  payload += "6304";
 
- return payload + crc16(payload);
+ return payload +
+  crc16(payload);
 
 }
-
 
 async function copiarPix(){
 
- if(!reservaAtual.length) return;
+ if(!reservaAtual.length)
+  return;
 
- const pix = gerarPayloadPix(
-  (reservaAtual.length * PRECO).toFixed(2)
+ const pix =
+  gerarPayloadPix(
+   (
+    reservaAtual.length *
+    PRECO
+   ).toFixed(2)
+  );
+
+ await navigator.clipboard.writeText(
+  pix
  );
 
- await navigator.clipboard.writeText(pix);
-
- alert("Código Pix Copia e Cola copiado!");
+ alert(
+  "Código Pix Copia e Cola copiado!"
+ );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    NÚMEROS
-   ========================================================= */
+   ===================================================== */
 
 function criarGrid(){
 
  const grid =
-  document.getElementById("gridNumeros");
+  document.getElementById(
+   "gridNumeros"
+  );
 
  grid.innerHTML = "";
 
- for(let i=1;i<=TOTAL;i++){
+ for(
+  let i=1;
+  i<=TOTAL;
+  i++
+ ){
 
   const b =
    document.createElement("div");
 
-  b.className = "numero";
+  b.className =
+   "numero";
 
-  b.id = "numero-" + i;
+  b.id =
+   "numero-" + i;
 
   b.textContent =
    String(i).padStart(3,"0");
 
   b.onclick =
-   ()=>selecionarNumero(i);
+   () => selecionarNumero(i);
 
   grid.appendChild(b);
 
@@ -734,12 +963,25 @@ function criarGrid(){
 
 async function atualizarNumerosOnline(){
 
- if(!db) return;
+ if(!db){
 
- const {data,error} =
-  await db
-   .from("rifa_numeros")
-   .select("numero,status");
+  console.error(
+   "Supabase não configurado."
+  );
+
+  return;
+
+ }
+
+ const {
+  data,
+  error
+ } =
+ await db
+  .from("rifa_numeros")
+  .select(
+   "numero,status,reserva_expira_em"
+  );
 
  if(error){
 
@@ -749,38 +991,71 @@ async function atualizarNumerosOnline(){
 
  }
 
- for(let i=1;i<=TOTAL;i++){
+ for(
+  let i=1;
+  i<=TOTAL;
+  i++
+ ){
 
   const botao =
-   document.getElementById("numero-"+i);
+   document.getElementById(
+    "numero-" + i
+   );
 
-  if(!botao) continue;
+  if(!botao)
+   continue;
 
-  botao.className = "numero";
+  botao.className =
+   "numero";
 
   botao.onclick =
-   ()=>selecionarNumero(i);
+   () => selecionarNumero(i);
 
   const item =
    data.find(
-    x=>Number(x.numero)===Number(i)
+    x =>
+    Number(x.numero) ===
+    Number(i)
    );
 
   if(item){
 
-   if(item.status === "pago"){
+   if(
+    item.status ===
+    "pago"
+   ){
 
-    botao.classList.add("vendido");
+    botao.classList.add(
+     "vendido"
+    );
 
-    botao.onclick = null;
+    botao.onclick =
+     null;
 
    }
 
-   else if(item.status === "reservado"){
+   else if(
+    item.status ===
+    "reservado"
+   ){
 
-    botao.classList.add("reservado");
+    /*
+      IMPORTANTE:
 
-    botao.onclick = null;
+      O tempo de 10 minutos NÃO
+      libera o número.
+
+      O número continua bloqueado
+      até a Allane confirmar o Pix
+      ou liberar manualmente.
+    */
+
+    botao.classList.add(
+     "reservado"
+    );
+
+    botao.onclick =
+     null;
 
    }
 
@@ -799,7 +1074,9 @@ async function atualizarNumerosOnline(){
 function selecionarNumero(numero){
 
  const botao =
-  document.getElementById("numero-"+numero);
+  document.getElementById(
+   "numero-" + numero
+  );
 
  if(
   botao.classList.contains("vendido") ||
@@ -813,7 +1090,10 @@ function selecionarNumero(numero){
 
  if(pos >= 0){
 
-  selecionados.splice(pos,1);
+  selecionados.splice(
+   pos,
+   1
+  );
 
   botao.classList.remove(
    "selecionado"
@@ -821,7 +1101,9 @@ function selecionarNumero(numero){
 
  }else{
 
-  selecionados.push(numero);
+  selecionados.push(
+   numero
+  );
 
   botao.classList.add(
    "selecionado"
@@ -845,9 +1127,12 @@ function atualizarTotal(){
   "valorTotal"
  ).textContent =
   "R$ " +
-  (selecionados.length * PRECO)
-   .toFixed(2)
-   .replace(".",",");
+  (
+   selecionados.length *
+   PRECO
+  )
+  .toFixed(2)
+  .replace(".",",");
 
 }
 
@@ -865,23 +1150,29 @@ function buscarNumero(){
   isNaN(v) ||
   v<1 ||
   v>TOTAL
- ){
+ )
   return;
- }
 
- document
-  .getElementById("numero-"+v)
-  .scrollIntoView({
+ const elemento =
+  document.getElementById(
+   "numero-" + v
+  );
+
+ if(elemento){
+
+  elemento.scrollIntoView({
    behavior:"smooth",
    block:"center"
   });
 
+ }
+
 }
 
 
-/* =========================================================
+/* =====================================================
    RESERVA
-   ========================================================= */
+   ===================================================== */
 
 async function gerarPix(){
 
@@ -896,14 +1187,21 @@ async function gerarPix(){
  }
 
  const nome =
-  document.getElementById("nome")
-   .value.trim();
+  document
+   .getElementById("nome")
+   .value
+   .trim();
 
  const telefone =
-  document.getElementById("telefone")
-   .value.trim();
+  document
+   .getElementById("telefone")
+   .value
+   .trim();
 
- if(!nome || !telefone){
+ if(
+  !nome ||
+  !telefone
+ ){
 
   alert(
    "Preencha nome e WhatsApp."
@@ -913,7 +1211,9 @@ async function gerarPix(){
 
  }
 
- if(selecionados.length===0){
+ if(
+  selecionados.length === 0
+ ){
 
   alert(
    "Escolha pelo menos um número."
@@ -928,35 +1228,44 @@ async function gerarPix(){
    "btnReservar"
   );
 
- btn.disabled = true;
+ btn.disabled =
+  true;
 
  btn.textContent =
   "⏳ Verificando disponibilidade...";
 
-
  try{
 
-  const {data,error} =
-   await db.rpc(
-    "reservar_numeros",
-    {
-     p_nome:nome,
-     p_telefone:telefone,
-     p_numeros:
-      selecionados.map(
-       n=>Number(n)
-      ),
-     p_valor:
-      Number(
-       (
-        selecionados.length *
-        PRECO
-       ).toFixed(2)
-      )
-    }
-   );
+  const {
+   data,
+   error
+  } =
+  await db.rpc(
+   "reservar_numeros",
+   {
+    p_nome:
+     nome,
 
-  if(error) throw error;
+    p_telefone:
+     telefone,
+
+    p_numeros:
+     selecionados.map(
+      n => Number(n)
+     ),
+
+    p_valor:
+     Number(
+      (
+       selecionados.length *
+       PRECO
+      ).toFixed(2)
+     )
+   }
+  );
+
+  if(error)
+   throw error;
 
   if(
    !data ||
@@ -964,18 +1273,20 @@ async function gerarPix(){
   ){
 
    throw new Error(
-    data?.erro ||
-    data?.mensagem ||
+    (
+     data &&
+     data.erro
+    )
+    ?
+    data.erro
+    :
     "O banco não confirmou a reserva."
    );
 
   }
 
   reservaAtual =
-   Array.isArray(data.numeros)
-   ? data.numeros.map(Number)
-   : [...selecionados];
-
+   [...selecionados];
 
   const valorPix =
    (
@@ -984,29 +1295,31 @@ async function gerarPix(){
    ).toFixed(2);
 
   const payload =
-   gerarPayloadPix(valorPix);
-
+   gerarPayloadPix(
+    valorPix
+   );
 
   document.getElementById(
    "pixArea"
-  ).style.display = "block";
-
+  ).style.display =
+   "block";
 
   document.getElementById(
    "qrCode"
   ).src =
-   "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+
+   "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
    encodeURIComponent(payload);
 
+  selecionados.forEach(
+   n => {
 
-  reservaAtual.forEach(n=>{
+    const b =
+     document.getElementById(
+      "numero-" + n
+     );
 
-   const b =
-    document.getElementById(
-     "numero-"+n
-    );
-
-   if(b){
+    if(!b)
+     return;
 
     b.classList.remove(
      "selecionado"
@@ -1016,47 +1329,83 @@ async function gerarPix(){
      "reservado"
     );
 
-    b.onclick = null;
+    b.onclick =
+     null;
 
    }
+  );
 
-  });
-
-
-  selecionados.length = 0;
+  selecionados.length =
+   0;
 
   atualizarTotal();
 
   iniciarTimer();
 
-
   alert(
-   "Números bloqueados com sucesso!\n\n"+
-   "O prazo de 10 minutos é apenas uma referência para concluir o Pix. "+
+   "Números bloqueados com sucesso!\n\n" +
+   "O QR Code foi gerado.\n\n" +
+   "O prazo de 10 minutos é apenas uma referência para concluir o Pix. " +
    "O número continuará bloqueado até a organizadora confirmar ou liberar."
   );
 
-
- }catch(error){
+ }
+ catch(error){
 
   console.error(
    "Erro ao reservar:",
    error
   );
 
+  const detalhe = [
+
+   error?.message
+    ?
+    "Mensagem: " +
+    error.message
+    :
+    "",
+
+   error?.code
+    ?
+    "Código: " +
+    error.code
+    :
+    "",
+
+   error?.details
+    ?
+    "Detalhes: " +
+    error.details
+    :
+    "",
+
+   error?.hint
+    ?
+    "Dica: " +
+    error.hint
+    :
+    ""
+
+  ]
+  .filter(Boolean)
+  .join("\n");
+
   alert(
-   "ERRO REAL DO SUPABASE:\n\n"+
+   "ERRO REAL DO SUPABASE:\n\n" +
    (
-    error?.message ||
+    detalhe ||
     String(error)
    )
   );
 
   await atualizarNumerosOnline();
 
- }finally{
+ }
+ finally{
 
-  btn.disabled = false;
+  btn.disabled =
+   false;
 
   btn.textContent =
    "💳 Gerar Pix e Reservar";
@@ -1066,77 +1415,115 @@ async function gerarPix(){
 }
 
 
-/* =========================================================
+/* =====================================================
    TIMER
-   ========================================================= */
+   ===================================================== */
 
 function iniciarTimer(){
 
- clearInterval(cronometro);
+ clearInterval(
+  cronometro
+ );
 
  tempoRestante =
-  TEMPO_RESERVA_MINUTOS * 60;
+  TEMPO_RESERVA_MINUTOS *
+  60;
 
  document.getElementById(
   "timerBox"
- ).style.display = "block";
+ ).style.display =
+  "block";
 
  document.getElementById(
   "timer"
- ).textContent = "10:00";
-
+ ).textContent =
+  "10:00";
 
  cronometro =
-  setInterval(async()=>{
+  setInterval(
+   async () => {
 
-   tempoRestante--;
+    tempoRestante--;
 
-   const m =
-    Math.floor(
-     tempoRestante/60
-    );
+    const m =
+     Math.floor(
+      tempoRestante /
+      60
+     );
 
-   const s =
-    tempoRestante%60;
-
-
-   document.getElementById(
-    "timer"
-   ).textContent =
-    String(m).padStart(2,"0")+
-    ":"+
-    String(s).padStart(2,"0");
-
-
-   if(tempoRestante<=0){
-
-    clearInterval(
-     cronometro
-    );
-
+    const s =
+     tempoRestante %
+     60;
 
     document.getElementById(
-     "timerBox"
-    ).innerHTML =
+     "timer"
+    ).textContent =
+     String(m)
+      .padStart(2,"0") +
+     ":" +
+     String(s)
+      .padStart(2,"0");
 
-     '<div style="color:#92400e;font-weight:700">'+
-     '🔒 Reserva mantida'+
-     '</div>'+
+    if(
+     tempoRestante <= 0
+    ){
 
-     '<div style="margin-top:8px;color:#92400e">'+
-     'O prazo de 10 minutos terminou, mas o número continua bloqueado até a organizadora confirmar ou liberar.'+
-     '</div>';
+     clearInterval(
+      cronometro
+     );
 
-   }
+     /*
+       MUITO IMPORTANTE:
 
-  },1000);
+       NÃO cancelar a reserva.
+
+       O número continua bloqueado.
+
+       Somente a Allane poderá
+       desbloquear pelo painel.
+     */
+
+     document.getElementById(
+      "timer"
+     ).textContent =
+      "PRAZO ENCERRADO";
+
+     document.getElementById(
+      "timer"
+     ).style.fontSize =
+      "22px";
+
+     document.getElementById(
+      "timerBox"
+     ).style.background =
+      "#fef3c7";
+
+     document.getElementById(
+      "timerBox"
+     ).innerHTML =
+
+      '<div style="color:#92400e;font-weight:700">' +
+      '🔒 Reserva mantida' +
+      '</div>' +
+
+      '<div style="margin-top:8px;color:#92400e">' +
+      'O prazo de 10 minutos terminou, mas o número continua bloqueado até a organizadora confirmar ou liberar.' +
+      '</div>';
+
+     await atualizarNumerosOnline();
+
+    }
+
+   },
+   1000
+  );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    ADMIN
-   ========================================================= */
+   ===================================================== */
 
 function pedirSenha(){
 
@@ -1146,7 +1533,8 @@ function pedirSenha(){
   );
 
  if(
-  senha !== SENHA_ADMIN
+  senha !==
+  SENHA_ADMIN
  ){
 
   alert(
@@ -1174,15 +1562,20 @@ async function realizarSorteio(){
 
  }
 
- const {data,error} =
-  await db
-   .from("rifa_numeros")
-   .select("numero")
-   .eq("status","pago");
+ const {
+  data,
+  error
+ } =
+ await db
+  .from("rifa_numeros")
+  .select("numero")
+  .eq("status","pago");
 
  if(error){
 
-  alert(error.message);
+  alert(
+   error.message
+  );
 
   return;
 
@@ -1203,37 +1596,40 @@ async function realizarSorteio(){
 
  const lista =
   data.map(
-   x=>x.numero
+   x => x.numero
   );
-
 
  const g1 =
   lista.splice(
    Math.floor(
-    Math.random()*lista.length
+    Math.random() *
+    lista.length
    ),
    1
   )[0];
-
 
  const g2 =
   lista.splice(
    Math.floor(
-    Math.random()*lista.length
+    Math.random() *
+    lista.length
    ),
    1
   )[0];
-
 
  document.getElementById(
   "resultadoSorteio"
  ).innerHTML =
 
   `🥇 1º Ganhador:
-   <strong>${String(g1).padStart(3,"0")}</strong>
+   <strong>
+    ${String(g1).padStart(3,"0")}
+   </strong>
    <br><br>
    🥈 2º Ganhador:
-   <strong>${String(g2).padStart(3,"0")}</strong>`;
+   <strong>
+    ${String(g2).padStart(3,"0")}
+   </strong>`;
 
 }
 
@@ -1246,7 +1642,8 @@ function abrirAdmin(){
   );
 
  if(
-  senha !== SENHA_ADMIN
+  senha !==
+  SENHA_ADMIN
  ){
 
   alert(
@@ -1257,182 +1654,43 @@ function abrirAdmin(){
 
  }
 
- document
-  .getElementById("adminPanel")
-  .classList.add("active");
+ adminAberto =
+  true;
+
+ document.getElementById(
+  "adminPanel"
+ ).classList.add(
+  "active"
+ );
 
  carregarAdmin();
 
- document
-  .getElementById("adminPanel")
-  .scrollIntoView({
-   behavior:"smooth"
-  });
+ document.getElementById(
+  "adminPanel"
+ ).scrollIntoView({
+  behavior:"smooth"
+ });
 
 }
 
 
 function fecharAdmin(){
 
- document
-  .getElementById("adminPanel")
-  .classList.remove("active");
+ adminAberto =
+  false;
+
+ document.getElementById(
+  "adminPanel"
+ ).classList.remove(
+  "active"
+ );
 
 }
 
 
-/* =========================================================
-   CADASTRAR COMPRADOR
-   ========================================================= */
-
-function cadastrarComprador(){
-
- const area =
-  document.getElementById(
-   "cadastroCompradorArea"
-  );
-
- area.style.display =
-  area.style.display === "none"
-  ? "block"
-  : "none";
-
-}
-
-
-async function salvarCadastroComprador(){
-
- const nome =
-  document.getElementById(
-   "cadastroNome"
-  ).value.trim();
-
- const telefone =
-  document.getElementById(
-   "cadastroTelefone"
-  ).value.trim();
-
- const numerosTexto =
-  document.getElementById(
-   "cadastroNumeros"
-  ).value.trim();
-
- const resultado =
-  document.getElementById(
-   "cadastroResultado"
-  );
-
-
- if(!nome || !telefone || !numerosTexto){
-
-  resultado.textContent =
-   "⚠️ Preencha nome, WhatsApp e número(s).";
-
-  return;
-
- }
-
-
- const numeros =
-  numerosTexto
-   .split(/[,\s;]+/)
-   .map(x=>parseInt(x,10))
-   .filter(
-    n=>n>=1 && n<=TOTAL
-   );
-
-
- if(!numeros.length){
-
-  resultado.textContent =
-   "⚠️ Nenhum número válido encontrado.";
-
-  return;
-
- }
-
-
- const unicos =
-  [...new Set(numeros)];
-
-
- resultado.textContent =
-  "⏳ Cadastrando...";
-
-
- try{
-
-  for(const numero of unicos){
-
-   const {data,error} =
-    await db.rpc(
-     "admin_cadastrar_compra_manual",
-     {
-      p_senha:SENHA_ADMIN,
-      p_nome:nome,
-      p_telefone:telefone,
-      p_numero:
-       String(numero).padStart(3,"0"),
-      p_valor:PRECO
-     }
-    );
-
-
-   if(error) throw error;
-
-
-   if(!data?.ok){
-
-    throw new Error(
-     data?.erro ||
-     data?.mensagem ||
-     "Não foi possível cadastrar."
-    );
-
-   }
-
-  }
-
-
-  resultado.innerHTML =
-   `✅ ${unicos.length} número(s) cadastrado(s) com sucesso e bloqueado(s) como PAGO.`;
-
-
-  document.getElementById(
-   "cadastroNome"
-  ).value = "";
-
-  document.getElementById(
-   "cadastroTelefone"
-  ).value = "";
-
-  document.getElementById(
-   "cadastroNumeros"
-  ).value = "";
-
-
-  await carregarAdmin();
-
-  await atualizarNumerosOnline();
-
-
- }catch(error){
-
-  resultado.textContent =
-   "❌ Erro: "+
-   (
-    error?.message ||
-    String(error)
-   );
-
- }
-
-}
-
-
-/* =========================================================
-   CARREGAR ADMIN
-   ========================================================= */
+/* =====================================================
+   CARREGAR COMPRADORES
+   ===================================================== */
 
 async function carregarAdmin(){
 
@@ -1446,225 +1704,251 @@ async function carregarAdmin(){
 
  }
 
-
- const {data,error} =
-  await db.rpc(
-   "admin_listar_compras",
-   {
-    p_senha:SENHA_ADMIN
-   }
-  );
-
+ const {
+  data,
+  error
+ } =
+ await db.rpc(
+  "admin_listar_compras",
+  {
+   p_senha:
+    SENHA_ADMIN
+  }
+ );
 
  if(error){
 
-  alert(error.message);
+  alert(
+   error.message
+  );
 
   return;
 
  }
 
+ const contagem =
+  {};
 
- const contagem = {};
+ (data || [])
+  .forEach(
+   r => {
 
+    contagem[r.numero] =
+     (
+      contagem[r.numero] ||
+      0
+     ) + 1;
 
- (data||[]).forEach(r=>{
-
-  const numero =
-   String(r.numero)
-    .padStart(3,"0");
-
-  contagem[numero] =
-   (contagem[numero]||0)+1;
-
- });
-
+   }
+  );
 
  const duplicados =
   new Set(
-   Object.keys(contagem)
-    .filter(
-     n=>contagem[n]>1
-    )
+   Object.keys(
+    contagem
+   )
+   .filter(
+    n =>
+     contagem[n] > 1
+   )
   );
-
 
  const tbody =
   document.getElementById(
    "adminTabela"
   );
 
- tbody.innerHTML = "";
+ tbody.innerHTML =
+  "";
 
+ (data || [])
+  .forEach(
+   r => {
 
- (data||[]).forEach(r=>{
+    const tr =
+     document.createElement(
+      "tr"
+     );
 
-  const numero =
-   String(r.numero)
-    .padStart(3,"0");
+    if(
+     duplicados.has(
+      r.numero
+     )
+    ){
 
-  const tr =
-   document.createElement("tr");
+     tr.classList.add(
+      "dup"
+     );
 
-
-  if(
-   duplicados.has(numero)
-  ){
-
-   tr.classList.add(
-    "dup"
-   );
-
-  }
-
-
-  const dataFormatada =
-   r.criado_em
-   ? new Date(
-      r.criado_em
-     ).toLocaleString("pt-BR")
-   : "";
-
-
-  let statusTexto =
-   escapeHtml(
-    r.status || ""
-   );
-
-  let statusClasse = "s";
-
-
-  if(r.status==="pago"){
-
-   statusTexto =
-    "✅ PAGO";
-
-   statusClasse = "p";
-
-  }
-
-  else if(
-   r.status==="reservado"
-  ){
-
-   statusTexto =
-    "⏳ RESERVADO";
-
-   statusClasse = "s";
-
-  }
-
-  else if(
-   r.status==="liberado"
-  ){
-
-   statusTexto =
-    "🔓 LIBERADO";
-
-   statusClasse = "l";
-
-  }
-
-
-  tr.innerHTML = `
-
-   <td>${r.id}</td>
-
-   <td>${dataFormatada}</td>
-
-   <td>
-    ${escapeHtml(r.nome||"")}
-   </td>
-
-   <td>
-    ${escapeHtml(r.telefone||"")}
-   </td>
-
-   <td>
-    <strong>${numero}</strong>
-   </td>
-
-   <td>
-    R$ ${
-     Number(r.valor||0)
-      .toFixed(2)
-      .replace(".",",")
-    }
-   </td>
-
-   <td>
-    <span
-     class="badgeStatus ${statusClasse}"
-    >
-     ${statusTexto}
-    </span>
-   </td>
-
-   <td>
-    ${
-     duplicados.has(numero)
-     ? "⚠️ SIM"
-     : "Não"
-    }
-   </td>
-
-   <td style="white-space:nowrap">
-
-    ${
-     r.status==="reservado"
-     ?
-     `
-      <button
-       onclick="confirmarPagamento(${r.id})"
-       style="padding:7px 9px"
-      >
-       ✅ PAGO
-      </button>
-     `
-     :
-     ""
     }
 
-    ${
-     r.status!=="liberado"
-     ?
-     `
-      <button
-       onclick="trocarNumero(
-        ${r.id},
-        '${numero}'
-       )"
-       style="padding:7px 9px"
-      >
-       🔁 TROCAR
-      </button>
-     `
-     :
-     ""
+    const dataFormatada =
+     r.criado_em
+      ?
+      new Date(
+       r.criado_em
+      ).toLocaleString(
+       "pt-BR"
+      )
+      :
+      "";
+
+    let statusHtml =
+     "";
+
+    if(
+     r.status ===
+     "pago"
+    ){
+
+     statusHtml =
+      '<span class="badgeStatus p">' +
+      '✅ PAGO' +
+      '</span>';
+
     }
 
-   </td>
+    else if(
+     r.status ===
+     "reservado"
+    ){
 
-  `;
+     statusHtml =
+      '<span class="badgeStatus s">' +
+      '⏳ RESERVADO' +
+      '</span>';
 
+    }
 
-  tbody.appendChild(tr);
+    else if(
+     r.status ===
+     "liberado"
+    ){
 
- });
+     statusHtml =
+      '<span class="badgeStatus l">' +
+      '🔓 LIBERADO' +
+      '</span>';
 
+    }
+
+    else{
+
+     statusHtml =
+      '<span class="badgeStatus">' +
+      escapeHtml(
+       r.status || ""
+      ) +
+      '</span>';
+
+    }
+
+    tr.innerHTML =
+
+     `<td>${r.id}</td>
+
+      <td>${dataFormatada}</td>
+
+      <td>
+       ${escapeHtml(
+        r.nome || ""
+       )}
+      </td>
+
+      <td>
+       ${escapeHtml(
+        r.telefone || ""
+       )}
+      </td>
+
+      <td>
+       <strong>
+        ${String(r.numero).padStart(3,"0")}
+       </strong>
+      </td>
+
+      <td>
+       R$ ${Number(
+        r.valor || 0
+       )
+       .toFixed(2)
+       .replace(".",",")}
+      </td>
+
+      <td>
+       ${statusHtml}
+      </td>
+
+      <td>
+       ${
+        duplicados.has(
+         r.numero
+        )
+        ?
+        "⚠️ SIM"
+        :
+        "Não"
+       }
+      </td>
+
+      <td style="white-space:nowrap">
+
+       ${
+        r.status !== "pago" &&
+        r.status !== "liberado"
+
+        ?
+
+        `<button
+          onclick="confirmarPagamento(${r.id})"
+          style="padding:7px 9px"
+         >
+          ✅ PAGO
+         </button>`
+
+        :
+        ""
+       }
+
+       ${
+        r.status !== "liberado"
+
+        ?
+
+        `<button
+          onclick="trocarNumero(${r.id}, '${String(r.numero).padStart(3,"0")}')"
+          style="padding:7px 9px"
+         >
+          🔁 TROCAR
+         </button>`
+
+        :
+        ""
+       }
+
+      </td>`;
+
+    tbody.appendChild(
+     tr
+    );
+
+   }
+  );
 
  document.getElementById(
   "adminResumo"
  ).innerHTML =
 
   `<div class="alert ${
-   duplicados.size
-   ? "warn"
-   : "ok"
+    duplicados.size
+     ?
+     "warn"
+     :
+     "ok"
   }">
 
    <strong>
-    ${data?.length||0}
+    ${data?.length || 0}
    </strong>
    registro(s) no histórico.
 
@@ -1675,10 +1959,10 @@ async function carregarAdmin(){
 
    ${
     duplicados.size
-    ?
-    " Os registros duplicados estão destacados em vermelho claro."
-    :
-    ""
+     ?
+     " Os registros duplicados estão destacados em vermelho claro."
+     :
+     ""
    }
 
   </div>`;
@@ -1686,9 +1970,9 @@ async function carregarAdmin(){
 }
 
 
-/* =========================================================
+/* =====================================================
    NÚMEROS DISPONÍVEIS
-   ========================================================= */
+   ===================================================== */
 
 async function mostrarDisponiveis(){
 
@@ -1702,102 +1986,42 @@ async function mostrarDisponiveis(){
 
  }
 
-
  const area =
   document.getElementById(
    "disponiveisArea"
   );
 
-
  area.classList.toggle(
   "hidden"
  );
 
-
  if(
-  area.classList.contains("hidden")
- ){
-
-  return;
-
- }
-
-
- const {data,error} =
-  await db
-   .from("rifa_numeros")
-   .select("numero,status")
-   .eq(
-    "status",
-    "disponivel"
-   )
-   .order("numero");
-
-
- if(error){
-
-  alert(error.message);
-
-  return;
-
- }
-
-
- const lista =
-  document.getElementById(
-   "listaDisponiveis"
-  );
-
-
- lista.innerHTML =
-  (data||[])
-   .map(
-    r=>
-     `
-      <div
-       class="numero"
-       style="cursor:default"
-      >
-       ${String(r.numero).padStart(3,"0")}
-      </div>
-     `
-   )
-   .join("");
-
-}
-
-
-/* =========================================================
-   CONFIRMAR PAGAMENTO
-   ========================================================= */
-
-async function confirmarPagamento(id){
-
- if(
-  !confirm(
-   "Confirmar que o Pix desta compra foi recebido?"
+  area.classList.contains(
+   "hidden"
   )
- ){
-
+ )
   return;
 
- }
-
-
- const {data,error} =
-  await db.rpc(
-   "admin_confirmar_pagamento",
-   {
-    p_senha:SENHA_ADMIN,
-    p_compra_id:id
-   }
+ const {
+  data,
+  error
+ } =
+ await db
+  .from("rifa_numeros")
+  .select(
+   "numero,status"
+  )
+  .eq(
+   "status",
+   "disponivel"
+  )
+  .order(
+   "numero"
   );
-
 
  if(error){
 
   alert(
-   "Erro: "+
    error.message
   );
 
@@ -1805,8 +2029,71 @@ async function confirmarPagamento(id){
 
  }
 
+ const lista =
+  document.getElementById(
+   "listaDisponiveis"
+  );
 
- if(!data?.ok){
+ lista.innerHTML =
+  (data || [])
+  .map(
+   r =>
+    `<div
+      class="numero"
+      style="cursor:default"
+     >
+      ${String(
+       r.numero
+      ).padStart(3,"0")}
+     </div>`
+  )
+  .join("");
+
+}
+
+
+/* =====================================================
+   CONFIRMAR PAGAMENTO
+   ===================================================== */
+
+async function confirmarPagamento(id){
+
+ if(
+  !confirm(
+   "Confirmar que o Pix desta compra foi recebido?"
+  )
+ )
+  return;
+
+ const {
+  data,
+  error
+ } =
+ await db.rpc(
+  "admin_confirmar_pagamento",
+  {
+   p_senha:
+    SENHA_ADMIN,
+
+   p_compra_id:
+    id
+  }
+ );
+
+ if(error){
+
+  alert(
+   "Erro: " +
+   error.message
+  );
+
+  return;
+
+ }
+
+ if(
+  !data?.ok
+ ){
 
   alert(
    data?.erro ||
@@ -1817,58 +2104,66 @@ async function confirmarPagamento(id){
 
  }
 
-
  alert(
   "Pagamento confirmado. O número ficou vendido."
  );
 
+ carregarAdmin();
 
- await carregarAdmin();
-
- await atualizarNumerosOnline();
+ atualizarNumerosOnline();
 
 }
 
 
-/* =========================================================
+/* =====================================================
    TROCAR NÚMERO
-   ========================================================= */
+   ===================================================== */
 
 async function trocarNumero(
  id,
  numeroAtual
 ){
 
- const {data:disp,error:err} =
-  await db
-   .from("rifa_numeros")
-   .select("numero")
-   .eq(
-    "status",
-    "disponivel"
-   )
-   .order("numero");
-
+ const {
+  data:disp,
+  error:err
+ } =
+ await db
+  .from("rifa_numeros")
+  .select("numero")
+  .eq(
+   "status",
+   "disponivel"
+  )
+  .order(
+   "numero"
+  );
 
  if(err){
 
-  alert(err.message);
+  alert(
+   err.message
+  );
 
   return;
 
  }
 
-
  const disponiveis =
-  (disp||[])
-   .map(
-    x=>
-     String(x.numero)
-      .padStart(3,"0")
-   );
+  (disp || [])
+  .map(
+   x =>
+    String(
+     x.numero
+    ).padStart(
+     3,
+     "0"
+    )
+  );
 
-
- if(!disponiveis.length){
+ if(
+  !disponiveis.length
+ ){
 
   alert(
    "Não há números disponíveis no momento."
@@ -1878,82 +2173,73 @@ async function trocarNumero(
 
  }
 
-
  const escolha =
   prompt(
-   "Digite o novo número disponível:\n\n"+
+   "Digite o novo número disponível:\n\n" +
    disponiveis.join("  "),
    ""
   );
 
-
- if(escolha===null) return;
-
-
- const numeroInteiro =
-  parseInt(
-   escolha,
-   10
-  );
-
-
  if(
-  isNaN(numeroInteiro)
- ){
-
-  alert(
-   "Número inválido."
-  );
-
+  escolha === null
+ )
   return;
-
- }
-
 
  const novo =
-  String(numeroInteiro)
-   .padStart(3,"0");
-
-
- if(
-  !disponiveis.includes(novo)
- ){
-
-  alert(
-   "Esse número não está disponível."
+  String(
+   parseInt(
+    escolha,
+    10
+   )
+  ).padStart(
+   3,
+   "0"
   );
 
-  return;
-
- }
-
-
  if(
-  !confirm(
-   `Trocar o número ${numeroAtual} pelo ${novo}?`
+  !disponiveis.includes(
+   novo
   )
  ){
 
+  alert(
+   "Esse número não está disponível. Escolha um dos números mostrados."
+  );
+
   return;
 
  }
 
+ if(
+  !confirm(
+   `Trocar o número ${numeroAtual} pelo ${novo}?\n\n` +
+   "O novo número será salvo para este comprador."
+  )
+ )
+  return;
 
- const {data,error} =
-  await db.rpc(
-   "admin_remanejar_compra",
-   {
-    p_senha:SENHA_ADMIN,
-    p_compra_id:id,
-    p_novo_numero:novo
-   }
-  );
+ const {
+  data,
+  error
+ } =
+ await db.rpc(
+  "admin_remanejar_compra",
+  {
+   p_senha:
+    SENHA_ADMIN,
 
+   p_compra_id:
+    id,
+
+   p_novo_numero:
+    novo
+  }
+ );
 
  if(error){
 
   alert(
-   "Erro: "+
+   "Erro: " +
    error.message
   );
 
@@ -1961,8 +2247,9 @@ async function trocarNumero(
 
  }
 
-
- if(!data?.ok){
+ if(
+  !data?.ok
+ ){
 
   alert(
    data?.erro ||
@@ -1973,22 +2260,20 @@ async function trocarNumero(
 
  }
 
-
  alert(
   `Pronto. O comprador agora está com o número ${novo}.`
  );
 
+ carregarAdmin();
 
- await carregarAdmin();
-
- await atualizarNumerosOnline();
+ atualizarNumerosOnline();
 
 }
 
 
-/* =========================================================
+/* =====================================================
    🔓 DESBLOQUEAR NÚMERO
-   ========================================================= */
+   ===================================================== */
 
 async function desbloquearNumeroManual(){
 
@@ -2002,7 +2287,6 @@ async function desbloquearNumeroManual(){
 
  }
 
-
  const input =
   document.getElementById(
    "numeroDesbloquear"
@@ -2013,13 +2297,11 @@ async function desbloquearNumeroManual(){
    "desbloquearResultado"
   );
 
-
  const raw =
   input.value.trim();
 
-
- resultado.textContent = "";
-
+ resultado.textContent =
+  "";
 
  if(!raw){
 
@@ -2030,18 +2312,18 @@ async function desbloquearNumeroManual(){
 
  }
 
-
  const numeroInteiro =
   parseInt(
    raw,
    10
   );
 
-
  if(
-  isNaN(numeroInteiro) ||
-  numeroInteiro<1 ||
-  numeroInteiro>TOTAL
+  isNaN(
+   numeroInteiro
+  ) ||
+  numeroInteiro < 1 ||
+  numeroInteiro > TOTAL
  ){
 
   resultado.textContent =
@@ -2051,39 +2333,47 @@ async function desbloquearNumeroManual(){
 
  }
 
-
  const numero =
-  String(numeroInteiro)
-   .padStart(3,"0");
+  String(
+   numeroInteiro
+  ).padStart(
+   3,
+   "0"
+  );
 
 
  /*
-   Localiza o estado atual do número.
+   O campo numero normalmente está
+   salvo como texto no formato 001.
+
+   Por isso usamos o número formatado
+   para localizar corretamente.
  */
 
- const {data:numeroDb,error:numeroError} =
-  await db
-   .from("rifa_numeros")
-   .select(
-    "numero,status"
-   )
-   .eq(
-    "numero",
-    numero
-   )
-   .maybeSingle();
-
+ const {
+  data:numeroDb,
+  error:numeroError
+ } =
+ await db
+  .from("rifa_numeros")
+  .select(
+   "numero,status"
+  )
+  .eq(
+   "numero",
+   numero
+  )
+  .maybeSingle();
 
  if(numeroError){
 
   resultado.textContent =
-   "❌ Erro ao localizar o número: "+
+   "❌ Erro ao localizar o número: " +
    numeroError.message;
 
   return;
 
  }
-
 
  if(!numeroDb){
 
@@ -2094,9 +2384,9 @@ async function desbloquearNumeroManual(){
 
  }
 
-
  if(
-  numeroDb.status==="disponivel"
+  numeroDb.status ===
+  "disponivel"
  ){
 
   resultado.textContent =
@@ -2108,109 +2398,141 @@ async function desbloquearNumeroManual(){
 
 
  /*
-   Busca o histórico para localizar
-   a reserva/compra ativa.
+   Busca o histórico para descobrir
+   qual reserva/compra ativa pertence
+   ao número.
  */
 
- const {data:compras,error:listaError} =
-  await db.rpc(
-   "admin_listar_compras",
-   {
-    p_senha:SENHA_ADMIN
-   }
-  );
-
+ const {
+  data:compras,
+  error:listaError
+ } =
+ await db.rpc(
+  "admin_listar_compras",
+  {
+   p_senha:
+    SENHA_ADMIN
+  }
+ );
 
  if(listaError){
 
   resultado.textContent =
-   "❌ Erro ao localizar o registro: "+
+   "❌ Erro ao localizar o registro: " +
    listaError.message;
 
   return;
 
  }
 
-
  const ativas =
-  (compras||[]).filter(
-   r=>
-    String(r.numero).padStart(3,"0")===numero &&
-    (
-     r.status==="reservado" ||
-     r.status==="pago"
+  (compras || [])
+  .filter(
+   r =>
+    String(
+     r.numero
+    ).padStart(
+     3,
+     "0"
+    ) === numero &&
+
+    [
+     "reservado",
+     "pago"
+    ].includes(
+     r.status
     )
   );
 
-
- if(!ativas.length){
+ if(
+  !ativas.length
+ ){
 
   resultado.textContent =
-   `⚠️ O número ${numero} está ocupado, mas não foi encontrada uma compra ativa para liberar.`;
+   `⚠️ O número ${numero} está ` +
+   `${String(numeroDb.status).toUpperCase()}, ` +
+   `mas não foi encontrada uma compra ativa para liberar.`;
 
   return;
 
  }
 
-
  /*
-   Prioriza uma reserva.
+   Se houver uma reserva ativa,
+   priorizamos a reserva.
+
+   Caso contrário, usamos o registro
+   pago/ativo encontrado.
  */
 
  const compra =
   ativas.find(
-   r=>r.status==="reservado"
+   r =>
+    r.status ===
+    "reservado"
   ) ||
   ativas[0];
 
 
  if(
   !confirm(
-   `🔓 DESBLOQUEAR NÚMERO ${numero}\n\n`+
-   `Comprador: ${compra.nome || "Não informado"}\n\n`+
-   `O registro NÃO será apagado.\n`+
-   `Ele ficará no histórico como 🔓 LIBERADO.\n\n`+
-   `Deseja liberar este número?`
+   `🔓 DESBLOQUEAR NÚMERO ${numero}\n\n` +
+
+   `Comprador: ${
+    compra.nome ||
+    "não informado"
+   }\n\n` +
+
+   "O registro NÃO será apagado.\n" +
+
+   "Ele ficará salvo no histórico com o status:\n" +
+
+   "🔓 LIBERADO\n\n" +
+
+   "Deseja realmente liberar este número?"
   )
- ){
-
+ )
   return;
-
- }
 
 
  /*
-   IMPORTANTE:
-   A função do banco deve transformar o
-   registro em "liberado" e devolver o
-   número para "disponivel".
+   O banco transforma o registro em
+   "liberado" e disponibiliza o número.
+
+   O registro histórico continua existindo.
  */
 
- const {data,error} =
-  await db.rpc(
-   "admin_cancelar_compra",
-   {
-    p_senha:SENHA_ADMIN,
-    p_compra_id:compra.id
-   }
-  );
+ const {
+  data,
+  error
+ } =
+ await db.rpc(
+  "admin_cancelar_compra",
+  {
+   p_senha:
+    SENHA_ADMIN,
 
+   p_compra_id:
+    compra.id
+  }
+ );
 
  if(error){
 
   resultado.textContent =
-   "❌ Erro ao liberar: "+
+   "❌ Erro ao liberar: " +
    error.message;
 
   return;
 
  }
 
-
- if(!data?.ok){
+ if(
+  !data?.ok
+ ){
 
   resultado.textContent =
-   "❌ "+
+   "❌ " +
    (
     data?.erro ||
     data?.mensagem ||
@@ -2221,20 +2543,16 @@ async function desbloquearNumeroManual(){
 
  }
 
-
  resultado.innerHTML =
-  `
-   ✅ Número
-   <strong>${numero}</strong>
-   desbloqueado com sucesso!
-   <br>
-   O registro foi mantido no histórico como
-   <strong>🔓 LIBERADO</strong>.
-  `;
 
+  `✅ Número <strong>${numero}</strong> desbloqueado.<br>` +
 
- input.value = "";
+  `O registro ficou salvo no histórico como ` +
 
+  `<strong>🔓 LIBERADO</strong>.`;
+
+ input.value =
+  "";
 
  await carregarAdmin();
 
@@ -2243,30 +2561,31 @@ async function desbloquearNumeroManual(){
 }
 
 
-/* =========================================================
-   ESCAPE HTML
-   ========================================================= */
+/* =====================================================
+   ESCAPAR HTML
+   ===================================================== */
 
 function escapeHtml(v){
 
- return String(v).replace(
-  /[&<>"']/g,
-  m=>
-   ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#039;"
-   }[m])
- );
+ return String(v)
+  .replace(
+   /[&<>"']/g,
+   m =>
+    ({
+     "&":"&amp;",
+     "<":"&lt;",
+     ">":"&gt;",
+     '"':"&quot;",
+     "'":"&#039;"
+    }[m])
+  );
 
 }
 
 
-/* =========================================================
+/* =====================================================
    EXPORTAR CSV
-   ========================================================= */
+   ===================================================== */
 
 async function exportarCSV(){
 
@@ -2280,98 +2599,377 @@ async function exportarCSV(){
 
  }
 
-
- const {data,error} =
-  await db.rpc(
-   "admin_listar_compras",
-   {
-    p_senha:SENHA_ADMIN
-   }
-  );
-
+ const {
+  data,
+  error
+ } =
+ await db.rpc(
+  "admin_listar_compras",
+  {
+   p_senha:
+    SENHA_ADMIN
+  }
+ );
 
  if(error){
 
-  alert(error.message);
+  alert(
+   error.message
+  );
 
   return;
 
  }
 
-
  let csv =
-  "ID,Data,Nome,WhatsApp,Numero,Valor,Status\n";
+  "ID,Data,Nome,WhatsApp,Numero,Valor,Status,Observacao\n";
 
+ (data || [])
+  .forEach(
+   r => {
 
- (data||[]).forEach(r=>{
+    const linha =
+     [
+      r.id,
+      r.criado_em,
+      r.nome,
+      r.telefone,
+      String(
+       r.numero
+      ).padStart(
+       3,
+       "0"
+      ),
+      r.valor,
+      r.status,
+      r.observacao || ""
+     ]
+     .map(
+      v =>
+       `"${String(
+        v ?? ""
+       ).replaceAll(
+        '"',
+        '""'
+       )}"`
+     )
+     .join(",");
 
-  const linha = [
+    csv +=
+     linha +
+     "\n";
 
-   r.id,
-
-   r.criado_em,
-
-   r.nome,
-
-   r.telefone,
-
-   String(r.numero)
-    .padStart(3,"0"),
-
-   r.valor,
-
-   r.status
-
-  ]
-  .map(
-   v=>
-    `"${String(v??"")
-     .replaceAll('"','""')}"`
-  )
-  .join(",");
-
-
-  csv += linha + "\n";
-
- });
-
+   }
+  );
 
  const blob =
   new Blob(
-   ["\ufeff"+csv],
+   [
+    "\ufeff" +
+    csv
+   ],
    {
     type:
      "text/csv;charset=utf-8"
    }
   );
 
-
  const url =
   URL.createObjectURL(
    blob
   );
 
-
  const a =
-  document.createElement("a");
+  document.createElement(
+   "a"
+  );
 
-
- a.href = url;
+ a.href =
+  url;
 
  a.download =
   "compradores_rifa_natal_completo.csv";
 
  a.click();
 
-
- URL.revokeObjectURL(url);
+ URL.revokeObjectURL(
+  url
+ );
 
 }
 
 
-/* =========================================================
+/* =====================================================
+   IMPORTAÇÃO
+   ===================================================== */
+
+function mostrarImportacao(){
+
+ document.getElementById(
+  "importArea"
+ ).classList.toggle(
+  "hidden"
+ );
+
+}
+
+
+async function importarCSV(){
+
+ if(!db){
+
+  alert(
+   "Configure o Supabase primeiro."
+  );
+
+  return;
+
+ }
+
+ const file =
+  document.getElementById(
+   "csvFile"
+  ).files[0];
+
+ if(!file){
+
+  alert(
+   "Selecione um arquivo CSV."
+  );
+
+  return;
+
+ }
+
+ const text =
+  await file.text();
+
+ const linhas =
+  text
+   .split(/\r?\n/)
+   .filter(
+    x =>
+     x.trim()
+   );
+
+ if(
+  linhas.length < 2
+ ){
+
+  alert(
+   "CSV vazio."
+  );
+
+  return;
+
+ }
+
+ const registros =
+  [];
+
+ for(
+  let i=1;
+  i<linhas.length;
+  i++
+ ){
+
+  const cols =
+   parseCSVLine(
+    linhas[i]
+   );
+
+  if(
+   cols.length < 3
+  )
+   continue;
+
+  const nome =
+   cols[0]?.trim();
+
+  const telefone =
+   cols[1]?.trim();
+
+  const numerosTexto =
+   cols[2]?.trim();
+
+  const valor =
+   Number(
+    (
+     cols[3] ||
+     "0"
+    )
+    .replace(
+     ",",
+     "."
+    )
+   );
+
+  const numeros =
+   numerosTexto
+    .split(
+     /[ ;|]+/
+    )
+    .map(
+     x =>
+      parseInt(
+       x,
+       10
+      )
+    )
+    .filter(
+     n =>
+      n >= 1 &&
+      n <= 100
+    );
+
+  numeros.forEach(
+   numero => {
+
+    registros.push({
+     nome,
+     telefone,
+     numero,
+     valor:
+      valor /
+      numeros.length,
+     status:
+      "historico"
+    });
+
+   }
+  );
+
+ }
+
+ if(
+  !registros.length
+ ){
+
+  alert(
+   "Não encontrei registros válidos."
+  );
+
+  return;
+
+ }
+
+ const {
+  data,
+  error
+ } =
+ await db.rpc(
+  "admin_importar_compras",
+  {
+   p_senha:
+    SENHA_ADMIN,
+
+   p_registros:
+    registros
+  }
+ );
+
+ if(error){
+
+  alert(
+   "Erro ao importar: " +
+   error.message
+  );
+
+  return;
+
+ }
+
+ alert(
+  `${registros.length} registro(s) importado(s). Os duplicados também foram preservados.`
+ );
+
+ carregarAdmin();
+
+}
+
+
+/* =====================================================
+   PARSER CSV
+   ===================================================== */
+
+function parseCSVLine(line){
+
+ const result = [];
+
+ let cur =
+  "";
+
+ let inside =
+  false;
+
+ for(
+  let i=0;
+  i<line.length;
+  i++
+ ){
+
+  const c =
+   line[i];
+
+  if(
+   c === '"'
+  ){
+
+   if(
+    inside &&
+    line[i+1] === '"'
+   ){
+
+    cur +=
+     '"';
+
+    i++;
+
+   }
+   else{
+
+    inside =
+     !inside;
+
+   }
+
+  }
+
+  else if(
+   c === "," &&
+   !inside
+  ){
+
+   result.push(
+    cur
+   );
+
+   cur =
+    "";
+
+  }
+
+  else{
+
+   cur +=
+    c;
+
+  }
+
+ }
+
+ result.push(
+  cur
+ );
+
+ return result;
+
+}
+
+
+/* =====================================================
    INICIALIZAÇÃO
-   ========================================================= */
+   ===================================================== */
 
 criarGrid();
 
