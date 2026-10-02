@@ -3,407 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Rifa de Natal • Allane Gonzaga</title>
+<title>Rifa de Natal • Dois Ganhadores</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
-  --bg:#f4f8ff;
-  --primary:#2563eb;
-  --primary2:#1d4ed8;
-  --wa:#25D366;
-  --danger:#dc2626;
-  --warning:#f59e0b;
-  --success:#16a34a;
-  --dark:#111827;
-  --shadow:0 18px 40px rgba(0,0,0,.12);
-  --radius:22px;
+ --bg:#f4f8ff;--primary:#2563eb;--primary2:#1d4ed8;
+ --wa:#25D366;--danger:#dc2626;--warning:#f59e0b;
+ --shadow:0 18px 40px rgba(0,0,0,.12);--radius:22px;
 }
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-body{
-  font-family:Inter,Arial,sans-serif;
-  background:var(--bg);
-  color:#111827;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,Arial,sans-serif;background:var(--bg);color:#111827}
 header{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:30px;
-  background:
-    linear-gradient(rgba(15,23,42,.65),rgba(15,23,42,.78)),
-    url("assets/allane.PNG") center/cover;
+ min-height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;
+ padding:30px;
+ background:linear-gradient(rgba(15,23,42,.65),rgba(15,23,42,.78)),
+ url("assets/allane.PNG") center/cover
 }
-
-.hero{
-  max-width:700px;
-  color:white;
-}
-
+.hero{max-width:700px;color:white}
 .badge{
-  display:inline-block;
-  background:#dc2626;
-  padding:8px 18px;
-  border-radius:999px;
-  font-weight:700;
-  margin-bottom:18px;
+ display:inline-block;background:#dc2626;padding:8px 18px;
+ border-radius:999px;font-weight:700;margin-bottom:18px
 }
-
-.hero h1{
-  font-size:52px;
-}
-
-.hero p{
-  margin:18px 0;
-  font-size:20px;
-  color:#dbeafe;
-}
+.hero h1{font-size:52px}
+.hero p{margin:18px 0;font-size:20px;color:#dbeafe}
 
 button{
-  border:none;
-  cursor:pointer;
-  border-radius:14px;
-  padding:13px 20px;
-  font-weight:700;
-  color:white;
-  background:linear-gradient(135deg,var(--primary),var(--primary2));
-  box-shadow:var(--shadow);
-  transition:.2s;
+ border:none;cursor:pointer;border-radius:16px;padding:14px 24px;
+ font-weight:700;color:white;
+ background:linear-gradient(135deg,var(--primary),var(--primary2));
+ box-shadow:var(--shadow);transition:.2s
 }
+button:hover{transform:translateY(-2px)}
+button:disabled{opacity:.55;cursor:not-allowed;transform:none}
 
-button:hover{
-  transform:translateY(-2px);
-}
-
-button:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-  transform:none;
-}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:40px 20px;
-}
+.container{max-width:1200px;margin:auto;padding:40px 20px}
 
 .stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
-  margin-top:-60px;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:18px;margin-top:-60px
 }
 
-.card,
-.booking,
-.winner,
-.adminPanel{
-  background:white;
-  padding:24px;
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
+.card,.booking,.winner,.adminPanel{
+ background:white;padding:24px;border-radius:var(--radius);
+ box-shadow:var(--shadow)
 }
 
-.card{
-  text-align:center;
-}
+.card{text-align:center}
+.card h3{color:#64748b;margin-bottom:8px}
+.card b{font-size:26px}
 
-.card h3{
-  color:#64748b;
-  margin-bottom:8px;
-}
-
-.card b{
-  font-size:26px;
-}
-
-.search{
-  margin:35px 0;
-}
+.search{margin:35px 0}
 
 .search input,
 .booking input,
-.adminPanel input{
-  width:100%;
-  padding:15px;
-  border-radius:14px;
-  border:1px solid #dbeafe;
-  margin-bottom:12px;
+.adminPanel input,
+.adminPanel select{
+ width:100%;padding:15px;border-radius:14px;
+ border:1px solid #dbeafe;margin-bottom:12px
 }
 
 .grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(65px,1fr));
-  gap:10px;
-  margin-top:25px;
+ display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(65px,1fr));
+ gap:10px;margin-top:25px
 }
 
 .numero{
-  height:60px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:white;
-  border-radius:14px;
-  cursor:pointer;
-  font-weight:700;
-  border:1px solid #dbeafe;
-  transition:.2s;
-  position:relative;
+ height:60px;display:flex;justify-content:center;align-items:center;
+ background:white;border-radius:14px;cursor:pointer;font-weight:700;
+ border:1px solid #dbeafe;transition:.2s;position:relative
 }
 
-.numero:hover{
-  transform:scale(1.05);
-}
-
-.numero.selecionado{
-  background:var(--primary);
-  color:white;
-}
-
+.numero:hover{transform:scale(1.05)}
+.numero.selecionado{background:var(--primary);color:white}
 .numero.reservado{
-  background:#fde68a;
-  color:#92400e;
-  cursor:not-allowed;
-  pointer-events:none;
+ background:#fde68a;color:#92400e;
+ cursor:not-allowed;pointer-events:none
 }
-
 .numero.vendido{
-  background:#cbd5e1;
-  color:#64748b;
-  cursor:not-allowed;
-  pointer-events:none;
+ background:#cbd5e1;color:#64748b;
+ cursor:not-allowed;pointer-events:none
 }
 
 .checkout{
-  position:sticky;
-  bottom:0;
-  background:white;
-  display:flex;
-  justify-content:space-between;
-  padding:18px;
-  margin-top:30px;
-  box-shadow:0 -8px 25px rgba(0,0,0,.1);
-  border-radius:18px 18px 0 0;
-  z-index:10;
+ position:sticky;bottom:0;background:white;
+ display:flex;justify-content:space-between;padding:18px;
+ margin-top:30px;
+ box-shadow:0 -8px 25px rgba(0,0,0,.1);
+ border-radius:18px 18px 0 0;z-index:10
 }
 
-.booking,
-.winner,
-.adminPanel{
-  margin-top:40px;
-}
-
-.whatsapp{
-  width:100%;
-  background:var(--wa);
-  margin-top:10px;
-}
+.booking,.winner,.adminPanel{margin-top:40px}
+.whatsapp{width:100%;background:var(--wa);margin-top:10px}
 
 #resultadoSorteio{
-  font-size:26px;
-  font-weight:800;
-  margin:20px 0;
+ font-size:26px;font-weight:800;margin:20px 0
 }
 
-.adminPanel{
-  display:none;
-}
-
-.adminPanel.active{
-  display:block;
-}
-
-.adminHeader{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
-  margin-bottom:10px;
-}
+.adminPanel{display:none}
+.adminPanel.active{display:block}
 
 .adminTop{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin:18px 0;
+ display:flex;gap:10px;flex-wrap:wrap;margin:18px 0
 }
 
-.adminTop button{
-  background:#111827;
-}
-
-.btn-green{
-  background:#16a34a !important;
-}
-
-.btn-red{
-  background:#dc2626 !important;
-}
-
-.btn-orange{
-  background:#ea580c !important;
-}
-
-.btn-dark{
-  background:#111827 !important;
-}
-
-.btn-gray{
-  background:#64748b !important;
-}
-
-.btn-exit{
-  background:#475569 !important;
-}
+.adminTop button{background:#111827}
 
 .tableWrap{
-  overflow:auto;
-  margin-top:20px;
-  border-radius:14px;
-  border:1px solid #e5e7eb;
+ overflow:auto;margin-top:20px;
+ border-radius:14px;border:1px solid #e5e7eb
 }
 
 table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:950px;
-  background:white;
+ width:100%;border-collapse:collapse;
+ min-width:850px;background:white
 }
 
-th,
-td{
-  padding:12px;
-  text-align:left;
-  border-bottom:1px solid #e5e7eb;
-  font-size:14px;
+th,td{
+ padding:12px;text-align:left;
+ border-bottom:1px solid #e5e7eb;font-size:14px
 }
 
 th{
-  background:#f8fafc;
-  position:sticky;
-  top:0;
+ background:#f8fafc;
+ position:sticky;top:0
 }
 
-.dup{
-  background:#fff1f2;
-}
+.dup{background:#fff1f2}
 
 .badgeStatus{
-  padding:5px 9px;
-  border-radius:999px;
-  font-weight:700;
-  font-size:12px;
+ padding:5px 9px;border-radius:999px;
+ font-weight:700;font-size:12px
 }
 
-.s{
-  background:#fef3c7;
-  color:#92400e;
-}
-
-.p{
-  background:#dcfce7;
-  color:#166534;
-}
-
-.c{
-  background:#fee2e2;
-  color:#991b1b;
-}
+.s{background:#fef3c7;color:#92400e}
+.p{background:#dcfce7;color:#166534}
+.l{background:#fee2e2;color:#991b1b}
 
 .alert{
-  padding:14px;
-  border-radius:14px;
-  margin:15px 0;
-  line-height:1.5;
+ padding:14px;border-radius:14px;
+ margin:15px 0;line-height:1.5
 }
 
-.alert.warn{
-  background:#fff7ed;
-  color:#9a3412;
-}
+.alert.warn{background:#fff7ed;color:#9a3412}
+.alert.ok{background:#ecfdf5;color:#166534}
 
-.alert.ok{
-  background:#ecfdf5;
-  color:#166534;
-}
+.small{font-size:13px;color:#64748b}
+.hidden{display:none}
 
-.small{
-  font-size:13px;
-  color:#64748b;
-}
-
-.hidden{
-  display:none;
-}
-
-.manualBox{
-  background:#f8fafc;
-  border:1px solid #e2e8f0;
-  border-radius:16px;
-  padding:20px;
-  margin:15px 0 25px;
-}
-
-.manualGrid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:10px;
-  margin-top:15px;
-}
-
-.manualGrid input{
-  margin:0;
-}
-
-.actionBtn{
-  padding:7px 9px;
-  margin:2px;
-  font-size:12px;
-}
-
-.empty{
-  text-align:center;
-  padding:30px;
-  color:#64748b;
-}
-
-footer{
-  text-align:center;
-  padding:35px 20px;
-  color:#64748b;
-}
+footer{text-align:center;padding:35px;color:#64748b}
 
 @media(max-width:650px){
-
-  .hero h1{
-    font-size:38px;
-  }
-
-  .checkout{
-    font-size:14px;
-  }
-
-  .adminHeader{
-    align-items:stretch;
-  }
-
-  .adminHeader button{
-    width:100%;
-  }
-
+ .hero h1{font-size:38px}
+ .checkout{font-size:14px}
 }
 </style>
 </head>
@@ -411,557 +166,391 @@ footer{
 <body>
 
 <header>
+ <div class="hero">
+  <div class="badge">Rifa Oficial</div>
 
-  <div class="hero">
+  <h1>🎄 Rifa Especial de Natal</h1>
 
-    <div class="badge">
-      Rifa Oficial
-    </div>
+  <p>
+   Dois cenários especiais para registrar momentos inesquecíveis.<br>
+   Escolha seu número e participe!
+  </p>
 
-    <h1>
-      🎄 Rifa Especial de Natal
-    </h1>
-
-    <p>
-      Dois cenários especiais para registrar
-      momentos inesquecíveis.
-      <br>
-      Escolha seu número e participe!
-    </p>
-
-    <button
-      onclick="document.getElementById('numeros').scrollIntoView({behavior:'smooth'})"
-    >
-      Escolher meu número
-    </button>
-
-  </div>
-
+  <button onclick="document.getElementById('numeros').scrollIntoView({behavior:'smooth'})">
+   Escolher meu número
+  </button>
+ </div>
 </header>
-
 
 <div class="container">
 
-  <div class="stats">
+ <div class="stats">
 
-    <div class="card">
-      <h3>Valor</h3>
-      <b>R$ 8,00</b>
-    </div>
-
-    <div class="card">
-      <h3>Números</h3>
-      <b>001 a 100</b>
-    </div>
-
-    <div class="card">
-      <h3>Sorteio</h3>
-      <b>31/10/2026</b>
-    </div>
-
-    <div class="card">
-      <h3>Ganhadores</h3>
-      <b>2 Famílias</b>
-    </div>
-
+  <div class="card">
+   <h3>Valor</h3>
+   <b>R$ 8,00</b>
   </div>
 
-
-  <div class="search">
-
-    <input
-      id="buscarNumero"
-      placeholder="Digite um número (001 a 100)"
-      oninput="buscarNumero()"
-    >
-
+  <div class="card">
+   <h3>Números</h3>
+   <b>001 a 100</b>
   </div>
 
+  <div class="card">
+   <h3>Sorteio</h3>
+   <b>31/10/2026</b>
+  </div>
 
-  <h2 id="numeros">
-    Escolha seu número
-  </h2>
+  <div class="card">
+   <h3>Ganhadores</h3>
+   <b>2 Famílias</b>
+  </div>
 
+ </div>
+
+ <div class="search">
+  <input
+   id="buscarNumero"
+   placeholder="Digite um número (001 a 100)"
+   oninput="buscarNumero()"
+  >
+ </div>
+
+ <h2 id="numeros">Escolha seu número</h2>
+
+ <div class="grid" id="gridNumeros"></div>
+
+ <div class="booking">
+
+  <h2>Reservar números</h2>
+
+  <input id="nome" placeholder="Nome completo">
+
+  <input id="telefone" placeholder="WhatsApp">
+
+  <button
+   class="whatsapp"
+   id="btnReservar"
+   onclick="gerarPix()"
+  >
+   💳 Gerar Pix e Reservar
+  </button>
 
   <div
-    class="grid"
-    id="gridNumeros"
-  ></div>
-
-
-  <!-- =========================
-       RESERVA DO CLIENTE
-       ========================= -->
-
-  <div class="booking">
-
-    <h2>
-      Reservar números
-    </h2>
-
-    <br>
-
-    <input
-      id="nome"
-      placeholder="Nome completo"
-    >
-
-    <input
-      id="telefone"
-      placeholder="WhatsApp"
-    >
-
-    <button
-      class="whatsapp"
-      id="btnReservar"
-      onclick="gerarPix()"
-    >
-      💳 Gerar Pix e Reservar
-    </button>
-
-
-    <div
-      id="timerBox"
-      style="
-        display:none;
-        margin-top:20px;
-        background:#fff7ed;
-        padding:18px;
-        border-radius:16px;
-        text-align:center;
-      "
-    >
-
-      <div
-        style="
-          color:#ea580c;
-          font-weight:700;
-        "
-      >
-        ⏳ Tempo informado para realizar o Pix
-      </div>
-
-      <div
-        id="timer"
-        style="
-          font-size:34px;
-          font-weight:800;
-          color:#ea580c;
-        "
-      >
-        10:00
-      </div>
-
-      <div
-        id="timerMensagem"
-        class="small"
-        style="margin-top:8px"
-      >
-        A reserva continuará bloqueada mesmo após
-        o contador chegar a zero.
-      </div>
-
-    </div>
-
-
-    <div
-      id="pixArea"
-      style="
-        display:none;
-        margin-top:20px;
-        text-align:center;
-      "
-    >
-
-      <h3>
-        Escaneie o QR Code
-      </h3>
-
-      <img
-        id="qrCode"
-        width="220"
-        height="220"
-        alt="QR Code Pix"
-      >
-
-      <p style="margin-top:15px">
-        Chave Pix:
-        <strong>
-          +55 66 99913-8775
-        </strong>
-      </p>
-
-      <button onclick="copiarPix()">
-        Copiar Pix
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       ÁREA DO SORTEIO
-       ========================= -->
-
-  <div class="winner">
-
-    <h2>
-      🔒 Área da Organizadora
-    </h2>
-
-    <p>
-      <strong>
-        Data do sorteio:
-      </strong>
-      31 de outubro de 2026
-    </p>
-
-
-    <div
-      style="
-        margin:25px 0;
-        padding:20px;
-        background:#f8fafc;
-        border-radius:18px;
-        line-height:1.8;
-      "
-    >
-
-      <h3>
-        🥇 Primeiro Prêmio
-      </h3>
-
-      <p>
-        Ensaio de Natal em um dos cenários
-        disponíveis + 15 fotos digitais.
-      </p>
-
-      <hr
-        style="
-          margin:20px 0;
-          border:none;
-          border-top:1px solid #ddd;
-        "
-      >
-
-      <h3>
-        🥈 Segundo Prêmio
-      </h3>
-
-      <p>
-        Ensaio de Natal no outro cenário
-        disponível + 15 fotos digitais.
-      </p>
-
-    </div>
-
-
-    <div id="resultadoSorteio">
-      🔒 Aguardando sorteio
-    </div>
-
-
-    <div
-      style="
-        display:flex;
-        gap:12px;
-        flex-wrap:wrap;
-        justify-content:center;
-        margin-top:20px;
-      "
-    >
-
-      <button onclick="pedirSenha()">
-        🎲 Realizar Sorteio
-      </button>
-
-      <button onclick="abrirAdmin()">
-        📊 Abrir Painel de Compradores
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       PAINEL ADMINISTRATIVO
-       ========================= -->
-
-  <div
-    class="adminPanel"
-    id="adminPanel"
+   id="timerBox"
+   style="
+    display:none;
+    margin-top:20px;
+    background:#fff7ed;
+    padding:18px;
+    border-radius:16px;
+    text-align:center
+   "
   >
 
-    <div class="adminHeader">
-
-      <div>
-
-        <h2>
-          📊 Painel da Allane
-        </h2>
-
-        <p class="small">
-          Área administrativa da organizadora.
-        </p>
-
-      </div>
-
-
-      <!-- BOTÃO SAIR -->
-
-      <button
-        class="btn-exit"
-        onclick="sairAdmin()"
-      >
-        🚪 Sair do modo administrador
-      </button>
-
-    </div>
-
-
-    <div class="alert ok">
-
-      🔐
-      <strong>
-        Modo administrador ativo.
-      </strong>
-
-      <br>
-
-      Aqui você pode cadastrar compradores,
-      confirmar pagamentos, trocar números,
-      liberar números e exportar a lista.
-
-    </div>
-
-
-    <!-- =========================
-         CADASTRO MANUAL
-         ========================= -->
-
-    <div class="manualBox">
-
-      <h3>
-        ➕ Cadastrar comprador
-      </h3>
-
-      <p class="small">
-
-        Use quando alguém comprar diretamente
-        com a Allane pelo WhatsApp, pessoalmente
-        ou por outro meio.
-
-        Os números informados ficarão
-        bloqueados como pagos.
-
-      </p>
-
-
-      <div class="manualGrid">
-
-        <input
-          id="manualNome"
-          type="text"
-          placeholder="Nome do comprador"
-        >
-
-        <input
-          id="manualTelefone"
-          type="text"
-          placeholder="WhatsApp"
-        >
-
-        <input
-          id="manualNumeros"
-          type="text"
-          placeholder="Números: 001, 002, 003"
-        >
-
-        <input
-          id="manualValor"
-          type="number"
-          step="0.01"
-          placeholder="Valor total"
-          value="8"
-        >
-
-      </div>
-
-
-      <button
-        onclick="cadastrarCompraManual()"
-        class="btn-green"
-        style="margin-top:15px;"
-      >
-        🔒 Cadastrar e Bloquear Números
-      </button>
-
-
-      <div
-        id="manualResultado"
-        class="small"
-        style="margin-top:12px"
-      ></div>
-
-    </div>
-
-
-    <!-- =========================
-         BOTÕES ADMINISTRATIVOS
-         ========================= -->
-
-    <div class="adminTop">
-
-      <button
-        onclick="carregarAdmin()"
-      >
-        🔄 Atualizar Compradores
-      </button>
-
-
-      <button
-        onclick="mostrarDisponiveis()"
-      >
-        🔢 Números Disponíveis
-      </button>
-
-
-      <button
-        onclick="exportarCSV()"
-      >
-        📥 Exportar Compradores
-      </button>
-
-
-      <button
-        class="btn-exit"
-        onclick="sairAdmin()"
-      >
-        🚪 Sair
-      </button>
-
-    </div>
-
-
-    <!-- =========================
-         NÚMEROS DISPONÍVEIS
-         ========================= -->
-
-    <div
-      id="disponiveisArea"
-      class="hidden"
-    >
-
-      <div class="alert ok">
-
-        <strong>
-          Números disponíveis:
-        </strong>
-
-        <br>
-
-        Estes são os números que ainda podem
-        ser vendidos.
-
-      </div>
-
-
-      <div
-        id="listaDisponiveis"
-        class="grid"
-        style="margin-top:15px"
-      ></div>
-
-    </div>
-
-
-    <div id="adminResumo"></div>
-
-
-    <!-- =========================
-         TABELA
-         ========================= -->
-
-    <div class="tableWrap">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>ID</th>
-
-            <th>Data</th>
-
-            <th>Nome</th>
-
-            <th>WhatsApp</th>
-
-            <th>Número</th>
-
-            <th>Valor</th>
-
-            <th>Status</th>
-
-            <th>Duplicado?</th>
-
-            <th>Ações</th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody
-          id="adminTabela"
-        ></tbody>
-
-      </table>
-
-    </div>
+   <div style="color:#ea580c;font-weight:700">
+    ⏳ Prazo inicial para concluir o Pix
+   </div>
+
+   <div
+    id="timer"
+    style="font-size:34px;font-weight:800;color:#ea580c"
+   >
+    10:00
+   </div>
 
   </div>
 
+  <div
+   id="pixArea"
+   style="display:none;margin-top:20px;text-align:center"
+  >
 
-  <!-- =========================
-       TOTAL
-       ========================= -->
+   <h3>Escaneie o QR Code</h3>
 
-  <div class="checkout">
+   <img id="qrCode" width="220" height="220">
 
-    <div>
+   <p style="margin-top:15px">
+    Chave Pix:
+    <strong>+55 66 99913-8775</strong>
+   </p>
 
-      <b id="qtdSelecionados">
-        0
-      </b>
-
-      número(s)
-
-    </div>
-
-
-    <div>
-
-      Total:
-
-      <b id="valorTotal">
-        R$ 0,00
-      </b>
-
-    </div>
+   <button onclick="copiarPix()">
+    Copiar Pix
+   </button>
 
   </div>
+
+ </div>
+
+ <div class="winner">
+
+  <h2>🔒 Área da Organizadora</h2>
+
+  <p>
+   <strong>Data do sorteio:</strong>
+   31 de outubro de 2026
+  </p>
+
+  <div
+   style="
+    margin:25px 0;
+    padding:20px;
+    background:#f8fafc;
+    border-radius:18px;
+    line-height:1.8
+   "
+  >
+
+   <h3>🥇 Primeiro Prêmio</h3>
+
+   <p>
+    Ensaio de Natal em um dos cenários disponíveis
+    + 15 fotos digitais.
+   </p>
+
+   <hr style="margin:20px 0;border:none;border-top:1px solid #ddd">
+
+   <h3>🥈 Segundo Prêmio</h3>
+
+   <p>
+    Ensaio de Natal no outro cenário disponível
+    + 15 fotos digitais.
+   </p>
+
+  </div>
+
+  <div id="resultadoSorteio">
+   🔒 Aguardando sorteio
+  </div>
+
+  <div
+   style="
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:20px
+   "
+  >
+
+   <button onclick="pedirSenha()">
+    🎲 Realizar Sorteio
+   </button>
+
+   <button onclick="abrirAdmin()">
+    📊 Abrir Planilha de Compradores
+   </button>
+
+  </div>
+
+ </div>
+
+ <!-- ==============================
+      PAINEL DA ALLANE
+      ============================== -->
+
+ <div class="adminPanel" id="adminPanel">
+
+  <h2>📊 Painel da Allane</h2>
+
+  <p class="small">
+   Área administrativa da organizadora.
+   Aqui aparecem todos os registros, inclusive históricos.
+   A Allane pode cadastrar compradores, confirmar pagamentos,
+   trocar números, desbloquear números e exportar a planilha.
+  </p>
+
+  <div class="adminTop">
+
+   <button onclick="cadastrarComprador()">
+    ➕ Cadastrar comprador
+   </button>
+
+   <button onclick="carregarAdmin()">
+    🔄 Atualizar compradores
+   </button>
+
+   <button onclick="mostrarDisponiveis()">
+    🔢 Números disponíveis
+   </button>
+
+   <button onclick="exportarCSV()">
+    📥 Exportar compradores
+   </button>
+
+   <button onclick="fecharAdmin()">
+    🚪 Sair do modo administrador
+   </button>
+
+  </div>
+
+  <!-- ==============================
+       DESBLOQUEAR NÚMERO
+       ============================== -->
+
+  <div
+   class="card"
+   style="
+    text-align:left;
+    margin-top:20px;
+    border:2px solid #fee2e2
+   "
+  >
+
+   <h3 style="color:#991b1b;margin-bottom:8px">
+    🔓 Desbloquear número
+   </h3>
+
+   <p
+    class="small"
+    style="margin-bottom:14px"
+   >
+    Digite o número que precisa ser liberado.
+    O registro da reserva não será apagado:
+    ele continuará no histórico com o status
+    <strong>🔓 LIBERADO</strong>.
+   </p>
+
+   <input
+    id="numeroDesbloquear"
+    type="text"
+    maxlength="3"
+    inputmode="numeric"
+    placeholder="Número (ex.: 025)"
+   >
+
+   <button
+    onclick="desbloquearNumeroManual()"
+    style="background:#dc2626"
+   >
+    🔓 Desbloquear número
+   </button>
+
+   <div
+    id="desbloquearResultado"
+    class="small"
+    style="margin-top:12px"
+   ></div>
+
+  </div>
+
+  <!-- ==============================
+       CADASTRAR COMPRADOR
+       ============================== -->
+
+  <div
+   id="cadastroCompradorArea"
+   class="card"
+   style="text-align:left;margin-top:20px;display:none"
+  >
+
+   <h3 style="margin-bottom:15px">
+    ➕ Cadastrar comprador
+   </h3>
+
+   <input
+    id="cadastroNome"
+    placeholder="Nome completo"
+   >
+
+   <input
+    id="cadastroTelefone"
+    placeholder="WhatsApp"
+   >
+
+   <input
+    id="cadastroNumeros"
+    placeholder="Número(s), exemplo: 025 ou 025,026,027"
+   >
+
+   <button onclick="salvarCadastroComprador()">
+    💾 Cadastrar comprador
+   </button>
+
+   <div
+    id="cadastroResultado"
+    class="small"
+    style="margin-top:12px"
+   ></div>
+
+  </div>
+
+  <!-- ==============================
+       NÚMEROS DISPONÍVEIS
+       ============================== -->
+
+  <div id="disponiveisArea" class="hidden">
+
+   <div class="alert ok">
+    <strong>Números disponíveis:</strong>
+    a Allane pode mandar esta lista para quem precisar escolher outro número.
+   </div>
+
+   <div
+    id="listaDisponiveis"
+    class="grid"
+    style="margin-top:15px"
+   ></div>
+
+  </div>
+
+  <!-- ==============================
+       RESUMO
+       ============================== -->
+
+  <div id="adminResumo"></div>
+
+  <!-- ==============================
+       TABELA
+       ============================== -->
+
+  <div class="tableWrap">
+
+   <table>
+
+    <thead>
+
+     <tr>
+      <th>ID</th>
+      <th>Data</th>
+      <th>Nome</th>
+      <th>WhatsApp</th>
+      <th>Número</th>
+      <th>Valor</th>
+      <th>Status</th>
+      <th>Duplicado?</th>
+      <th>Ações</th>
+     </tr>
+
+    </thead>
+
+    <tbody id="adminTabela"></tbody>
+
+   </table>
+
+  </div>
+
+ </div>
+
+ <div class="checkout">
+
+  <div>
+   <b id="qtdSelecionados">0</b>
+   número(s)
+  </div>
+
+  <div>
+   Total:
+   <b id="valorTotal">R$ 0,00</b>
+  </div>
+
+ </div>
 
 </div>
 
-
 <footer>
-
-  © Rifa Especial de Natal • Allane Gonzaga
-
+ © Rifa Especial de Natal
 </footer>
 
 
@@ -972,39 +561,33 @@ footer{
    ========================================================= */
 
 const SUPABASE_URL =
-  "https://sucfxibqessrjifphluk.supabase.co";
+ "https://sucfxibqessrjifphluk.supabase.co";
 
 const SUPABASE_ANON_KEY =
-  "sb_publishable_368aF2vyzalAvt88hXRBvw_L89cfyWr";
+ "sb_publishable_368aF2vyzalAvt88hXRBvw_L89cfyWr";
 
-const SENHA_ADMIN =
-  "8294";
+const SENHA_ADMIN = "8294";
 
-const PRECO =
-  8;
+const PRECO = 8;
 
-const TOTAL =
-  100;
+const TOTAL = 100;
 
-const TEMPO_RESERVA_MINUTOS =
-  10;
+const TEMPO_RESERVA_MINUTOS = 10;
 
-const CHAVE_PIX =
-  "+5566999138775";
+const CHAVE_PIX = "+5566999138775";
 
 
 let db = null;
 
 if(
-  !SUPABASE_URL.includes("COLOQUE_AQUI") &&
-  !SUPABASE_ANON_KEY.includes("COLOQUE_AQUI")
+ !SUPABASE_URL.includes("COLOQUE_AQUI") &&
+ !SUPABASE_ANON_KEY.includes("COLOQUE_AQUI")
 ){
 
-  db =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    );
+ db = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+ );
 
 }
 
@@ -1016,203 +599,100 @@ let reservaAtual = [];
 let cronometro = null;
 
 let tempoRestante =
-  TEMPO_RESERVA_MINUTOS * 60;
+ TEMPO_RESERVA_MINUTOS * 60;
 
 
 /* =========================================================
    PIX
    ========================================================= */
 
-function campo(
-  id,
-  valor
-){
+function campo(id, valor){
 
-  return (
-    id +
-    String(
-      valor.length
-    ).padStart(2,"0") +
-    valor
-  );
+ return id +
+ String(valor.length).padStart(2,"0") +
+ valor;
 
 }
 
 
-function crc16(
-  payload
-){
+function crc16(payload){
 
-  let polinomio =
-    0x1021;
+ let polinomio = 0x1021;
 
-  let resultado =
-    0xFFFF;
+ let resultado = 0xFFFF;
 
+ for(let i=0;i<payload.length;i++){
 
-  for(
-    let i=0;
-    i<payload.length;
-    i++
-  ){
+  resultado ^= payload.charCodeAt(i)<<8;
 
-    resultado ^=
-      payload.charCodeAt(i) << 8;
+  for(let j=0;j<8;j++){
 
+   resultado =
+    (resultado & 0x8000)
+    ? ((resultado<<1)^polinomio)
+    : (resultado<<1);
 
-    for(
-      let j=0;
-      j<8;
-      j++
-    ){
-
-      resultado =
-        (
-          resultado &
-          0x8000
-        )
-        ?
-        (
-          (resultado << 1) ^
-          polinomio
-        )
-        :
-        (
-          resultado << 1
-        );
-
-      resultado &=
-        0xFFFF;
-
-    }
+   resultado &= 0xFFFF;
 
   }
 
+ }
 
-  return resultado
-    .toString(16)
-    .toUpperCase()
-    .padStart(4,"0");
+ return resultado
+  .toString(16)
+  .toUpperCase()
+  .padStart(4,"0");
 
 }
 
 
-function gerarPayloadPix(
-  valor
-){
+function gerarPayloadPix(valor){
 
-  let payload = "";
+ let payload = "";
 
-  payload +=
-    campo("00","01");
+ payload += campo("00","01");
 
+ payload += campo(
+  "26",
+  campo("00","BR.GOV.BCB.PIX") +
+  campo("01",CHAVE_PIX)
+ );
 
-  payload +=
-    campo(
-      "26",
-      campo(
-        "00",
-        "BR.GOV.BCB.PIX"
-      ) +
-      campo(
-        "01",
-        CHAVE_PIX
-      )
-    );
+ payload += campo("52","0000");
 
+ payload += campo("53","986");
 
-  payload +=
-    campo("52","0000");
+ payload += campo("54",valor);
 
+ payload += campo("58","BR");
 
-  payload +=
-    campo("53","986");
+ payload += campo("59","ALLANE GONZAGA");
 
+ payload += campo("60","ALTO GARCAS");
 
-  payload +=
-    campo("54",valor);
+ payload += campo(
+  "62",
+  campo("05","NATAL2026")
+ );
 
+ payload += "6304";
 
-  payload +=
-    campo("58","BR");
-
-
-  payload +=
-    campo(
-      "59",
-      "ALLANE GONZAGA"
-    );
-
-
-  payload +=
-    campo(
-      "60",
-      "ALTO GARCAS"
-    );
-
-
-  payload +=
-    campo(
-      "62",
-      campo(
-        "05",
-        "NATAL2026"
-      )
-    );
-
-
-  payload +=
-    "6304";
-
-
-  return (
-    payload +
-    crc16(payload)
-  );
+ return payload + crc16(payload);
 
 }
 
 
 async function copiarPix(){
 
-  if(
-    !reservaAtual.length
-  ){
+ if(!reservaAtual.length) return;
 
-    return;
+ const pix = gerarPayloadPix(
+  (reservaAtual.length * PRECO).toFixed(2)
+ );
 
-  }
+ await navigator.clipboard.writeText(pix);
 
-
-  const pix =
-    gerarPayloadPix(
-      (
-        reservaAtual.length *
-        PRECO
-      ).toFixed(2)
-    );
-
-
-  try{
-
-    await navigator
-      .clipboard
-      .writeText(pix);
-
-
-    alert(
-      "Código Pix Copia e Cola copiado!"
-    );
-
-
-  }catch(e){
-
-    prompt(
-      "Copie o código Pix abaixo:",
-      pix
-    );
-
-  }
+ alert("Código Pix Copia e Cola copiado!");
 
 }
 
@@ -1223,291 +703,178 @@ async function copiarPix(){
 
 function criarGrid(){
 
-  const grid =
-    document.getElementById(
-      "gridNumeros"
-    );
+ const grid =
+  document.getElementById("gridNumeros");
 
+ grid.innerHTML = "";
 
-  grid.innerHTML = "";
+ for(let i=1;i<=TOTAL;i++){
 
+  const b =
+   document.createElement("div");
 
-  for(
-    let i=1;
-    i<=TOTAL;
-    i++
-  ){
+  b.className = "numero";
 
-    const b =
-      document.createElement(
-        "div"
-      );
+  b.id = "numero-" + i;
 
+  b.textContent =
+   String(i).padStart(3,"0");
 
-    b.className =
-      "numero";
+  b.onclick =
+   ()=>selecionarNumero(i);
 
+  grid.appendChild(b);
 
-    b.id =
-      "numero-" + i;
+ }
 
-
-    b.textContent =
-      String(i).padStart(
-        3,
-        "0"
-      );
-
-
-    b.onclick =
-      () =>
-        selecionarNumero(i);
-
-
-    grid.appendChild(b);
-
-  }
-
-
-  atualizarNumerosOnline();
+ atualizarNumerosOnline();
 
 }
 
 
 async function atualizarNumerosOnline(){
 
-  if(!db){
-    return;
-  }
+ if(!db) return;
 
+ const {data,error} =
+  await db
+   .from("rifa_numeros")
+   .select("numero,status");
 
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("rifa_numeros")
-      .select(
-        "numero,status,reserva_expira_em"
-      );
+ if(error){
 
+  console.error(error);
 
-  if(error){
+  return;
 
-    console.error(
-      "Erro ao atualizar números:",
-      error
-    );
+ }
 
-    return;
+ for(let i=1;i<=TOTAL;i++){
 
-  }
+  const botao =
+   document.getElementById("numero-"+i);
 
+  if(!botao) continue;
 
-  for(
-    let i=1;
-    i<=TOTAL;
-    i++
-  ){
+  botao.className = "numero";
 
-    const botao =
-      document.getElementById(
-        "numero-" + i
-      );
+  botao.onclick =
+   ()=>selecionarNumero(i);
 
+  const item =
+   data.find(
+    x=>Number(x.numero)===Number(i)
+   );
 
-    if(!botao){
-      continue;
-    }
+  if(item){
 
+   if(item.status === "pago"){
 
-    botao.className =
-      "numero";
+    botao.classList.add("vendido");
 
+    botao.onclick = null;
 
-    botao.onclick =
-      () =>
-        selecionarNumero(i);
+   }
 
+   else if(item.status === "reservado"){
 
-    const item =
-      (data || []).find(
-        x =>
-          Number(x.numero) ===
-          Number(i)
-      );
+    botao.classList.add("reservado");
 
+    botao.onclick = null;
 
-    if(!item){
-      continue;
-    }
-
-
-    /*
-      IMPORTANTE:
-
-      reservado = bloqueado.
-
-      NÃO existe mais liberação
-      automática pelo horário.
-
-      O contador é apenas informativo.
-    */
-
-    if(
-      item.status ===
-      "pago"
-    ){
-
-      botao.classList.add(
-        "vendido"
-      );
-
-      botao.onclick =
-        null;
-
-    }
-    else if(
-      item.status ===
-      "reservado"
-    ){
-
-      botao.classList.add(
-        "reservado"
-      );
-
-      botao.onclick =
-        null;
-
-    }
+   }
 
   }
+
+ }
+
+ setTimeout(
+  atualizarNumerosOnline,
+  5000
+ );
 
 }
 
 
-function selecionarNumero(
-  numero
-){
+function selecionarNumero(numero){
 
-  const botao =
-    document.getElementById(
-      "numero-" + numero
-    );
+ const botao =
+  document.getElementById("numero-"+numero);
 
+ if(
+  botao.classList.contains("vendido") ||
+  botao.classList.contains("reservado")
+ ){
+  return;
+ }
 
-  if(
-    botao.classList.contains(
-      "vendido"
-    ) ||
-    botao.classList.contains(
-      "reservado"
-    )
-  ){
+ const pos =
+  selecionados.indexOf(numero);
 
-    return;
+ if(pos >= 0){
 
-  }
+  selecionados.splice(pos,1);
 
+  botao.classList.remove(
+   "selecionado"
+  );
 
-  const pos =
-    selecionados.indexOf(
-      numero
-    );
+ }else{
 
+  selecionados.push(numero);
 
-  if(pos >= 0){
+  botao.classList.add(
+   "selecionado"
+  );
 
-    selecionados.splice(
-      pos,
-      1
-    );
+ }
 
-
-    botao.classList.remove(
-      "selecionado"
-    );
-
-  }
-  else{
-
-    selecionados.push(
-      numero
-    );
-
-
-    botao.classList.add(
-      "selecionado"
-    );
-
-  }
-
-
-  atualizarTotal();
+ atualizarTotal();
 
 }
 
 
 function atualizarTotal(){
 
-  document.getElementById(
-    "qtdSelecionados"
-  ).textContent =
-    selecionados.length;
+ document.getElementById(
+  "qtdSelecionados"
+ ).textContent =
+  selecionados.length;
 
-
-  document.getElementById(
-    "valorTotal"
-  ).textContent =
-    "R$ " +
-    (
-      selecionados.length *
-      PRECO
-    )
-      .toFixed(2)
-      .replace(
-        ".",
-        ","
-      );
+ document.getElementById(
+  "valorTotal"
+ ).textContent =
+  "R$ " +
+  (selecionados.length * PRECO)
+   .toFixed(2)
+   .replace(".",",");
 
 }
 
 
 function buscarNumero(){
 
-  const v =
-    parseInt(
-      document.getElementById(
-        "buscarNumero"
-      ).value
-    );
+ const v =
+  parseInt(
+   document.getElementById(
+    "buscarNumero"
+   ).value
+  );
 
+ if(
+  isNaN(v) ||
+  v<1 ||
+  v>TOTAL
+ ){
+  return;
+ }
 
-  if(
-    isNaN(v) ||
-    v < 1 ||
-    v > TOTAL
-  ){
-
-    return;
-
-  }
-
-
-  const numero =
-    document.getElementById(
-      "numero-" + v
-    );
-
-
-  if(numero){
-
-    numero.scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
-
-  }
+ document
+  .getElementById("numero-"+v)
+  .scrollIntoView({
+   behavior:"smooth",
+   block:"center"
+  });
 
 }
 
@@ -1518,289 +885,183 @@ function buscarNumero(){
 
 async function gerarPix(){
 
-  if(!db){
+ if(!db){
 
-    alert(
-      "Não foi possível conectar ao sistema."
-    );
+  alert(
+   "Não foi possível concluir a reserva agora."
+  );
 
-    return;
+  return;
 
-  }
+ }
+
+ const nome =
+  document.getElementById("nome")
+   .value.trim();
+
+ const telefone =
+  document.getElementById("telefone")
+   .value.trim();
+
+ if(!nome || !telefone){
+
+  alert(
+   "Preencha nome e WhatsApp."
+  );
+
+  return;
+
+ }
+
+ if(selecionados.length===0){
+
+  alert(
+   "Escolha pelo menos um número."
+  );
+
+  return;
+
+ }
+
+ const btn =
+  document.getElementById(
+   "btnReservar"
+  );
+
+ btn.disabled = true;
+
+ btn.textContent =
+  "⏳ Verificando disponibilidade...";
 
 
-  const nome =
-    document
-      .getElementById("nome")
-      .value
-      .trim();
+ try{
 
+  const {data,error} =
+   await db.rpc(
+    "reservar_numeros",
+    {
+     p_nome:nome,
+     p_telefone:telefone,
+     p_numeros:
+      selecionados.map(
+       n=>Number(n)
+      ),
+     p_valor:
+      Number(
+       (
+        selecionados.length *
+        PRECO
+       ).toFixed(2)
+      )
+    }
+   );
 
-  const telefone =
-    document
-      .getElementById("telefone")
-      .value
-      .trim();
-
-
-  if(!nome){
-
-    alert(
-      "Preencha seu nome."
-    );
-
-    return;
-
-  }
-
-
-  if(!telefone){
-
-    alert(
-      "Preencha seu WhatsApp."
-    );
-
-    return;
-
-  }
-
+  if(error) throw error;
 
   if(
-    selecionados.length === 0
+   !data ||
+   !data.reserva_id
   ){
 
-    alert(
-      "Escolha pelo menos um número."
-    );
-
-    return;
+   throw new Error(
+    data?.erro ||
+    data?.mensagem ||
+    "O banco não confirmou a reserva."
+   );
 
   }
 
+  reservaAtual =
+   Array.isArray(data.numeros)
+   ? data.numeros.map(Number)
+   : [...selecionados];
 
-  const btn =
+
+  const valorPix =
+   (
+    reservaAtual.length *
+    PRECO
+   ).toFixed(2);
+
+  const payload =
+   gerarPayloadPix(valorPix);
+
+
+  document.getElementById(
+   "pixArea"
+  ).style.display = "block";
+
+
+  document.getElementById(
+   "qrCode"
+  ).src =
+   "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+
+   encodeURIComponent(payload);
+
+
+  reservaAtual.forEach(n=>{
+
+   const b =
     document.getElementById(
-      "btnReservar"
+     "numero-"+n
     );
 
+   if(b){
 
-  btn.disabled =
-    true;
+    b.classList.remove(
+     "selecionado"
+    );
 
+    b.classList.add(
+     "reservado"
+    );
+
+    b.onclick = null;
+
+   }
+
+  });
+
+
+  selecionados.length = 0;
+
+  atualizarTotal();
+
+  iniciarTimer();
+
+
+  alert(
+   "Números bloqueados com sucesso!\n\n"+
+   "O prazo de 10 minutos é apenas uma referência para concluir o Pix. "+
+   "O número continuará bloqueado até a organizadora confirmar ou liberar."
+  );
+
+
+ }catch(error){
+
+  console.error(
+   "Erro ao reservar:",
+   error
+  );
+
+  alert(
+   "ERRO REAL DO SUPABASE:\n\n"+
+   (
+    error?.message ||
+    String(error)
+   )
+  );
+
+  await atualizarNumerosOnline();
+
+ }finally{
+
+  btn.disabled = false;
 
   btn.textContent =
-    "⏳ Verificando disponibilidade...";
+   "💳 Gerar Pix e Reservar";
 
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await db.rpc(
-        "reservar_numeros",
-        {
-
-          p_nome:
-            nome,
-
-          p_telefone:
-            telefone,
-
-          p_numeros:
-            selecionados.map(
-              n => Number(n)
-            ),
-
-          p_valor:
-            Number(
-              (
-                selecionados.length *
-                PRECO
-              ).toFixed(2)
-            )
-
-        }
-      );
-
-
-    if(error){
-
-      throw error;
-
-    }
-
-
-    if(
-      !data ||
-      (
-        data.ok !== true &&
-        !data.reserva_id
-      )
-    ){
-
-      throw new Error(
-        data?.erro ||
-        data?.mensagem ||
-        "O banco não confirmou a reserva."
-      );
-
-    }
-
-
-    reservaAtual =
-      Array.isArray(
-        data?.numeros
-      )
-      ?
-      data.numeros.map(
-        Number
-      )
-      :
-      [...selecionados];
-
-
-    const valorPix =
-      (
-        reservaAtual.length *
-        PRECO
-      ).toFixed(2);
-
-
-    const payload =
-      gerarPayloadPix(
-        valorPix
-      );
-
-
-    document.getElementById(
-      "pixArea"
-    ).style.display =
-      "block";
-
-
-    document.getElementById(
-      "qrCode"
-    ).src =
-      "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
-      encodeURIComponent(
-        payload
-      );
-
-
-    reservaAtual.forEach(
-      numero => {
-
-        const b =
-          document.getElementById(
-            "numero-" +
-            numero
-          );
-
-
-        if(!b){
-          return;
-        }
-
-
-        b.classList.remove(
-          "selecionado"
-        );
-
-
-        b.classList.add(
-          "reservado"
-        );
-
-
-        b.onclick =
-          null;
-
-      }
-    );
-
-
-    selecionados.length =
-      0;
-
-
-    atualizarTotal();
-
-    iniciarTimer();
-
-
-    alert(
-      "Números reservados com sucesso!\n\n" +
-      "Faça o Pix utilizando o QR Code."
-    );
-
-
-  }catch(error){
-
-    console.error(
-      "Erro ao reservar:",
-      error
-    );
-
-
-    const detalhe = [
-
-      error?.message
-        ?
-        "Mensagem: " +
-        error.message
-        :
-        "",
-
-      error?.code
-        ?
-        "Código: " +
-        error.code
-        :
-        "",
-
-      error?.details
-        ?
-        "Detalhes: " +
-        error.details
-        :
-        "",
-
-      error?.hint
-        ?
-        "Dica: " +
-        error.hint
-        :
-        ""
-
-    ]
-      .filter(Boolean)
-      .join("\n");
-
-
-    alert(
-      "Não foi possível reservar.\n\n" +
-      (
-        detalhe ||
-        String(error)
-      )
-    );
-
-
-    await atualizarNumerosOnline();
-
-  }
-  finally{
-
-    btn.disabled =
-      false;
-
-
-    btn.textContent =
-      "💳 Gerar Pix e Reservar";
-
-  }
+ }
 
 }
 
@@ -1811,690 +1072,616 @@ async function gerarPix(){
 
 function iniciarTimer(){
 
-  clearInterval(
-    cronometro
-  );
+ clearInterval(cronometro);
+
+ tempoRestante =
+  TEMPO_RESERVA_MINUTOS * 60;
+
+ document.getElementById(
+  "timerBox"
+ ).style.display = "block";
+
+ document.getElementById(
+  "timer"
+ ).textContent = "10:00";
 
 
-  tempoRestante =
-    TEMPO_RESERVA_MINUTOS *
-    60;
+ cronometro =
+  setInterval(async()=>{
 
+   tempoRestante--;
 
-  document.getElementById(
-    "timerBox"
-  ).style.display =
-    "block";
-
-
-  document.getElementById(
-    "timer"
-  ).textContent =
-    "10:00";
-
-
-  document.getElementById(
-    "timerMensagem"
-  ).textContent =
-    "A reserva continuará bloqueada mesmo após o contador chegar a zero.";
-
-
-  cronometro =
-    setInterval(
-      () => {
-
-        tempoRestante--;
-
-
-        const m =
-          Math.floor(
-            tempoRestante /
-            60
-          );
-
-
-        const s =
-          tempoRestante %
-          60;
-
-
-        document.getElementById(
-          "timer"
-        ).textContent =
-          String(m).padStart(
-            2,
-            "0"
-          ) +
-          ":" +
-          String(s).padStart(
-            2,
-            "0"
-          );
-
-
-        if(
-          tempoRestante <= 0
-        ){
-
-          clearInterval(
-            cronometro
-          );
-
-
-          document.getElementById(
-            "timer"
-          ).textContent =
-            "00:00";
-
-
-          document.getElementById(
-            "timerMensagem"
-          ).innerHTML =
-            "🔒 <strong>PRAZO ENCERRADO.</strong><br>" +
-            "A reserva continua bloqueada até a Allane confirmar ou liberar o número.";
-
-        }
-
-      },
-      1000
+   const m =
+    Math.floor(
+     tempoRestante/60
     );
+
+   const s =
+    tempoRestante%60;
+
+
+   document.getElementById(
+    "timer"
+   ).textContent =
+    String(m).padStart(2,"0")+
+    ":"+
+    String(s).padStart(2,"0");
+
+
+   if(tempoRestante<=0){
+
+    clearInterval(
+     cronometro
+    );
+
+
+    document.getElementById(
+     "timerBox"
+    ).innerHTML =
+
+     '<div style="color:#92400e;font-weight:700">'+
+     '🔒 Reserva mantida'+
+     '</div>'+
+
+     '<div style="margin-top:8px;color:#92400e">'+
+     'O prazo de 10 minutos terminou, mas o número continua bloqueado até a organizadora confirmar ou liberar.'+
+     '</div>';
+
+   }
+
+  },1000);
 
 }
 
 
 /* =========================================================
-   SORTEIO
+   ADMIN
    ========================================================= */
 
 function pedirSenha(){
 
-  const senha =
-    prompt(
-      "Digite a senha da organizadora:"
-    );
+ const senha =
+  prompt(
+   "Digite a senha da organizadora:"
+  );
 
+ if(
+  senha !== SENHA_ADMIN
+ ){
 
-  if(
-    senha !== SENHA_ADMIN
-  ){
+  alert(
+   "Senha incorreta."
+  );
 
-    alert(
-      "Senha incorreta."
-    );
+  return;
 
-    return;
+ }
 
-  }
-
-
-  realizarSorteio();
+ realizarSorteio();
 
 }
 
 
 async function realizarSorteio(){
 
-  if(!db){
+ if(!db){
 
-    alert(
-      "Configure o Supabase primeiro."
-    );
+  alert(
+   "Configure o Supabase primeiro."
+  );
 
-    return;
+  return;
 
-  }
+ }
 
+ const {data,error} =
+  await db
+   .from("rifa_numeros")
+   .select("numero")
+   .eq("status","pago");
 
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("rifa_numeros")
-      .select("numero")
-      .eq(
-        "status",
-        "pago"
-      );
+ if(error){
 
+  alert(error.message);
 
-  if(error){
+  return;
 
-    alert(
-      error.message
-    );
+ }
 
-    return;
+ if(
+  !data ||
+  data.length < 2
+ ){
 
-  }
+  alert(
+   "É preciso ter pelo menos 2 números pagos."
+  );
 
+  return;
 
-  if(
-    !data ||
-    data.length < 2
-  ){
+ }
 
-    alert(
-      "É preciso ter pelo menos 2 números pagos."
-    );
-
-    return;
-
-  }
+ const lista =
+  data.map(
+   x=>x.numero
+  );
 
 
-  const lista =
-    data.map(
-      x =>
-        x.numero
-    );
+ const g1 =
+  lista.splice(
+   Math.floor(
+    Math.random()*lista.length
+   ),
+   1
+  )[0];
 
 
-  const g1 =
-    lista.splice(
-      Math.floor(
-        Math.random() *
-        lista.length
-      ),
-      1
-    )[0];
+ const g2 =
+  lista.splice(
+   Math.floor(
+    Math.random()*lista.length
+   ),
+   1
+  )[0];
 
 
-  const g2 =
-    lista.splice(
-      Math.floor(
-        Math.random() *
-        lista.length
-      ),
-      1
-    )[0];
+ document.getElementById(
+  "resultadoSorteio"
+ ).innerHTML =
 
-
-  document.getElementById(
-    "resultadoSorteio"
-  ).innerHTML =
-
-    `🥇 1º Ganhador:
-    <strong>
-      ${String(g1).padStart(3,"0")}
-    </strong>
-
-    <br><br>
-
-    🥈 2º Ganhador:
-    <strong>
-      ${String(g2).padStart(3,"0")}
-    </strong>`;
+  `🥇 1º Ganhador:
+   <strong>${String(g1).padStart(3,"0")}</strong>
+   <br><br>
+   🥈 2º Ganhador:
+   <strong>${String(g2).padStart(3,"0")}</strong>`;
 
 }
 
-
-/* =========================================================
-   ABRIR ADMIN
-   ========================================================= */
 
 function abrirAdmin(){
 
-  const senha =
-    prompt(
-      "Digite a senha da organizadora:"
-    );
+ const senha =
+  prompt(
+   "Digite a senha da organizadora:"
+  );
 
+ if(
+  senha !== SENHA_ADMIN
+ ){
 
-  if(
-    senha !== SENHA_ADMIN
-  ){
+  alert(
+   "Senha incorreta."
+  );
 
-    alert(
-      "Senha incorreta."
-    );
+  return;
 
-    return;
+ }
 
-  }
+ document
+  .getElementById("adminPanel")
+  .classList.add("active");
 
+ carregarAdmin();
 
-  document
-    .getElementById(
-      "adminPanel"
-    )
-    .classList.add(
-      "active"
-    );
-
-
-  carregarAdmin();
-
-
-  document
-    .getElementById(
-      "adminPanel"
-    )
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
-}
-
-
-/* =========================================================
-   SAIR DO ADMIN
-   ========================================================= */
-
-function sairAdmin(){
-
-  /*
-    Fecha completamente o painel
-    administrativo.
-
-    Não altera nenhum comprador.
-    Não libera nenhum número.
-    Apenas sai da área administrativa.
-  */
-
-  document
-    .getElementById(
-      "adminPanel"
-    )
-    .classList.remove(
-      "active"
-    );
-
-
-  document
-    .getElementById(
-      "disponiveisArea"
-    )
-    .classList.add(
-      "hidden"
-    );
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
+ document
+  .getElementById("adminPanel")
+  .scrollIntoView({
+   behavior:"smooth"
   });
 
 }
 
 
+function fecharAdmin(){
+
+ document
+  .getElementById("adminPanel")
+  .classList.remove("active");
+
+}
+
+
 /* =========================================================
-   LISTAR COMPRADORES
+   CADASTRAR COMPRADOR
+   ========================================================= */
+
+function cadastrarComprador(){
+
+ const area =
+  document.getElementById(
+   "cadastroCompradorArea"
+  );
+
+ area.style.display =
+  area.style.display === "none"
+  ? "block"
+  : "none";
+
+}
+
+
+async function salvarCadastroComprador(){
+
+ const nome =
+  document.getElementById(
+   "cadastroNome"
+  ).value.trim();
+
+ const telefone =
+  document.getElementById(
+   "cadastroTelefone"
+  ).value.trim();
+
+ const numerosTexto =
+  document.getElementById(
+   "cadastroNumeros"
+  ).value.trim();
+
+ const resultado =
+  document.getElementById(
+   "cadastroResultado"
+  );
+
+
+ if(!nome || !telefone || !numerosTexto){
+
+  resultado.textContent =
+   "⚠️ Preencha nome, WhatsApp e número(s).";
+
+  return;
+
+ }
+
+
+ const numeros =
+  numerosTexto
+   .split(/[,\s;]+/)
+   .map(x=>parseInt(x,10))
+   .filter(
+    n=>n>=1 && n<=TOTAL
+   );
+
+
+ if(!numeros.length){
+
+  resultado.textContent =
+   "⚠️ Nenhum número válido encontrado.";
+
+  return;
+
+ }
+
+
+ const unicos =
+  [...new Set(numeros)];
+
+
+ resultado.textContent =
+  "⏳ Cadastrando...";
+
+
+ try{
+
+  for(const numero of unicos){
+
+   const {data,error} =
+    await db.rpc(
+     "admin_cadastrar_compra_manual",
+     {
+      p_senha:SENHA_ADMIN,
+      p_nome:nome,
+      p_telefone:telefone,
+      p_numero:
+       String(numero).padStart(3,"0"),
+      p_valor:PRECO
+     }
+    );
+
+
+   if(error) throw error;
+
+
+   if(!data?.ok){
+
+    throw new Error(
+     data?.erro ||
+     data?.mensagem ||
+     "Não foi possível cadastrar."
+    );
+
+   }
+
+  }
+
+
+  resultado.innerHTML =
+   `✅ ${unicos.length} número(s) cadastrado(s) com sucesso e bloqueado(s) como PAGO.`;
+
+
+  document.getElementById(
+   "cadastroNome"
+  ).value = "";
+
+  document.getElementById(
+   "cadastroTelefone"
+  ).value = "";
+
+  document.getElementById(
+   "cadastroNumeros"
+  ).value = "";
+
+
+  await carregarAdmin();
+
+  await atualizarNumerosOnline();
+
+
+ }catch(error){
+
+  resultado.textContent =
+   "❌ Erro: "+
+   (
+    error?.message ||
+    String(error)
+   );
+
+ }
+
+}
+
+
+/* =========================================================
+   CARREGAR ADMIN
    ========================================================= */
 
 async function carregarAdmin(){
 
-  if(!db){
+ if(!db){
 
-    alert(
-      "Configure o Supabase primeiro."
-    );
+  alert(
+   "Configure o Supabase primeiro."
+  );
 
-    return;
+  return;
 
-  }
-
-
-  const {
-    data,
-    error
-  } =
-    await db.rpc(
-      "admin_listar_compras",
-      {
-        p_senha:
-          SENHA_ADMIN
-      }
-    );
+ }
 
 
-  if(error){
-
-    console.error(
-      "Erro admin_listar_compras:",
-      error
-    );
-
-
-    alert(
-      "Erro ao carregar compradores:\n\n" +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  const registros =
-    Array.isArray(data)
-      ?
-      data
-      :
-      [];
-
-
-  const contagem = {};
-
-
-  registros.forEach(
-    r => {
-
-      const numero =
-        String(
-          r.numero
-        ).padStart(
-          3,
-          "0"
-        );
-
-
-      contagem[numero] =
-        (
-          contagem[numero] ||
-          0
-        ) + 1;
-
-    }
+ const {data,error} =
+  await db.rpc(
+   "admin_listar_compras",
+   {
+    p_senha:SENHA_ADMIN
+   }
   );
 
 
-  const duplicados =
-    new Set(
-      Object.keys(
-        contagem
-      ).filter(
-        n =>
-          contagem[n] > 1
-      )
-    );
+ if(error){
+
+  alert(error.message);
+
+  return;
+
+ }
 
 
-  const tbody =
-    document.getElementById(
-      "adminTabela"
-    );
+ const contagem = {};
 
 
-  tbody.innerHTML =
-    "";
+ (data||[]).forEach(r=>{
+
+  const numero =
+   String(r.numero)
+    .padStart(3,"0");
+
+  contagem[numero] =
+   (contagem[numero]||0)+1;
+
+ });
+
+
+ const duplicados =
+  new Set(
+   Object.keys(contagem)
+    .filter(
+     n=>contagem[n]>1
+    )
+  );
+
+
+ const tbody =
+  document.getElementById(
+   "adminTabela"
+  );
+
+ tbody.innerHTML = "";
+
+
+ (data||[]).forEach(r=>{
+
+  const numero =
+   String(r.numero)
+    .padStart(3,"0");
+
+  const tr =
+   document.createElement("tr");
 
 
   if(
-    registros.length === 0
+   duplicados.has(numero)
   ){
 
-    tbody.innerHTML = `
-      <tr>
-        <td
-          colspan="9"
-          class="empty"
-        >
-          Nenhum comprador cadastrado.
-        </td>
-      </tr>
-    `;
+   tr.classList.add(
+    "dup"
+   );
 
   }
 
 
-  registros.forEach(
-    r => {
-
-      const numero =
-        String(
-          r.numero
-        ).padStart(
-          3,
-          "0"
-        );
+  const dataFormatada =
+   r.criado_em
+   ? new Date(
+      r.criado_em
+     ).toLocaleString("pt-BR")
+   : "";
 
 
-      const tr =
-        document.createElement(
-          "tr"
-        );
+  let statusTexto =
+   escapeHtml(
+    r.status || ""
+   );
+
+  let statusClasse = "s";
 
 
-      if(
-        duplicados.has(
-          numero
-        )
-      ){
+  if(r.status==="pago"){
 
-        tr.classList.add(
-          "dup"
-        );
+   statusTexto =
+    "✅ PAGO";
 
-      }
+   statusClasse = "p";
 
+  }
 
-      const dataFormatada =
-        r.criado_em
-        ?
-        new Date(
-          r.criado_em
-        ).toLocaleString(
-          "pt-BR"
-        )
-        :
-        "";
+  else if(
+   r.status==="reservado"
+  ){
 
+   statusTexto =
+    "⏳ RESERVADO";
 
-      let statusClass =
-        "s";
+   statusClasse = "s";
 
+  }
 
-      if(
-        r.status ===
-        "pago"
-      ){
+  else if(
+   r.status==="liberado"
+  ){
 
-        statusClass =
-          "p";
+   statusTexto =
+    "🔓 LIBERADO";
 
-      }
-      else if(
-        r.status ===
-        "cancelado"
-      ){
+   statusClasse = "l";
 
-        statusClass =
-          "c";
-
-      }
+  }
 
 
-      let acoes =
-        "";
+  tr.innerHTML = `
 
+   <td>${r.id}</td>
 
-      /*
-        CONFIRMAR PAGAMENTO
-      */
+   <td>${dataFormatada}</td>
 
-      if(
-        r.status !==
-        "pago" &&
-        r.status !==
-        "cancelado"
-      ){
+   <td>
+    ${escapeHtml(r.nome||"")}
+   </td>
 
-        acoes += `
+   <td>
+    ${escapeHtml(r.telefone||"")}
+   </td>
 
-          <button
-            class="actionBtn btn-green"
-            onclick="confirmarPagamento(${r.id})"
-          >
-            ✅ PAGO
-          </button>
+   <td>
+    <strong>${numero}</strong>
+   </td>
 
-        `;
-
-      }
-
-
-      /*
-        TROCAR NÚMERO
-      */
-
-      if(
-        r.status !==
-        "cancelado"
-      ){
-
-        acoes += `
-
-          <button
-            class="actionBtn btn-orange"
-            onclick="trocarNumero(${r.id}, '${numero}')"
-          >
-            🔁 TROCAR
-          </button>
-
-        `;
-
-      }
-
-
-      /*
-        LIBERAR NÚMERO
-      */
-
-      if(
-        r.status !==
-        "cancelado"
-      ){
-
-        acoes += `
-
-          <button
-            class="actionBtn btn-red"
-            onclick="liberarNumero(${r.id}, '${numero}')"
-          >
-            🔓 LIBERAR
-          </button>
-
-        `;
-
-      }
-
-
-      tr.innerHTML = `
-
-        <td>
-          ${escapeHtml(r.id)}
-        </td>
-
-        <td>
-          ${escapeHtml(dataFormatada)}
-        </td>
-
-        <td>
-          ${escapeHtml(r.nome || "")}
-        </td>
-
-        <td>
-          ${escapeHtml(r.telefone || "")}
-        </td>
-
-        <td>
-          <strong>
-            ${escapeHtml(numero)}
-          </strong>
-        </td>
-
-        <td>
-          R$
-          ${
-            Number(
-              r.valor || 0
-            )
-              .toFixed(2)
-              .replace(".",",")
-          }
-        </td>
-
-        <td>
-
-          <span
-            class="badgeStatus ${statusClass}"
-          >
-            ${escapeHtml(
-              r.status || ""
-            )}
-          </span>
-
-        </td>
-
-        <td>
-
-          ${
-            duplicados.has(
-              numero
-            )
-            ?
-            "⚠️ SIM"
-            :
-            "Não"
-          }
-
-        </td>
-
-        <td
-          style="white-space:nowrap"
-        >
-          ${acoes}
-        </td>
-
-      `;
-
-
-      tbody.appendChild(
-        tr
-      );
-
+   <td>
+    R$ ${
+     Number(r.valor||0)
+      .toFixed(2)
+      .replace(".",",")
     }
-  );
+   </td>
 
-
-  document.getElementById(
-    "adminResumo"
-  ).innerHTML = `
-
-    <div
-      class="alert ${
-        duplicados.size
-          ?
-          "warn"
-          :
-          "ok"
-      }"
+   <td>
+    <span
+     class="badgeStatus ${statusClasse}"
     >
+     ${statusTexto}
+    </span>
+   </td>
 
-      <strong>
-        ${registros.length}
-      </strong>
-      registro(s) no histórico.
+   <td>
+    ${
+     duplicados.has(numero)
+     ? "⚠️ SIM"
+     : "Não"
+    }
+   </td>
 
-      <br>
+   <td style="white-space:nowrap">
 
-      <strong>
-        ${duplicados.size}
-      </strong>
-      número(s) aparecem mais de uma vez.
+    ${
+     r.status==="reservado"
+     ?
+     `
+      <button
+       onclick="confirmarPagamento(${r.id})"
+       style="padding:7px 9px"
+      >
+       ✅ PAGO
+      </button>
+     `
+     :
+     ""
+    }
 
-      ${
-        duplicados.size
-        ?
-        "<br>Os números duplicados estão destacados."
-        :
-        ""
-      }
+    ${
+     r.status!=="liberado"
+     ?
+     `
+      <button
+       onclick="trocarNumero(
+        ${r.id},
+        '${numero}'
+       )"
+       style="padding:7px 9px"
+      >
+       🔁 TROCAR
+      </button>
+     `
+     :
+     ""
+    }
 
-    </div>
+   </td>
 
   `;
+
+
+  tbody.appendChild(tr);
+
+ });
+
+
+ document.getElementById(
+  "adminResumo"
+ ).innerHTML =
+
+  `<div class="alert ${
+   duplicados.size
+   ? "warn"
+   : "ok"
+  }">
+
+   <strong>
+    ${data?.length||0}
+   </strong>
+   registro(s) no histórico.
+
+   <strong>
+    ${duplicados.size}
+   </strong>
+   número(s) aparecem mais de uma vez.
+
+   ${
+    duplicados.size
+    ?
+    " Os registros duplicados estão destacados em vermelho claro."
+    :
+    ""
+   }
+
+  </div>`;
 
 }
 
@@ -2505,111 +1692,77 @@ async function carregarAdmin(){
 
 async function mostrarDisponiveis(){
 
-  if(!db){
+ if(!db){
 
-    alert(
-      "Configure o Supabase primeiro."
-    );
+  alert(
+   "Configure o Supabase primeiro."
+  );
 
-    return;
+  return;
 
-  }
-
-
-  const area =
-    document.getElementById(
-      "disponiveisArea"
-    );
+ }
 
 
-  area.classList.toggle(
-    "hidden"
+ const area =
+  document.getElementById(
+   "disponiveisArea"
   );
 
 
-  if(
-    area.classList.contains(
-      "hidden"
-    )
-  ){
-
-    return;
-
-  }
+ area.classList.toggle(
+  "hidden"
+ );
 
 
-  const {
-    data,
-    error
-  } =
-    await db
-      .from("rifa_numeros")
-      .select(
-        "numero,status"
-      )
-      .eq(
-        "status",
-        "disponivel"
-      )
-      .order(
-        "numero"
-      );
+ if(
+  area.classList.contains("hidden")
+ ){
+
+  return;
+
+ }
 
 
-  if(error){
-
-    alert(
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  const lista =
-    document.getElementById(
-      "listaDisponiveis"
-    );
+ const {data,error} =
+  await db
+   .from("rifa_numeros")
+   .select("numero,status")
+   .eq(
+    "status",
+    "disponivel"
+   )
+   .order("numero");
 
 
-  lista.innerHTML =
-    (data || [])
-      .map(
-        r => `
+ if(error){
 
-          <div
-            class="numero"
-            style="cursor:default"
-          >
-            ${String(
-              r.numero
-            ).padStart(
-              3,
-              "0"
-            )}
-          </div>
+  alert(error.message);
 
-        `
-      )
-      .join("");
+  return;
+
+ }
 
 
-  if(
-    !data ||
-    data.length === 0
-  ){
+ const lista =
+  document.getElementById(
+   "listaDisponiveis"
+  );
 
-    lista.innerHTML = `
+
+ lista.innerHTML =
+  (data||[])
+   .map(
+    r=>
+     `
       <div
-        class="empty"
-        style="grid-column:1/-1"
+       class="numero"
+       style="cursor:default"
       >
-        Nenhum número disponível.
+       ${String(r.numero).padStart(3,"0")}
       </div>
-    `;
-
-  }
+     `
+   )
+   .join("");
 
 }
 
@@ -2618,74 +1771,61 @@ async function mostrarDisponiveis(){
    CONFIRMAR PAGAMENTO
    ========================================================= */
 
-async function confirmarPagamento(
-  id
-){
+async function confirmarPagamento(id){
 
-  if(
-    !confirm(
-      "Confirmar que o Pix desta compra foi recebido?"
-    )
-  ){
+ if(
+  !confirm(
+   "Confirmar que o Pix desta compra foi recebido?"
+  )
+ ){
 
-    return;
+  return;
 
-  }
+ }
 
 
-  const {
-    data,
-    error
-  } =
-    await db.rpc(
-      "admin_confirmar_pagamento",
-      {
-
-        p_senha:
-          SENHA_ADMIN,
-
-        p_compra_id:
-          id
-
-      }
-    );
-
-
-  if(error){
-
-    alert(
-      "Erro: " +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  if(
-    !data?.ok
-  ){
-
-    alert(
-      data?.erro ||
-      "Não foi possível confirmar."
-    );
-
-    return;
-
-  }
-
-
-  alert(
-    "Pagamento confirmado!\n\n" +
-    "O número ficou como PAGO."
+ const {data,error} =
+  await db.rpc(
+   "admin_confirmar_pagamento",
+   {
+    p_senha:SENHA_ADMIN,
+    p_compra_id:id
+   }
   );
 
 
-  await carregarAdmin();
+ if(error){
 
-  await atualizarNumerosOnline();
+  alert(
+   "Erro: "+
+   error.message
+  );
+
+  return;
+
+ }
+
+
+ if(!data?.ok){
+
+  alert(
+   data?.erro ||
+   "Não foi possível confirmar."
+  );
+
+  return;
+
+ }
+
+
+ alert(
+  "Pagamento confirmado. O número ficou vendido."
+ );
+
+
+ await carregarAdmin();
+
+ await atualizarNumerosOnline();
 
 }
 
@@ -2695,779 +1835,536 @@ async function confirmarPagamento(
    ========================================================= */
 
 async function trocarNumero(
-  id,
-  numeroAtual
+ id,
+ numeroAtual
 ){
 
-  const {
-    data:disp,
-    error:err
-  } =
-    await db
-      .from("rifa_numeros")
-      .select("numero")
-      .eq(
-        "status",
-        "disponivel"
-      )
-      .order(
-        "numero"
-      );
+ const {data:disp,error:err} =
+  await db
+   .from("rifa_numeros")
+   .select("numero")
+   .eq(
+    "status",
+    "disponivel"
+   )
+   .order("numero");
 
 
-  if(err){
+ if(err){
 
-    alert(
-      err.message
-    );
+  alert(err.message);
 
-    return;
+  return;
 
-  }
+ }
 
 
-  const disponiveis =
-    (disp || [])
-      .map(
-        x =>
-          String(
-            x.numero
-          ).padStart(
-            3,
-            "0"
-          )
-      );
+ const disponiveis =
+  (disp||[])
+   .map(
+    x=>
+     String(x.numero)
+      .padStart(3,"0")
+   );
 
 
-  if(
-    !disponiveis.length
-  ){
+ if(!disponiveis.length){
 
-    alert(
-      "Não há números disponíveis."
-    );
+  alert(
+   "Não há números disponíveis no momento."
+  );
 
-    return;
+  return;
 
-  }
+ }
 
 
-  const escolha =
-    prompt(
-      "Número atual: " +
-      numeroAtual +
-      "\n\n" +
-      "Digite o novo número disponível:\n\n" +
-      disponiveis.join("  ")
-    );
+ const escolha =
+  prompt(
+   "Digite o novo número disponível:\n\n"+
+   disponiveis.join("  "),
+   ""
+  );
 
 
-  if(
-    escolha === null
-  ){
-
-    return;
-
-  }
+ if(escolha===null) return;
 
 
-  const novo =
-    String(
-      parseInt(
-        escolha,
-        10
-      )
-    ).padStart(
-      3,
-      "0"
-    );
+ const numeroInteiro =
+  parseInt(
+   escolha,
+   10
+  );
 
 
-  if(
-    !disponiveis.includes(
-      novo
+ if(
+  isNaN(numeroInteiro)
+ ){
+
+  alert(
+   "Número inválido."
+  );
+
+  return;
+
+ }
+
+
+ const novo =
+  String(numeroInteiro)
+   .padStart(3,"0");
+
+
+ if(
+  !disponiveis.includes(novo)
+ ){
+
+  alert(
+   "Esse número não está disponível."
+  );
+
+  return;
+
+ }
+
+
+ if(
+  !confirm(
+   `Trocar o número ${numeroAtual} pelo ${novo}?`
+  )
+ ){
+
+  return;
+
+ }
+
+
+ const {data,error} =
+  await db.rpc(
+   "admin_remanejar_compra",
+   {
+    p_senha:SENHA_ADMIN,
+    p_compra_id:id,
+    p_novo_numero:novo
+   }
+  );
+
+
+ if(error){
+
+  alert(
+   "Erro: "+
+   error.message
+  );
+
+  return;
+
+ }
+
+
+ if(!data?.ok){
+
+  alert(
+   data?.erro ||
+   "Não foi possível trocar o número."
+  );
+
+  return;
+
+ }
+
+
+ alert(
+  `Pronto. O comprador agora está com o número ${novo}.`
+ );
+
+
+ await carregarAdmin();
+
+ await atualizarNumerosOnline();
+
+}
+
+
+/* =========================================================
+   🔓 DESBLOQUEAR NÚMERO
+   ========================================================= */
+
+async function desbloquearNumeroManual(){
+
+ if(!db){
+
+  alert(
+   "Configure o Supabase primeiro."
+  );
+
+  return;
+
+ }
+
+
+ const input =
+  document.getElementById(
+   "numeroDesbloquear"
+  );
+
+ const resultado =
+  document.getElementById(
+   "desbloquearResultado"
+  );
+
+
+ const raw =
+  input.value.trim();
+
+
+ resultado.textContent = "";
+
+
+ if(!raw){
+
+  resultado.textContent =
+   "⚠️ Informe o número.";
+
+  return;
+
+ }
+
+
+ const numeroInteiro =
+  parseInt(
+   raw,
+   10
+  );
+
+
+ if(
+  isNaN(numeroInteiro) ||
+  numeroInteiro<1 ||
+  numeroInteiro>TOTAL
+ ){
+
+  resultado.textContent =
+   "⚠️ Número inválido. Use um número de 001 a 100.";
+
+  return;
+
+ }
+
+
+ const numero =
+  String(numeroInteiro)
+   .padStart(3,"0");
+
+
+ /*
+   Localiza o estado atual do número.
+ */
+
+ const {data:numeroDb,error:numeroError} =
+  await db
+   .from("rifa_numeros")
+   .select(
+    "numero,status"
+   )
+   .eq(
+    "numero",
+    numero
+   )
+   .maybeSingle();
+
+
+ if(numeroError){
+
+  resultado.textContent =
+   "❌ Erro ao localizar o número: "+
+   numeroError.message;
+
+  return;
+
+ }
+
+
+ if(!numeroDb){
+
+  resultado.textContent =
+   "❌ Número não encontrado no cadastro.";
+
+  return;
+
+ }
+
+
+ if(
+  numeroDb.status==="disponivel"
+ ){
+
+  resultado.textContent =
+   `ℹ️ O número ${numero} já está disponível.`;
+
+  return;
+
+ }
+
+
+ /*
+   Busca o histórico para localizar
+   a reserva/compra ativa.
+ */
+
+ const {data:compras,error:listaError} =
+  await db.rpc(
+   "admin_listar_compras",
+   {
+    p_senha:SENHA_ADMIN
+   }
+  );
+
+
+ if(listaError){
+
+  resultado.textContent =
+   "❌ Erro ao localizar o registro: "+
+   listaError.message;
+
+  return;
+
+ }
+
+
+ const ativas =
+  (compras||[]).filter(
+   r=>
+    String(r.numero).padStart(3,"0")===numero &&
+    (
+     r.status==="reservado" ||
+     r.status==="pago"
     )
-  ){
-
-    alert(
-      "Esse número não está disponível."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    !confirm(
-      `Trocar o número ${numeroAtual} pelo ${novo}?`
-    )
-  ){
-
-    return;
-
-  }
-
-
-  const {
-    data,
-    error
-  } =
-    await db.rpc(
-      "admin_remanejar_compra",
-      {
-
-        p_senha:
-          SENHA_ADMIN,
-
-        p_compra_id:
-          id,
-
-        p_novo_numero:
-          novo
-
-      }
-    );
-
-
-  if(error){
-
-    alert(
-      "Erro: " +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  if(
-    !data?.ok
-  ){
-
-    alert(
-      data?.erro ||
-      "Não foi possível trocar."
-    );
-
-    return;
-
-  }
-
-
-  alert(
-    "Número trocado com sucesso!"
   );
 
 
-  await carregarAdmin();
+ if(!ativas.length){
 
-  await atualizarNumerosOnline();
+  resultado.textContent =
+   `⚠️ O número ${numero} está ocupado, mas não foi encontrada uma compra ativa para liberar.`;
+
+  return;
+
+ }
+
+
+ /*
+   Prioriza uma reserva.
+ */
+
+ const compra =
+  ativas.find(
+   r=>r.status==="reservado"
+  ) ||
+  ativas[0];
+
+
+ if(
+  !confirm(
+   `🔓 DESBLOQUEAR NÚMERO ${numero}\n\n`+
+   `Comprador: ${compra.nome || "Não informado"}\n\n`+
+   `O registro NÃO será apagado.\n`+
+   `Ele ficará no histórico como 🔓 LIBERADO.\n\n`+
+   `Deseja liberar este número?`
+  )
+ ){
+
+  return;
+
+ }
+
+
+ /*
+   IMPORTANTE:
+   A função do banco deve transformar o
+   registro em "liberado" e devolver o
+   número para "disponivel".
+ */
+
+ const {data,error} =
+  await db.rpc(
+   "admin_cancelar_compra",
+   {
+    p_senha:SENHA_ADMIN,
+    p_compra_id:compra.id
+   }
+  );
+
+
+ if(error){
+
+  resultado.textContent =
+   "❌ Erro ao liberar: "+
+   error.message;
+
+  return;
+
+ }
+
+
+ if(!data?.ok){
+
+  resultado.textContent =
+   "❌ "+
+   (
+    data?.erro ||
+    data?.mensagem ||
+    "O banco não confirmou a liberação."
+   );
+
+  return;
+
+ }
+
+
+ resultado.innerHTML =
+  `
+   ✅ Número
+   <strong>${numero}</strong>
+   desbloqueado com sucesso!
+   <br>
+   O registro foi mantido no histórico como
+   <strong>🔓 LIBERADO</strong>.
+  `;
+
+
+ input.value = "";
+
+
+ await carregarAdmin();
+
+ await atualizarNumerosOnline();
 
 }
 
 
 /* =========================================================
-   LIBERAR NÚMERO
-   ========================================================= */
-
-async function liberarNumero(
-  id,
-  numero
-){
-
-  const confirmar =
-    confirm(
-      "🔓 LIBERAR NÚMERO\n\n" +
-
-      "Número: " +
-      numero +
-      "\n\n" +
-
-      "Ao confirmar, este número será liberado " +
-      "e poderá ser comprado novamente por outra pessoa.\n\n" +
-
-      "Deseja realmente liberar?"
-    );
-
-
-  if(!confirmar){
-
-    return;
-
-  }
-
-
-  const {
-    data,
-    error
-  } =
-    await db.rpc(
-      "admin_cancelar_compra",
-      {
-
-        p_senha:
-          SENHA_ADMIN,
-
-        p_compra_id:
-          id
-
-      }
-    );
-
-
-  if(error){
-
-    console.error(
-      "Erro ao liberar:",
-      error
-    );
-
-
-    alert(
-      "Não foi possível liberar o número.\n\n" +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  if(
-    !data ||
-    data.ok !== true
-  ){
-
-    alert(
-      data?.erro ||
-      data?.mensagem ||
-      "O banco não confirmou a liberação."
-    );
-
-    return;
-
-  }
-
-
-  alert(
-    "✅ Número " +
-    numero +
-    " liberado com sucesso!\n\n" +
-    "Ele já pode ser vendido novamente."
-  );
-
-
-  await carregarAdmin();
-
-  await atualizarNumerosOnline();
-
-}
-
-
-/* =========================================================
-   CADASTRAR COMPRA MANUAL
-   ========================================================= */
-
-async function cadastrarCompraManual(){
-
-  if(!db){
-
-    alert(
-      "Supabase não configurado."
-    );
-
-    return;
-
-  }
-
-
-  const nome =
-    document.getElementById(
-      "manualNome"
-    ).value.trim();
-
-
-  const telefone =
-    document.getElementById(
-      "manualTelefone"
-    ).value.trim();
-
-
-  const numerosTexto =
-    document.getElementById(
-      "manualNumeros"
-    ).value.trim();
-
-
-  const valorTotal =
-    Number(
-      document.getElementById(
-        "manualValor"
-      ).value || 0
-    );
-
-
-  const resultado =
-    document.getElementById(
-      "manualResultado"
-    );
-
-
-  if(!nome){
-
-    resultado.innerHTML =
-      "⚠️ Informe o nome.";
-
-    return;
-
-  }
-
-
-  if(!telefone){
-
-    resultado.innerHTML =
-      "⚠️ Informe o WhatsApp.";
-
-    return;
-
-  }
-
-
-  if(!numerosTexto){
-
-    resultado.innerHTML =
-      "⚠️ Informe os números.";
-
-    return;
-
-  }
-
-
-  const numeros =
-    numerosTexto
-      .split(
-        /[\s,;|/]+/
-      )
-      .map(
-        x =>
-          parseInt(
-            x,
-            10
-          )
-      )
-      .filter(
-        n =>
-          !isNaN(n) &&
-          n >= 1 &&
-          n <= TOTAL
-      );
-
-
-  const unicos =
-    [...new Set(
-      numeros
-    )];
-
-
-  if(
-    !unicos.length
-  ){
-
-    resultado.innerHTML =
-      "⚠️ Nenhum número válido encontrado.";
-
-    return;
-
-  }
-
-
-  if(
-    valorTotal <= 0
-  ){
-
-    resultado.innerHTML =
-      "⚠️ Informe o valor total.";
-
-    return;
-
-  }
-
-
-  resultado.innerHTML =
-    "⏳ Cadastrando e bloqueando os números...";
-
-
-  let sucesso = [];
-
-  let erros = [];
-
-
-  const valorPorNumero =
-    valorTotal /
-    unicos.length;
-
-
-  for(
-    const numero of unicos
-  ){
-
-    try{
-
-      const numeroFormatado =
-        String(
-          numero
-        ).padStart(
-          3,
-          "0"
-        );
-
-
-      const {
-        data:estado,
-        error:erroConsulta
-      } =
-        await db
-          .from("rifa_numeros")
-          .select(
-            "numero,status"
-          )
-          .eq(
-            "numero",
-            numeroFormatado
-          )
-          .maybeSingle();
-
-
-      if(
-        erroConsulta
-      ){
-
-        throw erroConsulta;
-
-      }
-
-
-      if(
-        !estado ||
-        estado.status !==
-        "disponivel"
-      ){
-
-        erros.push(
-          numeroFormatado +
-          " já está ocupado."
-        );
-
-        continue;
-
-      }
-
-
-      const {
-        data,
-        error
-      } =
-        await db.rpc(
-          "admin_cadastrar_compra_manual",
-          {
-
-            p_senha:
-              SENHA_ADMIN,
-
-            p_nome:
-              nome,
-
-            p_telefone:
-              telefone,
-
-            p_numero:
-              numeroFormatado,
-
-            p_valor:
-              Number(
-                valorPorNumero
-                  .toFixed(2)
-              )
-
-          }
-        );
-
-
-      if(error){
-
-        throw error;
-
-      }
-
-
-      if(
-        !data ||
-        data.ok !== true
-      ){
-
-        throw new Error(
-          data?.erro ||
-          "Não foi possível cadastrar."
-        );
-
-      }
-
-
-      sucesso.push(
-        numeroFormatado
-      );
-
-
-    }catch(erro){
-
-      erros.push(
-        String(
-          numero
-        ).padStart(
-          3,
-          "0"
-        ) +
-        ": " +
-        erro.message
-      );
-
-    }
-
-  }
-
-
-  let mensagem = "";
-
-
-  if(
-    sucesso.length
-  ){
-
-    mensagem +=
-      "✅ Bloqueados: " +
-      sucesso.join(", ") +
-      "<br>";
-
-  }
-
-
-  if(
-    erros.length
-  ){
-
-    mensagem +=
-      "<br>⚠️ Não cadastrados:<br>" +
-      erros.join("<br>");
-
-  }
-
-
-  resultado.innerHTML =
-    mensagem ||
-    "Nenhum número foi cadastrado.";
-
-
-  if(
-    sucesso.length
-  ){
-
-    document.getElementById(
-      "manualNome"
-    ).value =
-      "";
-
-    document.getElementById(
-      "manualTelefone"
-    ).value =
-      "";
-
-    document.getElementById(
-      "manualNumeros"
-    ).value =
-      "";
-
-    document.getElementById(
-      "manualValor"
-    ).value =
-      "8";
-
-  }
-
-
-  await carregarAdmin();
-
-  await atualizarNumerosOnline();
-
-}
-
-
-/* =========================================================
-   EXPORTAR COMPRADORES
-   ========================================================= */
-
-async function exportarCSV(){
-
-  if(!db){
-
-    alert(
-      "Configure o Supabase primeiro."
-    );
-
-    return;
-
-  }
-
-
-  const {
-    data,
-    error
-  } =
-    await db.rpc(
-      "admin_listar_compras",
-      {
-        p_senha:
-          SENHA_ADMIN
-      }
-    );
-
-
-  if(error){
-
-    alert(
-      "Erro ao exportar:\n\n" +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  let csv =
-    "ID,Data,Nome,WhatsApp,Numero,Valor,Status\n";
-
-
-  (data || []).forEach(
-    r => {
-
-      const linha = [
-
-        r.id,
-
-        r.criado_em,
-
-        r.nome,
-
-        r.telefone,
-
-        String(
-          r.numero
-        ).padStart(
-          3,
-          "0"
-        ),
-
-        r.valor,
-
-        r.status
-
-      ]
-        .map(
-          v =>
-            `"${String(
-              v ?? ""
-            ).replaceAll(
-              '"',
-              '""'
-            )}"`
-        )
-        .join(",");
-
-
-      csv +=
-        linha +
-        "\n";
-
-    }
-  );
-
-
-  const blob =
-    new Blob(
-      [
-        "\ufeff" +
-        csv
-      ],
-      {
-        type:
-          "text/csv;charset=utf-8"
-      }
-    );
-
-
-  const url =
-    URL.createObjectURL(
-      blob
-    );
-
-
-  const a =
-    document.createElement(
-      "a"
-    );
-
-
-  a.href =
-    url;
-
-
-  a.download =
-    "compradores_rifa_allane.csv";
-
-
-  document.body.appendChild(
-    a
-  );
-
-
-  a.click();
-
-
-  a.remove();
-
-
-  URL.revokeObjectURL(
-    url
-  );
-
-
-  alert(
-    "Lista de compradores exportada com sucesso!"
-  );
-
-}
-
-
-/* =========================================================
-   ESCAPAR HTML
+   ESCAPE HTML
    ========================================================= */
 
 function escapeHtml(v){
 
-  return String(v)
-    .replace(
-      /[&<>"']/g,
-      m =>
-        ({
-          "&":"&amp;",
-          "<":"&lt;",
-          ">":"&gt;",
-          '"':"&quot;",
-          "'":"&#039;"
-        }[m])
-    );
+ return String(v).replace(
+  /[&<>"']/g,
+  m=>
+   ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+   }[m])
+ );
+
+}
+
+
+/* =========================================================
+   EXPORTAR CSV
+   ========================================================= */
+
+async function exportarCSV(){
+
+ if(!db){
+
+  alert(
+   "Configure o Supabase primeiro."
+  );
+
+  return;
+
+ }
+
+
+ const {data,error} =
+  await db.rpc(
+   "admin_listar_compras",
+   {
+    p_senha:SENHA_ADMIN
+   }
+  );
+
+
+ if(error){
+
+  alert(error.message);
+
+  return;
+
+ }
+
+
+ let csv =
+  "ID,Data,Nome,WhatsApp,Numero,Valor,Status\n";
+
+
+ (data||[]).forEach(r=>{
+
+  const linha = [
+
+   r.id,
+
+   r.criado_em,
+
+   r.nome,
+
+   r.telefone,
+
+   String(r.numero)
+    .padStart(3,"0"),
+
+   r.valor,
+
+   r.status
+
+  ]
+  .map(
+   v=>
+    `"${String(v??"")
+     .replaceAll('"','""')}"`
+  )
+  .join(",");
+
+
+  csv += linha + "\n";
+
+ });
+
+
+ const blob =
+  new Blob(
+   ["\ufeff"+csv],
+   {
+    type:
+     "text/csv;charset=utf-8"
+   }
+  );
+
+
+ const url =
+  URL.createObjectURL(
+   blob
+  );
+
+
+ const a =
+  document.createElement("a");
+
+
+ a.href = url;
+
+ a.download =
+  "compradores_rifa_natal_completo.csv";
+
+ a.click();
+
+
+ URL.revokeObjectURL(url);
 
 }
 
@@ -3477,17 +2374,6 @@ function escapeHtml(v){
    ========================================================= */
 
 criarGrid();
-
-
-/*
-  Atualização automática dos números
-  a cada 5 segundos.
-*/
-
-setInterval(
-  atualizarNumerosOnline,
-  5000
-);
 
 </script>
 
